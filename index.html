@@ -3,20 +3,20 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
+body, html {
+  height: 100%;
   margin: 0;
-  font-family: Thrivesolo, Helvetica, sans-serif;  
- }
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .hero-image {
-  background-image: url('https://cutewallpaper.org/21/stormy-weather-backgrounds/100+-Storm-Pictures-Download-Free-Images-and-Stock-Photos-on-.jpg');
-  background-color: #cccccc;
-  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("photographer.jpg");
+  height: 50%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
- }
+  position: relative;
+}
 
 .hero-text {
   text-align: center;
@@ -25,21 +25,36 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
- }
+}
 
-</style> 
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: black;
+  background-color: #ddd;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hero-text button:hover {
+  background-color: #555;
+  color: white;
+}
+</style>
 </head>
 <body>
 
 <div class="hero-image">
   <div class="hero-text">
-    <h1 style="font-size:50px">Petrides Constantinos</h1>
-    <h3>Physics Student at NKUA</h3>
-      <a href='https://github.com/costpetrides'><img src='https://cdn-icons-png.flaticon.com/512/25/25231.png' style="width:30px;height:30px;"></a>
-      <a href='https://www.linkedin.com/in/constantinos-petrides-4366b7133/'><img src='http://t0.gstatic.com/images?q=tbn:ANd9GcRMCA3j2A8hfLl9p5UAU5nd9lvqLlNZvqoU4xOsZ192uH4IYS6X' style="width:30px;height:30px;"></a>
-    </div>
+    <h1 style="font-size:50px">I am John Doe</h1>
+    <p>And I'm a Photographer</p>
+    <button>Hire me</button>
+  </div>
 </div>
 
+<p>Page Content..</p>
 
 </body>
 </html>
