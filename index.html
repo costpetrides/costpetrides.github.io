@@ -1,96 +1,63 @@
-
 <!DOCTYPE html>
 <html>
 <head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-  
-
-  
-.hero-image {
-  background-image: url('612A4712-F4C1-4445-8804-EE3A2A1C5241.jpeg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-
-.hero-image1 {
-  background-image: url('image.png');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text1 {
-  text-align: center;
-  position: absolute;
-  top: 5%;
-  left: 10%;
-  transform: translate(-5%, -10%);
-  color: white;
-}
-
-
-.hero-text button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 5px 10px;
-  color: black;
-  background-color: #ddd;
-  text-align: center;
-  cursor: pointer;
-}
-
-.hero-text button:hover {
-  background-color: #555;
-  color: white;
-}
-
-
-
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+body {font-family: "Open Sans"}
 </style>
 </head>
-<body>
+<body class="w3-light-grey">
 
-<div class="hero-image">
-  <div class="hero-text">
-    <h1 style="font-size:30px">	Constantinos Petrides</h1>
-    <p> Physicist at NKUA </p>
-    <p><a href='https://github.com/costpetrides'><img src='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg' style="width:30px;height:30px;"></a> <a href='https://www.linkedin.com/in/constantinos-petrides-4366b7133'><img src='https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg' style="width:30px;height:30px;"></a> <a href='https://en.phys.uoa.gr'><img src='https://upload.wikimedia.org/wikipedia/en/thumb/a/ab/National_and_Kapodistrian_University_of_Athens_logo.svg/1024px-National_and_Kapodistrian_University_of_Athens_logo.svg.png' style="width:30px;height:30px;"></a>  <a href='https://storiesbyheroes.com'><img  src='IMG_1314.svg' style="width:30px;height:30px;"></a></p>
-    <button onclick="window.location.href='CV.pdf';">Curriculum Vitae</button>
-  </div>
+<!-- Navigation bar with social media icons -->
+<div class="w3-bar w3-black w3-hide-small">
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-facebook-official"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-instagram"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-snapchat"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-flickr"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-twitter"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-linkedin"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-right"><i class="fa fa-search"></i></a>
 </div>
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1600px">
 
   
-<div class="hero-image1">
-  <div class="hero-text1">
-    <h3 style="font-size:30px"> Research Projects:</h3>
-      <h4 style="font-size:30px"> 1. CMS Analysis of the 40MHz scouting data recorded in 2018</h4>
-        <p>Summarize observations and findings from the analysis of cosmic muons in the 40 MHz scouting data recorded in 2018.</p>
-      <h4 style="font-size:30px"> 2. COVID-19 lockdown impact on air quality with emphasis on urban, suburban and rural zones</h4>
-        <p> The nationwide lockdown in Greece to flatten the pandemic COVID-19 curve has resulted in the reduction of anthropogenic emission sources to a great extent. This study aims to highlight the impact of the COVID-19 pandemic on atmospheric pollution. The pandemic was the most efficient simulation of anthropogenic pollutants reduction. </p>
-  </div>
-</div>
-   
+
+ 
+
+
+  
+
+
+
+
+
+<script>
+// Toggle between hiding and showing blog replies/comments
+document.getElementById("myBtn").click();
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+function likeFunction(x) {
+  x.style.fontWeight = "bold";
+  x.innerHTML = "✓ Liked";
+}
+</script>
+
 </body>
 </html>
