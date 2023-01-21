@@ -267,19 +267,15 @@ section::after {
 </head>
 <body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-bar-block w3-animate-right w3-top w3-text-light-grey w3-large" style="z-index:3;width:250px;font-weight:bold;display:none;right:0;background-color:#333333;" id="mySidebar">
-  <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item  w3-left w3-padding-32">&times;</a> 
-  <a href="https://www.linkedin.com/in/constantinos-petrides/" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16 active" alt="LinkedIn">LinkedIn</a> 
-  <a href="https://github.com/costpetrides" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16" alt="GitHub">GitHub</a> 
-  <a href="https://storiesbyheroes.com" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16" alt="SbH">SbH</a>
-  <a href="mailto:costpetrides@icloud.com" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16" alt="Contact">Contact</a>	
-</nav>
 
-	
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<ul class="w3-navbar w3-black">
+  <li><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></li>
+  <li><a href="https://github.com/costpetrides">GitHub</a></li>
+  <li><a href="https://storiesbyheroes.com">SbH</a></li>
+  <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+</ul>	
+
 
 <script>
 $(function () {
@@ -294,23 +290,6 @@ $(function () {
 });
 </script>	
 	
-	
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
-
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
-</script>
-	
-<header class="w3-container w3-top  w3-large w3-padding-16" style="color:white;background-color:#333333;">
-    <a href="javascript:void(0)" class="w3-right w3-button" style="color:white;background-color:#333333;" onclick="w3_open()">☰</a>	
-</header>
 	
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
   
