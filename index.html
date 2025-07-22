@@ -258,41 +258,27 @@ section::after {
 </head>
 <body>
 
-
-<div class="w3-top">
-  <div class="w3-bar w3-black w3-card w3-large">
-    <a class="w3-bar-item w3-button w3-hide-small" href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a>
-    <a class="w3-bar-item w3-button w3-hide-small" href="https://github.com/costpetrides">GitHub</a>
-    <a class="w3-bar-item w3-button w3-hide-small" href="#section4">Projects</a>
-    <a class="w3-bar-item w3-button w3-hide-small" href="mailto:costpetrides@icloud.com">Contact</a>
-
-
-    <a href="javascript:void(0);" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleNavbar()">
-      ☰
-    </a>
-  </div>
-
-  
-  <div id="mobileNavbar" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
-    <a class="w3-bar-item w3-button" href="#section4">Projects</a>
-    <a class="w3-bar-item w3-button" href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a>
-    <a class="w3-bar-item w3-button" href="https://github.com/costpetrides">GitHub</a>
-    <a class="w3-bar-item w3-button" href="mailto:costpetrid
+<ul class="w3-navbar w3-black">
+  <li><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></li>
+  <li><a href="https://github.com/costpetrides">GitHub</a></li>
+  <li><a href="#section4">Projects</a></li>
+  <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+</ul>
 
 
 
 <script>
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+$(function () {
+  $("a[href*=#]").on("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    $("html, body").animate(
+      { scrollTop: $($(this).attr("href")).offset().top },
+      500,
+      "linear"
+    );
   });
 });
-</script>
-	
+</script>	
 	
 	
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
@@ -423,4 +409,3 @@ function topFunction() {
     
 </body>
 </html>
-	     
