@@ -43,16 +43,18 @@ h4 {text-align:center; color:#555;}
 }
 #myBtn:hover {background-color:#40E0D0;}
 .footer {
-  width: 100vw; 
+  width: 100%;
   background-image: url('footer.png');
   background-size: cover;
   background-position: center;
   padding: 40px 0;
   color:white;
+  box-sizing: border-box;
 }
 .footer h3, .footer h4 {margin:10px 0;}
 .footer p, .footer a {color:white; text-decoration:none;}
 .footer img {vertical-align: middle; margin-left: 5px;}
+
 </style>
 </head>
 <body>
@@ -70,7 +72,7 @@ h4 {text-align:center; color:#555;}
 <div class="container">
   <h1>High School Classes</h1>
   <h4>Welcome!</h4> 
-  <p style="text-align:center; color:#555;">Here you’ll find notes and exercises for each class. To get the most out of your studies, first read through the notes carefully, try solving the exercises on your own, and review the solutions only to check your work. Regular practice and understanding the concepts, not just memorizing formulas, is the key to success in Physics and Math.</p>
+  <p style="text-align:center; color:#555;">Here you will find notes and exercises for each class. To make the most of your studies, read the notes carefully, try to solve the exercises on your own, and then check the solutions to confirm your answers. Memorizing formulas isn’t necessary—the important thing is to understand the physics behind each problem. In Physics, it’s very important to fully grasp each concept before moving on to the next, because otherwise it’s like building a house without a solid foundation—the house could start to collapse.</p>
 
 
 
@@ -132,27 +134,28 @@ function topFunction() {
 
 <!-- Footer -->
 <div class="footer">
-  <div class="w3-row" style="margin:0; padding:0;">
-    <h3 style="margin-left:10px;">GitHub <img src="icons8-github.svg" width="50" height="50"></h3>
-    <div class="w3-third">
-      <h4 style="text-align:center;">About</h4>
-      <p style="text-align:center;">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
+  <h3 style="text-align:center; margin-bottom:20px;">GitHub <img src="icons8-github.svg" width="50" height="50"></h3>
+  <div style="display:flex; flex-wrap:wrap; margin:0; padding:0;">
+    <div style="flex:1; min-width:250px; text-align:center; padding:10px;">
+      <h4>About</h4>
+      <p>Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
     </div>
-    <div class="w3-third">
-      <h4 style="text-align:center;">Links</h4>
-      <p style="text-align:center;"><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></p>
-      <p style="text-align:center;"><a href="https://github.com/costpetrides">GitHub</a></p>
-      <p style="text-align:center;"><a href="mailto:costpetrides@icloud.com">Contact</a></p>
-    </div>    
-    <div class="w3-third">
-      <h4 style="text-align:center;">Follow me</h4> 
-      <p style="text-align:center;">
+    <div style="flex:1; min-width:250px; text-align:center; padding:10px;">
+      <h4>Links</h4>
+      <p><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></p>
+      <p><a href="https://github.com/costpetrides">GitHub</a></p>
+      <p><a href="mailto:costpetrides@icloud.com">Contact</a></p>
+    </div>
+    <div style="flex:1; min-width:250px; text-align:center; padding:10px;">
+      <h4>Follow me</h4> 
+      <p>
         <a href='https://www.linkedin.com/in/constantinos-petrides/'><img src='icons8-linkedin-2.svg' style="width:30px;height:30px;"></a>
         <a href='https://github.com/costpetrides'><img src='icons8-github.svg' style="width:30px;height:30px;"></a>
       </p>
     </div>  
   </div>
 </div>
+
 
 </body>
 </html>
