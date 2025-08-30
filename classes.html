@@ -1,1 +1,120 @@
-<li><a href="teaching.html">Classes</a></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>	
+<title>Classes - Petrides Constantinos</title>
+<meta name="title" content="Classes - Petrides Constantinos">
+<meta name="description" content="High school class notes for my students, organized by class.">  
+<meta name="keywords" content="Petrides, Constantinos, Classes, Notes, Physics, Math, High School, Students">
+<meta name="author" content="Constantinos Petrides">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">	
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+
+<style>
+body, html {margin:0; font-family: Chalkboard, sans-serif; background-color:#f9f9f9;}
+ul {list-style-type:none; margin:0; padding:0; overflow:hidden; background-color:#333;}
+li {float:left;}
+li a {display:block; color:white; text-align:center; padding:14px 16px; text-decoration:none;}
+li a:hover {background-color:#276;}
+.container {max-width:800px; margin:auto; padding:40px 20px;}
+h1 {text-align:center; color:#333;}
+h4 {text-align:center; color:#555;}
+.class-list {list-style-type:none; padding-left:0;}
+.class-list li {background-color:#242423; color:white; margin:8px 0; padding:12px 20px; border-radius:5px;}
+.class-list li:hover {background-color:#575959; cursor:pointer;}
+a {color:white; text-decoration:none; display:block;}
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+#myBtn:hover {background-color:#40E0D0;}
+.footer {background-image: url('footer.png'); padding:20px 0;}
+.footer h3, .footer h4 {color:white; margin:10px 0;}
+.footer p, .footer a {color:white; text-decoration:none;}
+.footer img {vertical-align: middle; margin-left: 5px;}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<ul class="w3-navbar w3-black">
+  <li><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></li>
+  <li><a href="https://github.com/costpetrides">GitHub</a></li>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="classes.html">Classes</a></li>
+  <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+</ul>
+
+<!-- Page Content -->
+<div class="container">
+  <h1>Petrides Constantinos</h1>
+  <h4>High School Classes</h4>
+  <p style="text-align:center; color:#555;">Click a class to access the notes</p>
+
+  <ul class="class-list">
+    <li><a href="notes/physics1.pdf">Physics I</a></li>
+    <li><a href="notes/physics3.pdf">Physics III</a></li>
+    <li><a href="notes/math1.pdf">Mathematics I</a></li>
+    <li><a href="notes/math2.pdf">Mathematics II</a></li>
+  </ul>
+</div>
+
+<!-- Scroll to Top Button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<script>
+// Get the button
+let mybutton = document.getElementById("myBtn");
+
+// Show button when scrolled down 20px
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// Scroll to top on click
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+<!-- Footer (same as main page) -->
+<div class="w3-row-padding footer">
+  <h3 style="color:white;"> &nbsp; &nbsp; GitHub <img src="icons8-github.svg"  width="50" height="50"></h3>
+  <div class="w3-third">
+    <h4 style="color:Turquoise;"><center>About<center></h4>
+    <center><p style="color:white;">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p></center>
+  </div>
+  <div class="w3-third">
+    <h4 style="color:Turquoise;"><center>Links<center></h4>
+    <p><center><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a><center></p>
+    <p><center><a href="https://github.com/costpetrides">GitHub</a><center></p>
+    <p><center><a href="mailto:costpetrides@icloud.com">Contact</a><center></p>
+  </div>    
+  <div class="w3-third">
+    <h4 style="color:Turquoise;"><center>Follow me<center></h4> 
+    <p><center>
+      <a href='https://www.linkedin.com/in/constantinos-petrides/'><img src='icons8-linkedin-2.svg' style="width:30px;height:30px;"></a>
+      <a href='https://github.com/costpetrides'><img src='icons8-github.svg' style="width:30px;height:30px;"></a>
+    </center></p>
+  </div>  
+</div>
+
+</body>
+</html>
