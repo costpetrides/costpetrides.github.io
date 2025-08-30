@@ -19,7 +19,7 @@ li a:hover {background-color:#276;}
 .container {max-width:800px; margin:auto; padding:40px 20px;}
 h1 {text-align:center; color:#333;}
 h4 {text-align:center; color:#555;}
-.class-list {list-style-type:none; padding-left:0;}
+.class-list {list-style-type:disc; padding-left:20px;}
 .class-list li {background-color:#242423; color:white; margin:8px 0; padding:12px 20px; border-radius:5px;}
 .class-list li:hover {background-color:#575959; cursor:pointer;}
 a {color:white; text-decoration:none; display:block;}
@@ -39,8 +39,15 @@ a {color:white; text-decoration:none; display:block;}
   border-radius: 4px;
 }
 #myBtn:hover {background-color:#40E0D0;}
-.footer {background-image: url('footer.png'); padding:20px 0;}
-.footer h3, .footer h4 {color:white; margin:10px 0;}
+.footer {
+  width: 100%;
+  background-image: url('footer.png');
+  background-size: cover;
+  background-position: center;
+  padding: 40px 0;
+  color:white;
+}
+.footer h3, .footer h4 {margin:10px 0;}
 .footer p, .footer a {color:white; text-decoration:none;}
 .footer img {vertical-align: middle; margin-left: 5px;}
 </style>
@@ -60,33 +67,37 @@ a {color:white; text-decoration:none; display:block;}
 <div class="container">
   <h1>Petrides Constantinos</h1>
   <h4>High School Classes</h4>
-  <p style="text-align:center; color:#555;">Click a class to access the notes</p>
+  <p style="text-align:center; color:#555;">Click a class to see notes and exercises</p>
 
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section3">
-  <h2 class="w3-wide">High School Notes</h2>
-  <p>&nbsp;</p>
-  <p class="w3-justify">
-    1. Physics I: 
-    <a href="notes/physics1_notes.pdf" style="color:blue;">Notes</a>, 
-    <a href="exercises/physics1_exercises.pdf" style="color:blue;">Exercises</a>
-  </p>
-  <p class="w3-justify">
-    2. Physics III: 
-    <a href="notes/physics3_notes.pdf" style="color:blue;">Notes</a>, 
-    <a href="exercises/physics3_exercises.pdf" style="color:blue;">Exercises</a>
-  </p>
-  <p class="w3-justify">
-    3. Mathematics I: 
-    <a href="notes/math1_notes.pdf" style="color:blue;">Notes</a>, 
-    <a href="exercises/math1_exercises.pdf" style="color:blue;">Exercises</a>
-  </p>
-  <p class="w3-justify">
-    4. Mathematics II: 
-    <a href="notes/math2_notes.pdf" style="color:blue;">Notes</a>, 
-    <a href="exercises/math2_exercises.pdf" style="color:blue;">Exercises</a>
-  </p>
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section3">
+    <h2 class="w3-wide">High School Notes</h2>
+    <p>&nbsp;</p>
+    
+    <p class="w3-justify"><strong>Physics I:</strong></p>
+    <ul class="class-list">
+      <li>Notes (insert PDF link later)</li>
+      <li>Exercises (insert PDF link later)</li>
+    </ul>
+    
+    <p class="w3-justify"><strong>Physics III:</strong></p>
+    <ul class="class-list">
+      <li>Notes (insert PDF link later)</li>
+      <li>Exercises (insert PDF link later)</li>
+    </ul>
+    
+    <p class="w3-justify"><strong>Mathematics I:</strong></p>
+    <ul class="class-list">
+      <li>Notes (insert PDF link later)</li>
+      <li>Exercises (insert PDF link later)</li>
+    </ul>
+    
+    <p class="w3-justify"><strong>Mathematics II:</strong></p>
+    <ul class="class-list">
+      <li>Notes (insert PDF link later)</li>
+      <li>Exercises (insert PDF link later)</li>
+    </ul>
+  </div>
 </div>
-
 
 <!-- Scroll to Top Button -->
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
@@ -109,25 +120,27 @@ function topFunction() {
 </script>
 
 <!-- Footer -->
-<div class="w3-row-padding footer">
-  <h3 style="color:white;"> &nbsp; &nbsp; GitHub <img src="icons8-github.svg"  width="50" height="50"></h3>
-  <div class="w3-third">
-    <h4 style="color:Turquoise;"><center>About<center></h4>
-    <center><p style="color:white;">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p></center>
+<div class="footer">
+  <div class="w3-row-padding">
+    <h3>&nbsp;&nbsp; GitHub <img src="icons8-github.svg"  width="50" height="50"></h3>
+    <div class="w3-third">
+      <h4><center>About</center></h4>
+      <p style="text-align:center;">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
+    </div>
+    <div class="w3-third">
+      <h4><center>Links</center></h4>
+      <p style="text-align:center;"><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a></p>
+      <p style="text-align:center;"><a href="https://github.com/costpetrides">GitHub</a></p>
+      <p style="text-align:center;"><a href="mailto:costpetrides@icloud.com">Contact</a></p>
+    </div>    
+    <div class="w3-third">
+      <h4><center>Follow me</center></h4> 
+      <p style="text-align:center;">
+        <a href='https://www.linkedin.com/in/constantinos-petrides/'><img src='icons8-linkedin-2.svg' style="width:30px;height:30px;"></a>
+        <a href='https://github.com/costpetrides'><img src='icons8-github.svg' style="width:30px;height:30px;"></a>
+      </p>
+    </div>  
   </div>
-  <div class="w3-third">
-    <h4 style="color:Turquoise;"><center>Links<center></h4>
-    <p><center><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a><center></p>
-    <p><center><a href="https://github.com/costpetrides">GitHub</a><center></p>
-    <p><center><a href="mailto:costpetrides@icloud.com">Contact</a><center></p>
-  </div>    
-  <div class="w3-third">
-    <h4 style="color:Turquoise;"><center>Follow me<center></h4> 
-    <p><center>
-      <a href='https://www.linkedin.com/in/constantinos-petrides/'><img src='icons8-linkedin-2.svg' style="width:30px;height:30px;"></a>
-      <a href='https://github.com/costpetrides'><img src='icons8-github.svg' style="width:30px;height:30px;"></a>
-    </center></p>
-  </div>  
 </div>
 
 </body>
