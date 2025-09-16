@@ -55,6 +55,39 @@ h4 {text-align:center; color:#555;}
 .footer p, .footer a {color:white; text-decoration:none;}
 .footer img {vertical-align: middle; margin-left: 5px;}
 
+/* ---- Modal CSS for access code (kept separate so original styles unchanged) ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  padding: 20px;
+  width: 320px;
+  max-width: calc(100% - 40px);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  font-family: inherit;
+}
+.modal h3 { margin: 0 0 10px; font-size: 18px; }
+.modal .hint { margin-bottom: 12px; color: #555; font-size: 14px; }
+.modal input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.modal .buttons { display:flex; gap:8px; justify-content:flex-end; }
+.modal button { padding: 8px 12px; cursor: pointer; border-radius:4px; border: none; }
+.modal .btn-cancel { background:#ddd; }
+.modal .btn-ok { background:#007BFF; color: white; }
+.modal .error { color: #b00020; font-size: 13px; display:none; margin-top:6px; }
 </style>
 </head>
 <body>
@@ -78,7 +111,7 @@ h4 {text-align:center; color:#555;}
     <h2 class="w3-wide">Φυσική Γ Λυκείου </h2>
     <p>&nbsp;</p>
     <p class="w3-justify">Σημειώσεις: </p>
-   <p class="w3-justify">Ασκήσεις: <a href="Notes/Electromagnetism.pdf" style="color:blue;"> Ηλεκτρομαγνητισμός </a></p>
+   <p class="w3-justify">Ασκήσεις: <a href="Notes/Electromagnetism.pdf" class="protected-link" data-code="421" title="Protected file"> Ηλεκτρομαγνητισμός </a></p>
  </div>	 
 
 
@@ -86,7 +119,11 @@ h4 {text-align:center; color:#555;}
     <h2 class="w3-wide">Μαθηματικά Γ Λυκείου </h2>
     <p>&nbsp;</p>
     <p class="w3-justify">Σημειώσεις: </p>
-   <p class="w3-justify">Ασκήσεις: <a href="Notes/Math_G_1.pdf" style="color:blue;"> Κεφ. 1 </a><a href="Notes/Math_G_2.pdf" style="color:blue;">,  Κεφ. 2 </a><a href="Notes/Μath_G_3.pdf" style="color:blue;">,  Κεφ. 3 </a></p>
+   <p class="w3-justify">Ασκήσεις: 
+     <a href="Notes/Math_G_1.pdf" class="protected-link" data-code="421" title="Protected file"> Κεφ. 1 </a>
+     <a href="Notes/Math_G_2.pdf" class="protected-link" data-code="421" title="Protected file">,  Κεφ. 2 </a>
+     <a href="Notes/Μath_G_3.pdf" class="protected-link" data-code="421" title="Protected file">,  Κεφ. 3 </a>
+   </p>
  </div>	
 
 
@@ -94,14 +131,17 @@ h4 {text-align:center; color:#555;}
  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
     <h2 class="w3-wide">Μαθηματικά Γ Λυκείου (κ.κ) </h2>
     <p>&nbsp;</p>
-   <p class="w3-justify">Ασκήσεις: <a href="Notes/Μath.G.KK.1.pdf" style="color:blue;"> Κεφ. 1 </a><a href="Notes/Integrals.kk.pdf" style="color:blue;"> Κεφ. 2 </a></p>
+   <p class="w3-justify">Ασκήσεις: 
+     <a href="Notes/Μath.G.KK.1.pdf" class="protected-link" data-code="421" title="Protected file"> Κεφ. 1 </a>
+     <a href="Notes/Integrals.kk.pdf" class="protected-link" data-code="421" title="Protected file"> Κεφ. 2 </a>
+   </p>
  </div>	
 
       
  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
     <h2 class="w3-wide">Μαθηματικά B Λυκείου </h2>
     <p>&nbsp;</p>
-   <p class="w3-justify">Ασκήσεις: <a href="Notes/Math_Β_1.pdf" style="color:blue;"> Κεφ. 1 </a></p>
+   <p class="w3-justify">Ασκήσεις: <a href="Notes/Math_Β_1.pdf" class="protected-link" data-code="421" title="Protected file"> Κεφ. 1 </a></p>
  </div>	
 
 
@@ -110,6 +150,20 @@ h4 {text-align:center; color:#555;}
       
 <!-- Scroll to Top Button -->
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<!-- Password Modal HTML (appears when clicking protected links) -->
+<div id="passwordModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Enter access code</h3>
+    <div class="hint">Please enter the code to open this file.</div>
+    <input id="modalPassword" type="password" inputmode="numeric" placeholder="Access code" aria-label="Access code">
+    <div class="error" id="modalError">Wrong code. Try again.</div>
+    <div class="buttons">
+      <button class="btn-cancel" id="modalCancel">Cancel</button>
+      <button class="btn-ok" id="modalOk">Open</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // Show button when scrolled down 20px
@@ -126,6 +180,82 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+</script>
+
+<!-- Password modal JS (keeps your styles untouched and only adds the protection behavior) -->
+<script>
+(function() {
+  const modalOverlay = document.getElementById('passwordModal');
+  const input = document.getElementById('modalPassword');
+  const errorBox = document.getElementById('modalError');
+  const btnCancel = document.getElementById('modalCancel');
+  const btnOk = document.getElementById('modalOk');
+
+  // Track which link triggered the modal
+  let currentLink = null;
+  let currentCode = null;
+
+  // Attach handler to all links with class "protected-link"
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a.protected-link');
+    if (!a) return;
+    // Prevent immediate navigation; show modal instead
+    e.preventDefault();
+
+    currentLink = a;
+    currentCode = a.getAttribute('data-code') || ''; // expected code (string)
+    showModal();
+  });
+
+  function showModal() {
+    errorBox.style.display = 'none';
+    input.value = '';
+    modalOverlay.style.display = 'flex';
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    setTimeout(() => input.focus(), 100);
+    document.addEventListener('keydown', handleKeydown);
+  }
+
+  function hideModal() {
+    modalOverlay.style.display = 'none';
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    errorBox.style.display = 'none';
+    input.value = '';
+    currentLink = null;
+    currentCode = null;
+    document.removeEventListener('keydown', handleKeydown);
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') hideModal();
+    if (e.key === 'Enter') tryOpen();
+  }
+
+  btnCancel.addEventListener('click', hideModal);
+  modalOverlay.addEventListener('click', function(e) {
+    // close if clicking outside modal (.modal)
+    if (e.target === modalOverlay) hideModal();
+  });
+
+  btnOk.addEventListener('click', tryOpen);
+
+  function tryOpen() {
+    const val = input.value.trim();
+    if (!currentLink) { hideModal(); return; }
+    // Compare as strings to keep leading zeros if any
+    if (val === currentCode) {
+      const href = currentLink.getAttribute('href');
+      const target = currentLink.getAttribute('target') || '_self';
+      window.open(href, target);
+      hideModal();
+    } else {
+      errorBox.style.display = 'block';
+      errorBox.textContent = 'Wrong code. Try again.';
+      input.focus();
+      input.select();
+    }
+  }
+})();
 </script>
 
 </body>
