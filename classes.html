@@ -54,8 +54,6 @@ h4 {text-align:center; color:#555;}
 .footer h3, .footer h4 {margin:10px 0;}
 .footer p, .footer a {color:white; text-decoration:none;}
 .footer img {vertical-align: middle; margin-left: 5px;}
-
-/* ---- Modal CSS for access code (kept separate so original styles unchanged) ---- */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -105,38 +103,32 @@ h4 {text-align:center; color:#555;}
   <h4>Welcome!</h4> 
   <p style="text-align:center; color:#555;">Here you’ll find notes and exercises for each class. To get the most out of your studies, first read the notes carefully, then try to solve the exercises on your own, and finally check the solutions to confirm your answers. Memorizing formulas isn’t necessary—the key is to understand the physics behind each problem. In Physics, it’s especially important to fully grasp each concept before moving on to the next. Think of it like building a house: without a solid foundation, the house could collapse.</p>
 
-
-
  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
     <h2 class="w3-wide">Φυσική Γ Λυκείου </h2>
     <p>&nbsp;</p>
     <p class="w3-justify">Σημειώσεις: </p>
-   <p class="w3-justify">Ασκήσεις: <a href="Notes/Electromagnetism.pdf" class="protected-link" data-code="421!" title="Protected file"> Ηλεκτρομαγνητισμός </a></p>
+   <p class="w3-justify">Ασκήσεις: 
+     <a href="#" class="protected-link" data-code="421!" data-href="Notes/Electromagnetism.pdf"> Ηλεκτρομαγνητισμός </a>
+   </p>
  </div>	 
-
 
  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4"> 
     <h2 class="w3-wide">Μαθηματικά Γ Λυκείου </h2>
     <p>&nbsp;</p>
     <p class="w3-justify">Σημειώσεις: </p>
    <p class="w3-justify">Ασκήσεις: 
-     <a href="Notes/Math_G_1.pdf" title="Protected file"> Κεφ. 1 </a>
-     <a href="Notes/Math_G_2.pdf" class="protected-link" data-code="421!" title="Protected file">, Κεφ. 2 </a>
-     <a href="Notes/Math_G_3.pdf" class="protected-link" data-code="421!" title="Protected file">, Κεφ. 3 </a>
-     <a href="Notes/Math_G_4.pdf" class="protected-link" data-code="421!" title="Protected file">, Κεφ. 4 </a>
-     <a href="Notes/Math_B_9.pdf" class="protected-link" data-code="421!" title="Protected file">, E. 9 </a>
-       
+     <a href="Notes/Math_G_1.pdf"> Κεφ. 1 </a>
+     <a href="#" class="protected-link" data-code="421!" data-href="Notes/Math_G_2.pdf">, Κεφ. 2 </a>
+     <a href="#" class="protected-link" data-code="421!" data-href="Notes/Math_G_3.pdf">, Κεφ. 3 </a>
+     <a href="#" class="protected-link" data-code="421!" data-href="Notes/Math_G_4.pdf">, Κεφ. 4 </a>
+     <a href="#" class="protected-link" data-code="421!" data-href="Notes/Math_B_9.pdf">, E. 9 </a>
    </p> 
  </div>	
 
-
-
-
-      
 <!-- Scroll to Top Button -->
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
-<!-- Password Modal HTML (appears when clicking protected links) -->
+<!-- Password Modal -->
 <div id="passwordModal" class="modal-overlay" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <h3 id="modalTitle">Enter access code</h3>
@@ -151,7 +143,7 @@ h4 {text-align:center; color:#555;}
 </div>
 
 <script>
-// Show button when scrolled down 20px
+// Scroll button
 let mybutton = document.getElementById("myBtn");
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {
@@ -167,7 +159,6 @@ function topFunction() {
 }
 </script>
 
-<!-- Password modal JS (keeps your styles untouched and only adds the protection behavior) -->
 <script>
 (function() {
   const modalOverlay = document.getElementById('passwordModal');
@@ -176,19 +167,16 @@ function topFunction() {
   const btnCancel = document.getElementById('modalCancel');
   const btnOk = document.getElementById('modalOk');
 
-  // Track which link triggered the modal
   let currentLink = null;
   let currentCode = null;
 
-  // Attach handler to all links with class "protected-link"
+  // Handle clicks on protected links
   document.addEventListener('click', function(e) {
     const a = e.target.closest('a.protected-link');
     if (!a) return;
-    // Prevent immediate navigation; show modal instead
     e.preventDefault();
-
     currentLink = a;
-    currentCode = a.getAttribute('data-code') || ''; // expected code (string)
+    currentCode = a.getAttribute('data-code') || '';
     showModal();
   });
 
@@ -218,7 +206,6 @@ function topFunction() {
 
   btnCancel.addEventListener('click', hideModal);
   modalOverlay.addEventListener('click', function(e) {
-    // close if clicking outside modal (.modal)
     if (e.target === modalOverlay) hideModal();
   });
 
@@ -227,11 +214,9 @@ function topFunction() {
   function tryOpen() {
     const val = input.value.trim();
     if (!currentLink) { hideModal(); return; }
-    // Compare as strings to keep leading zeros if any
     if (val === currentCode) {
-      const href = currentLink.getAttribute('href');
-      const target = currentLink.getAttribute('target') || '_self';
-      window.open(href, target);
+      const href = currentLink.getAttribute('data-href');
+      window.location.href = href; // always same tab
       hideModal();
     } else {
       errorBox.style.display = 'block';
