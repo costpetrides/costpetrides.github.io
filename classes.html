@@ -87,17 +87,17 @@ h4 {text-align:center; color:#555;}
 .modal .btn-ok { background:#007BFF; color: white; }
 .modal .error { color: #b00020; font-size: 13px; display:none; margin-top:6px; }
 
-a {
-  color: #007BFF;       /* standard bootstrap blue */
-  text-decoration: none; /* optional: remove underline */
+/* --- Blue links only for Physics III, Mathematics III, and Useful Links sections --- */
+.section-links a {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-a:hover {
-  color: #0056b3;        /* darker blue on hover */
-  text-decoration: underline; /* optional: underline on hover */
+.section-links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
-
-    
 </style>
 </head>
 <body>
@@ -115,7 +115,8 @@ a:hover {
   <h4>Welcome!</h4> 
   <p style="text-align:center; color:#555;">Here you’ll find notes and exercises for each class. To get the most out of your studies, first read the notes carefully, then try to solve the exercises on your own, and finally check the solutions to confirm your answers. Memorizing formulas isn’t necessary—the key is to understand the physics behind each problem. In Physics, it’s especially important to fully grasp each concept before moving on to the next. Think of it like building a house: without a solid foundation, the house could collapse.</p>
 
- <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
+ <!-- Physics III -->
+ <div class="w3-container w3-content w3-center w3-padding-64 section-links" style="max-width:800px">
     <h2 class="w3-wide">Physics III</h2>
     <p>&nbsp;</p>
    <p class="w3-justify">Ηλεκτρομαγνητισμός: 
@@ -123,9 +124,8 @@ a:hover {
    </p>
  </div>	  
 
-
-    
- <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4"> 
+ <!-- Mathematics III -->
+ <div class="w3-container w3-content w3-center w3-padding-64 section-links" style="max-width:800px"> 
     <h2 class="w3-wide">Mathematics III</h2>
     <p>&nbsp;</p> 
    <p class="w3-justify">Εφαρμογές Διαφορικού Λογισμού: 
@@ -156,8 +156,8 @@ a:hover {
    </p>  
  </div>	
 
-
- <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
+ <!-- Useful Links & Notes -->
+ <div class="w3-container w3-content w3-center w3-padding-64 section-links" style="max-width:800px">
     <h2 class="w3-wide">Useful Links & Notes</h2>
      <h4>Notes by Paul Dawkins</h4> 
     <p>&nbsp;</p>
@@ -170,111 +170,3 @@ a:hover {
      <a href="#" class="protected-link" data-code="421!" data-href="https://drive.google.com/file/d/1VRIqGyN8MXaihC51d0aPiClCimamo2Vq/view?usp=share_link"> Problems</a>
    </p>
  </div>	
- 
-
-    
-<!-- Scroll to Top Button -->
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-
-<!-- Password Modal -->
-<div id="passwordModal" class="modal-overlay" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h3 id="modalTitle">Enter access code</h3>
-    <div class="hint">Please enter the code to open this file.</div>
-    <input id="modalPassword" type="password" inputmode="numeric" placeholder="Access code" aria-label="Access code">
-    <div class="error" id="modalError">Wrong code. Try again.</div>
-    <div class="buttons">
-      <button class="btn-cancel" id="modalCancel">Cancel</button>
-      <button class="btn-ok" id="modalOk">Open</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// Scroll button
-let mybutton = document.getElementById("myBtn");
-window.onscroll = function() {scrollFunction()};
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-</script>
-
-<script>
-(function() {
-  const modalOverlay = document.getElementById('passwordModal');
-  const input = document.getElementById('modalPassword');
-  const errorBox = document.getElementById('modalError');
-  const btnCancel = document.getElementById('modalCancel');
-  const btnOk = document.getElementById('modalOk');
-
-  let currentLink = null;
-  let currentCode = null;
-
-  // Handle clicks on protected links
-  document.addEventListener('click', function(e) {
-    const a = e.target.closest('a.protected-link');
-    if (!a) return;
-    e.preventDefault();
-    currentLink = a;
-    currentCode = a.getAttribute('data-code') || '';
-    showModal();
-  });
-
-  function showModal() {
-    errorBox.style.display = 'none';
-    input.value = '';
-    modalOverlay.style.display = 'flex';
-    modalOverlay.setAttribute('aria-hidden', 'false');
-    setTimeout(() => input.focus(), 100);
-    document.addEventListener('keydown', handleKeydown);
-  }
-
-  function hideModal() {
-    modalOverlay.style.display = 'none';
-    modalOverlay.setAttribute('aria-hidden', 'true');
-    errorBox.style.display = 'none';
-    input.value = '';
-    currentLink = null;
-    currentCode = null;
-    document.removeEventListener('keydown', handleKeydown);
-  }
-
-  function handleKeydown(e) {
-    if (e.key === 'Escape') hideModal();
-    if (e.key === 'Enter') tryOpen();
-  }
-
-  btnCancel.addEventListener('click', hideModal);
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === modalOverlay) hideModal();
-  });
-
-  btnOk.addEventListener('click', tryOpen);
-
-  function tryOpen() {
-    const val = input.value.trim();
-    if (!currentLink) { hideModal(); return; }
-    if (val === currentCode) {
-      const href = currentLink.getAttribute('data-href');
-      window.location.href = href; // always same tab
-      hideModal();
-    } else {
-      errorBox.style.display = 'block';
-      errorBox.textContent = 'Wrong code. Try again.';
-      input.focus();
-      input.select();
-    }
-  }
-})();
-</script>
-
-</body>
-</html>
