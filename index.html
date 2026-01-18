@@ -1,496 +1,412 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Petrides Constantinos</title>
+<!DOCTYPE html> 
+<html lang="en">  
+<head>	 
+<title>Petrides Constantinos</title>
+<meta name="title" content="Petrides Constantinos">
+<meta name="description" content="Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.">  
+<meta name="keywords" content="Petrides, Consstantinos, costpetrides ,Konsstantinos, Physics, Atmospheric Physics, Computational Physics, NKUA, Athens, Enviromental, Research, Fluid Dynamics, Models, Cyprus, Github, costpetrides.com, costpetrides, petridescost">
+<meta name="author" content="Constantinos Petrides">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">	
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+	 
+<style>       
+  
+.w3-third img{margin-bottom: -9px; cursor: pointer}  
+.w3-third img:hover{opacity: 0.6; transition: 0.3s}
+	 
+* {
+  box-sizing: border-box;
+}
+  
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Chalkboard, sans-serif;
+}
 
-  <meta charset="UTF-8">
-  <meta name="title" content="Petrides Constantinos">
-  <meta name="description" content="Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.">
-  <meta name="keywords" content="Petrides, Consstantinos, costpetrides, Konsstantinos, Physics, Atmospheric Physics, Computational Physics, NKUA, Athens, Environmental, Research, Fluid Dynamics, Models, Cyprus, Github, costpetrides.com, petridescost">
-  <meta name="author" content="Constantinos Petrides">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+html, body {width: 100vw; height: 100vh;}
+  
+.column3 {
+  float: left;
+  width: 33.33%;
+  padding: 10;
+}    
+  
+.column {
+  float: left;
+  width: 50%;
+  padding: 10;
+}  
 
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}  
+  
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
 
-  <style>
-    .w3-third img { margin-bottom: -9px; cursor: pointer; }
-    .w3-third img:hover { opacity: 0.6; transition: 0.3s; }
+li {
+  float: left;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 
-    body, html {
-      height: 100%;
-      margin: 0;
-      font-family: Chalkboard, sans-serif;
-      width: 100vw;
-      height: 100vh;
-    }
+li a:hover {
+  background-color: #276;
+}  
 
-    .column3 { float: left; width: 33.33%; padding: 10; }
-    .column { float: left; width: 50%; padding: 10; }
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
 
-    .row:after { content: ""; display: table; clear: both; }
+   
+#myBtn:hover {
+  background-color: #40E0D0;
+}     
+  
+.hero-imagetitle{
+  background-image: url("wallpaper.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-    }
-    li { float: left; }
-    li a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-    li a:hover { background-color: #276; }
+.hero-imageabout{
+  background-color: #487d73; 
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}	
 
-    #myBtn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 30px;
-      z-index: 99;
-      font-size: 18px;
-      border: none;
-      outline: none;
-      background-color: red;
-      color: white;
-      cursor: pointer;
-      padding: 15px;
-      border-radius: 4px;
-    }
-    #myBtn:hover { background-color: #40E0D0; }
+.hero-texttitle {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
 
-    .hero-imagetitle {
-      background-image: url("wallpaper.jpg");
-      height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-    }
+  
+a:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: #40E0D0;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: #40E0D0
+  background-color: transparent;
+  text-decoration: underline;
+}
 
-    .hero-imageabout {
-      background-color: #487d73;
-      height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-    }
+.button1 {
+  background-color:#242423 ; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}    
+    
+    
+.button1:hover {
+  background-color: #575959;
+  color: white;
+}
 
-    .hero-texttitle {
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-    }
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+}
+section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+section::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 80%;
+  background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+  background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+}
 
-    a:link { color: white; background-color: transparent; text-decoration: none; }
-    a:visited { color: white; background-color: transparent; text-decoration: none; }
-    a:hover { color: #40E0D0; background-color: transparent; text-decoration: underline; }
-    a:active { color: #40E0D0; background-color: transparent; text-decoration: underline; }
+#thanks {
+  background-color: #fff;
+}
+#thanks::after {
+  content: none;
+}
+#thanks div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#thanks h2 {
+  margin-bottom: 60px;
+  color: #333;
+  font : normal 300 64px/1 'Josefin Sans', sans-serif;
+  text-align: center;
+  white-space: nowrap;
+}
+#thanks p {
+  color: #333;
+  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+}
+#thanks p a {
+  color: #333;
+  text-decoration: none;
+  transition: color .3s;
+}
+#thanks p a:hover {
+  color: #888;
+}
 
-    .button1 {
-      background-color: #242423;
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-    .button1:hover { background-color: #575959; color: white; }
 
-    section { position: relative; width: 100%; height: 100%; }
-    section::after {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      content: '';
-      width: 100%;
-      height: 80%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,.8) 80%, rgba(0,0,0,.8) 100%);
-    }
+#section01 a {
+  padding-top: 60px;
+}
+	
+#section01 a span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+}
 
-    #section01 a { padding-top: 60px; }
-    #section01 a span {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 24px;
-      height: 24px;
-      margin-left: -12px;
-      border-left: 1px solid #fff;
-      border-bottom: 1px solid #fff;
-      transform: rotate(-45deg);
-      box-sizing: border-box;
-    }
-    .demo a {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      z-index: 2;
-      display: inline-block;
-      transform: translate(0, -50%);
-      color: #fff;
-      font: normal 400 20px/1 'Josefin Sans', sans-serif;
-      letter-spacing: .1em;
-      text-decoration: none;
-      transition: opacity .3s;
-    }
-    .demo a:hover { opacity: .5; }
+.demo a {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  z-index: 2;
+  display: inline-block;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: #fff;
+  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: opacity .3s;
+}
+.demo a:hover {
+  opacity: .5;
+}
 
-    /* ===== Contact section styling (user-friendly) ===== */
-    .contact-wrap { max-width: 900px; margin: 0 auto; padding: 48px 16px; }
-    .contact-card {
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 24px;
-      color: #fff;
-      backdrop-filter: blur(4px);
-    }
-    .contact-card h2, .contact-card p { color: #fff; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .contact-grid .full { grid-column: 1 / -1; }
-
-    .contact-label { display: block; margin: 10px 0 6px; font-weight: 600; }
-    .contact-input, .contact-textarea {
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      outline: none;
-    }
-    .contact-input:focus, .contact-textarea:focus {
-      border-color: rgba(64,224,208,0.8);
-      box-shadow: 0 0 0 3px rgba(64,224,208,0.15);
-    }
-    .contact-textarea { min-height: 140px; resize: vertical; }
-    .contact-actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
-    .contact-hint { opacity: 0.9; font-size: 14px; }
-
-    .contact-status {
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      display: none;
-    }
-    .contact-status.ok {
-      display: block;
-      background: rgba(60,179,113,0.18);
-      border: 1px solid rgba(60,179,113,0.35);
-    }
-    .contact-status.err {
-      display: block;
-      background: rgba(255,99,71,0.18);
-      border: 1px solid rgba(255,99,71,0.35);
-    }
-
-    @media (max-width: 700px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      li { float: none; }
-      li a { text-align: left; }
-    }
-  </style>
+</style>
 </head>
-
 <body>
 
-  <ul class="w3-navbar w3-black">
-    <li><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="classes.html">Classes</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<ul class="w3-navbar w3-black">
+  <li><a href="https://github.com/costpetrides">GitHub</a></li>
+  <li><a href="#section4">Projects</a></li>
+  <li><a href="classes.html">Classes</a></li>
+  <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+</ul>
 
-  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
-  <script>
-    // Show "Top" button after scroll
-    let mybutton = document.getElementById("myBtn");
-    window.onscroll = function () { scrollFunction(); };
 
-    function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-      } else {
-        mybutton.style.display = "none";
-      }
-    }
+<script>
+$(function () {
+  $("a[href*=#]").on("click", function (e) {
+    e.preventDefault();
+    $("html, body").animate(
+      { scrollTop: $($(this).attr("href")).offset().top },
+      500,
+      "linear"
+    );
+  });
+});
+</script>	
+	
+	
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
+  
+<script>
+// Get the button
+let mybutton = document.getElementById("myBtn");
 
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
 
-    // Smooth scrolling WITHOUT jQuery
-    document.addEventListener("click", function (e) {
-      const a = e.target.closest("a[href^='#']");
-      if (!a) return;
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
 
-      const targetId = a.getAttribute("href");
-      if (!targetId || targetId === "#") return;
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>  
+  
+<section id="section01" class="demo">
+  <div class="hero-imagetitle">
+  <div class="hero-texttitle">
+    <h1>Petrides Constantinos</h1>  
+    <h4>Physicist - NKUA</h4>  
+  </div>	
+  <a href="#section2"><span></span></a>
+  </div>	  
+</section>
+	
+		
 
-      const targetEl = document.querySelector(targetId);
-      if (!targetEl) return;
-
-      e.preventDefault();
-      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  </script>
-
-  <section id="section01" class="demo">
-    <div class="hero-imagetitle">
-      <div class="hero-texttitle">
-        <h1>Petrides Constantinos</h1>
-        <h4>Physicist - NKUA</h4>
-      </div>
-      <a href="#about"><span></span></a>
-    </div>
-  </section>
-
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="about">
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section2">
     <h2 class="w3-wide">Welcome !!!</h2>
     <p>&nbsp;</p>
     <p class="w3-opacity"><i>A bunch of atoms trying to understand themselves</i></p>
-    <p class="w3-justify">
-      Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens.
-      My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.
-    </p>
-    <h2>&nbsp;</h2>
+    <p class="w3-justify">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
+    <h2> &nbsp;</h2>
     <a href="Full_CV.pdf"><button class="button1">CV</button></a>
-  </div>
+</div>	
 
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="projects">
+
+
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
     <h2 class="w3-wide">Research - Projects</h2>
     <p>&nbsp;</p>
-    <p class="w3-justify">
-      1. Fairmode WG5: Model bias correction:
-      <a href="https://knowledge4policy.ec.europa.eu/event/wg5-interim-meeting-17062025_en" style="color:Turquoise;" target="_blank" rel="noopener">Link</a>
-    </p>
-  </div>
+    <p class="w3-justify">1. Fairmode WG5: Model bias correction: <a href="https://knowledge4policy.ec.europa.eu/event/wg5-interim-meeting-17062025_en" style="color:blue;">Link</a></p>
+</div>
+	
 
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="repos">
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
     <h2 class="w3-wide">GitHub Repositories</h2>
     <p>&nbsp;</p>
-    <p class="w3-justify">
-      1. A Hybrid Quantum–Classical Solver for the Incompressible Navier–Stokes Equations:
-      <a href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes" style="color:Turquoise;" target="_blank" rel="noopener">GitHub</a>
-    </p>
-    <p class="w3-justify">
-      2. Numerical simulation designed to solve the 2D shallow water equations:
-      <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes" style="color:Turquoise;" target="_blank" rel="noopener">GitHub</a>
-    </p>
-    <p class="w3-justify">
-      3. NOx–Ozone Relationship Modeling Using a Machine Learning Approach:
-      <a href="https://github.com/costpetrides/NOx-Ozone-Relationship-Modeling-with-ML" style="color:Turquoise;" target="_blank" rel="noopener">GitHub</a>
-    </p>
-    <p class="w3-justify">
-      4. Time Series Forecasting of Meteorological Data Using Machine Learning and Statistical Models:
-      <a href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" style="color:Turquoise;" target="_blank" rel="noopener">GitHub</a>
-    </p>
-    <p class="w3-justify">
-      5. CMS Analysis of the 40MHz scouting data recorded in 2018:
-      <a href="https://github.com/theofil/dscout" style="color:Turquoise;" target="_blank" rel="noopener">GitHub</a>
-    </p>
-  </div>
+    <p class="w3-justify">1. A Hybrid Quantum–Classical Solver for the Incompressible Navier–Stokes Equations: <a href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes" style="color:blue;">GitHub</a></p>
+    <p class="w3-justify">2. Numerical simulation designed to solve the 2D shallow water equations: <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes" style="color:blue;">GitHub</a></p>
+    <p class="w3-justify">3. NOx–Ozone Relationship Modeling Using a Machine Learning Approach: <a href="https://github.com/costpetrides/NOx-Ozone-Relationship-Modeling-with-ML" style="color:blue;">GitHub</a></p>
+    <p class="w3-justify">4. Time Series Forecasting of Meteorological Data Using Machine Learning and Statistical Models: <a href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" style="color:blue;">GitHub</a></p>
+    <p class="w3-justify">5. CMS Analysis of the 40MHz scouting data recorded in 2018: <a href="https://github.com/theofil/dscout" style="color:blue;">GitHub</a></p>
+</div>
 
-  <div class="w3-row w3-grayscale-min" id="section5">
+	
+
+<div class="w3-row w3-grayscale-min" id="section5">
     <div class="w3-third">
-      <a href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" target="_blank" rel="noopener">
-        <img src="LSTM.png" style="width: 100%; height: 300px; object-fit: contain;" alt="LSTM Project">
-      </a>
+        <a href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" target="_blank">
+             <img src="LSTM.png" style="width: 100%; height: 300px; object-fit: contain;">
+        </a>
     </div>
     <div class="w3-third">
-      <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb" target="_blank" rel="noopener">
-        <img src="hta_1.gif" style="width: 100%; height: 300px; object-fit: contain;" alt="Simulations GIF">
-      </a>
+        <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb" target="_blank">
+           <img src="hta_1.gif" style="width: 100%; height: 300px; object-fit: contain;" loop>
+        </a>
     </div>
     <div class="w3-third">
-      <a href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb" target="_blank" rel="noopener">
-        <img src="classical.png" style="width: 100%; height: 300px; object-fit: contain;" alt="Classical Solver">
-      </a>
+        <a href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb" target="_blank">
+             <img src="classical.png" style="width: 100%; height: 300px; object-fit: contain;">
+        </a>
     </div>
-  </div>
+</div>
+<br>
+<br>
 
-  <br><br>
-
-  <div class="w3-row w3-grayscale-min">
+	
+<div class="w3-row w3-grayscale-min" id="section5">
     <div class="w3-third">
-      <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb" target="_blank" rel="noopener">
-        <img src="velocity.gif" style="width: 100%; height: 300px; object-fit: contain;" alt="Velocity GIF">
-      </a>
-    </div>
-    <div class="w3-third">
-      <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb" target="_blank" rel="noopener">
-        <img src="Forcing.gif" style="width: 100%; height: 300px; object-fit: contain;" alt="Forcing GIF">
-      </a>
+        <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb" target="_blank">
+            <img src="velocity.gif" style="width: 100%; height: 300px; object-fit: contain;" loop>
+        </a>
     </div>
     <div class="w3-third">
-      <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin–Helmholtz-Instability.ipynb" target="_blank" rel="noopener">
-        <img src="KHI.gif" style="width: 100%; height: 300px; object-fit: contain;" alt="Kelvin-Helmholtz Instability GIF">
-      </a>
+        <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb" target="_blank">
+           <img src="Forcing.gif" style="width: 100%; height: 300px; object-fit: contain;" loop>
+        </a>
     </div>
-  </div>
-
-  <br><br>
-
-  <!-- ===== Contact Form Section (user-friendly) ===== -->
-  <div id="contact" class="w3-row-padding" style="background-image: url('footer.png');">
-    <div class="contact-wrap">
-      <div class="contact-card">
-        <h2 class="w3-wide">Contact</h2>
-        <p class="contact-hint">
-          Send me a message using the form below. This will open your email client with everything filled in.
-          If you prefer, email me directly:
-          <a href="mailto:costpetrides@icloud.com">costpetrides@icloud.com</a>
-        </p>
-
-        <!-- Static-site friendly: builds a mailto link (no backend needed) -->
-        <form id="contactForm" novalidate>
-          <div class="contact-grid">
-            <div>
-              <label class="contact-label" for="name">Name *</label>
-              <input class="contact-input" id="name" type="text" placeholder="Your name" required>
-            </div>
-
-            <div>
-              <label class="contact-label" for="email">Email *</label>
-              <input class="contact-input" id="email" type="email" placeholder="your.email@example.com" required>
-            </div>
-
-            <div class="full">
-              <label class="contact-label" for="subject">Subject *</label>
-              <input class="contact-input" id="subject" type="text" placeholder="What is this about?" required>
-            </div>
-
-            <div class="full">
-              <label class="contact-label" for="message">Message *</label>
-              <textarea class="contact-textarea" id="message" placeholder="Write your message here..." required></textarea>
-            </div>
-
-            <!-- Honeypot field (anti-spam). Keep hidden. -->
-            <div class="full" style="display:none;">
-              <label class="contact-label" for="company">Company</label>
-              <input class="contact-input" id="company" type="text" autocomplete="off">
-            </div>
-          </div>
-
-          <div class="contact-actions">
-            <button class="button1" type="submit">Send Message</button>
-            <button class="button1" type="reset">Clear</button>
-          </div>
-
-          <div id="contactStatus" class="contact-status"></div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Footer (your original footer content, preserved) ===== -->
-  <div class="w3-row-padding" style="background-image: url('footer.png');">
-    <br>
-    <h3 style="color:white;"> &nbsp; &nbsp; GitHub <img src="icons8-github.svg" width="50" height="50" alt="GitHub"></h3>
-
     <div class="w3-third">
-      <h4 style="color:Turquoise;"><center>About</center></h4>
-      <center>
-        <p style="color:white;">
-          Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens.
-          My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.
-        </p>
-      </center>
+        <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin–Helmholtz-Instability.ipynb" target="_blank">
+            <img src="KHI.gif" style="width: 100%; height: 300px; object-fit: contain;" loop>
+        </a>
     </div>
+</div>
+<br>
+<br>
 
+	
+<div class="w3-row-padding" style="background-image: url('footer.png');" >
+<br>
+<h3 style="color:white;"> &nbsp; &nbsp; GitHub <img src="icons8-github.svg"  width="50" height="50"></h3>
     <div class="w3-third">
-      <h4 style="color:Turquoise;"><center>Links</center></h4>
-      <p><center><a href="https://www.linkedin.com/in/constantinos-petrides/" target="_blank" rel="noopener">LinkedIn</a></center></p>
-      <p><center><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></center></p>
-      <p><center><a href="mailto:costpetrides@icloud.com">Contact</a></center></p>
+      <h4 style="color:Turquoise;"><center>About<center></h4>
+      <center><p style="color:white;">Hi, I’m Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p></center>
     </div>
-
     <div class="w3-third">
-      <h4 style="color:Turquoise;"><center>Follow me</center></h4>
-      <p>
-        <center>
-          <a href="https://www.linkedin.com/in/constantinos-petrides/" target="_blank" rel="noopener">
-            <img src="icons8-linkedin-2.svg" style="width:30px;height:30px;" alt="LinkedIn">
-          </a>
-          <a href="https://github.com/costpetrides" target="_blank" rel="noopener">
-            <img src="icons8-github.svg" style="width:30px;height:30px;" alt="GitHub">
-          </a>
-        </center>
-      </p>
-    </div>
-  </div>
-
-  <script>
-    // Contact form -> creates a mailto link (user-friendly for static websites)
-    (function () {
-      const form = document.getElementById("contactForm");
-      const status = document.getElementById("contactStatus");
-
-      function setStatus(type, msg) {
-        status.className = "contact-status " + type;
-        status.textContent = msg;
-      }
-
-      function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      }
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Honeypot spam check
-        const hp = document.getElementById("company");
-        if (hp && hp.value.trim() !== "") return;
-
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const subject = document.getElementById("subject").value.trim();
-        const message = document.getElementById("message").value.trim();
-
-        if (!name || !email || !subject || !message) {
-          setStatus("err", "Please fill in all required fields.");
-          return;
-        }
-
-        if (!isValidEmail(email)) {
-          setStatus("err", "Please enter a valid email address.");
-          return;
-        }
-
-        const to = "costpetrides@icloud.com";
-        const fullSubject = encodeURIComponent(subject);
-        const body = encodeURIComponent(
-          "Name: " + name + "\n" +
-          "Email: " + email + "\n\n" +
-          message
-        );
-
-        // Open user's email client with prefilled info
-        window.location.href = "mailto:" + to + "?subject=" + fullSubject + "&body=" + body;
-
-        setStatus("ok", "Opening your email client… If it doesn’t open, email me directly at costpetrides@icloud.com.");
-      });
-    })();
-  </script>
-
+      <h4 style="color:Turquoise;"><center>Links<center></h4>
+      <p><center><a href="https://www.linkedin.com/in/constantinos-petrides/">LinkedIn</a><center></p>
+      <p><center><a href="https://github.com/costpetrides">GitHub</a><center></p>
+      <p><center><a href="mailto:costpetrides@icloud.com">Contact</a><center></p>
+    </div>    
+    <div cclass="w3-third">
+      <h4 style="color:Turquoise;"><center>Follow me<center></h4> 
+      <p><center><a href='https://www.linkedin.com/in/constantinos-petrides/'><img src='icons8-linkedin-2.svg' style="width:30px;height:30px;"></a><a href='https://github.com/costpetrides'><img src='icons8-github.svg' style="width:30px;height:30px;"></a></p>
+    </div>  
+</div>
+    
 </body>
 </html>
