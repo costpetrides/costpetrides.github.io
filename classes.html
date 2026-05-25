@@ -1,236 +1,198 @@
-<!DOCTYPE html> 
-<html lang="en">   
-<head>	
-<title>Classes - Petrides Constantinos</title>
-<meta name="title" content="Classes - Petrides Constantinos">
-<meta name="description" content="High school class notes for my students, organized by class.">  
-<meta name="keywords" content="Petrides, Constantinos, Classes, Notes, Physics, Math, High School, Students">
-<meta name="author" content="Constantinos Petrides">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">	
-<meta name="viewport" content="width=device-width, initial-scale=1">	
-
-<style>
-body, html {
-    margin:0;
-    font-family: Chalkboard, sans-serif;
-    background-color:#f9f9f9;
-    color: #000;
-}
-ul {list-style-type:none; margin:0; padding:0; overflow:hidden; background-color:#333;}
-li {float:left;}
-li a {display:block; color:white; text-align:center; padding:14px 16px; text-decoration:none;}
-li a:hover {background-color:#276;}
-.container {max-width:800px; margin:auto; padding:40px 20px;}
-h1 {text-align:center; color:#333;}
-h4 {text-align:center; color:#555;}
-.class-list {list-style-type:disc; padding-left:20px; margin:0;}
-.class-list li {background-color: transparent; color: #000; margin: 5px 0; padding: 2px 0; border-radius:0;}
-#myBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-}
-#myBtn:hover {background-color:#40E0D0;}
-.footer {
-  width: 100%;
-  background-image: url('footer.png');
-  background-size: cover;
-  background-position: center;
-  padding: 40px 0;
-  color:white;
-  box-sizing: border-box;
-}
-.footer h3, .footer h4 {margin:10px 0;}
-.footer p, .footer a {color:white; text-decoration:none;} 
-.footer img {vertical-align: middle; margin-left: 5px;}
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.modal {
-  background: #fff;
-  padding: 20px;
-  width: 320px;
-  max-width: calc(100% - 40px);
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  font-family: inherit;
-}
-.modal h3 { margin: 0 0 10px; font-size: 18px; }
-.modal .hint { margin-bottom: 12px; color: #555; font-size: 14px; }
-.modal input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.modal .buttons { display:flex; gap:8px; justify-content:flex-end; }
-.modal button { padding: 8px 12px; cursor: pointer; border-radius:4px; border: none; }
-.modal .btn-cancel { background:#ddd; }
-.modal .btn-ok { background:#007BFF; color: white; }
-.modal .error { color: #b00020; font-size: 13px; display:none; margin-top:6px; }
-
-
-#section4 a {
-  color: #2a00b3;
-  text-decoration: none;
-}
-#section4 a:hover {
-  color: #2a00b3;
-  text-decoration: underline;
-}
-    
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classes — Petrides Constantinos</title>
+  <meta name="title" content="Classes - Petrides Constantinos">
+  <meta name="description" content="University course notes for computational physics and fluid dynamics.">
+  <meta name="keywords" content="Petrides, Constantinos, Classes, Notes, Physics, NKUA, Fluid Dynamics, Computational Physics">
+  <meta name="author" content="Constantinos Petrides">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<ul class="w3-navbar w3-black">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="classes.html">Classes</a></li>
-  <li><a href="mailto:costpetrides@icloud.com">Contact</a></li> 
-</ul>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__brand">C. Petrides</a>
+      <button class="site-nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="site-nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        <li><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
+  <header class="page-hero">
+    <h1>University Course Notes</h1>
+    <p>Computational physics and fluid dynamics materials</p>
+  </header>
 
+  <section class="section">
+    <div class="section__inner">
+      <div class="notes-grid">
+        <article class="notes-card">
+          <h3>Computational Physics</h3>
+          <p>Lecture notes, solved problems, and official course resources from NKUA.</p>
+          <div class="notes-card__links">
+            <a href="Comp_Phys_Notes.pdf">Notes</a>
+            <a href="Comp_Phys_Solutions.pdf">Solved Problems (EN)</a>
+            <a href="https://github.com/theofil/CompPhysics" target="_blank" rel="noopener">Official Course GitHub</a>
+          </div>
+        </article>
 
- <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="section4">
-    <h2 class="w3-wide">University Course Notes</h2>
-    <p>&nbsp;</p>
-   <p class="w3-justify">Computational Physics: 
-    <a href="Comp_Phys_Notes.pdf">Notes, </a>
-    <a href="Comp_Phys_Solutions.pdf">Solved Problems (EN), </a>
-    <a href="https://github.com/theofil/CompPhysics">Official (NKUA) Course GitHub </a>
-   </p> 
-   <p class="w3-justify">Fluid Dynamics: 
-    <a href="FD_1.pdf">FD1, </a>
-    <a href="FD_2.pdf">FD2, </a>
-    <a href="FD_3.pdf">FD3, </a>
-    <a href="FD_4.pdf">FD4, </a>
-    <a href="FD_5.pdf">FD5 </a>
-   </p>
- </div>	 
+        <article class="notes-card">
+          <h3>Fluid Dynamics</h3>
+          <p>Course materials organized by module.</p>
+          <div class="notes-card__links">
+            <a href="FD_1.pdf">FD 1</a>
+            <a href="FD_2.pdf">FD 2</a>
+            <a href="FD_3.pdf">FD 3</a>
+            <a href="FD_4.pdf">FD 4</a>
+            <a href="FD_5.pdf">FD 5</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <h3>Constantinos Petrides</h3>
+        <p>Physics student at the National and Kapodistrian University of Athens.</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <ul class="site-footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="https://www.linkedin.com/in/constantinos-petrides/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/constantinos-petrides/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="icons8-linkedin-2.svg" alt="">
+          </a>
+          <a href="https://github.com/costpetrides" target="_blank" rel="noopener" aria-label="GitHub">
+            <img src="icons8-github.svg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; Constantinos Petrides</p>
+    </div>
+  </footer>
 
-    
-<!-- Scroll to Top Button -->
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+  <button type="button" class="scroll-top" id="scrollTop" title="Back to top" aria-label="Back to top">↑</button>
 
-<!-- Password Modal -->
-<div id="passwordModal" class="modal-overlay" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h3 id="modalTitle">Enter access code</h3>
-    <div class="hint">Please enter the code to open this file.</div>
-    <input id="modalPassword" type="password" inputmode="numeric" placeholder="Access code" aria-label="Access code">
-    <div class="error" id="modalError">Wrong code. Try again.</div>
-    <div class="buttons">
-      <button class="btn-cancel" id="modalCancel">Cancel</button>
-      <button class="btn-ok" id="modalOk">Open</button>
+  <div id="passwordModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Enter access code</h3>
+      <p class="hint">Please enter the code to open this file.</p>
+      <input id="modalPassword" type="password" inputmode="numeric" placeholder="Access code" aria-label="Access code">
+      <div class="error" id="modalError">Wrong code. Try again.</div>
+      <div class="buttons">
+        <button type="button" class="btn btn--dark" style="background:#e2e8f0;color:#334155;" id="modalCancel">Cancel</button>
+        <button type="button" class="btn btn--primary" id="modalOk">Open</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-// Scroll button
-let mybutton = document.getElementById("myBtn");
-window.onscroll = function() {scrollFunction()};
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-</script>
+  <script>
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-<script>
-(function() {
-  const modalOverlay = document.getElementById('passwordModal');
-  const input = document.getElementById('modalPassword');
-  const errorBox = document.getElementById('modalError');
-  const btnCancel = document.getElementById('modalCancel');
-  const btnOk = document.getElementById('modalOk');
+    const toggle = document.querySelector('.site-nav__toggle');
+    const links = document.querySelector('.site-nav__links');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+  </script>
 
-  let currentLink = null;
-  let currentCode = null;
+  <script>
+  (function() {
+    const modalOverlay = document.getElementById('passwordModal');
+    const input = document.getElementById('modalPassword');
+    const errorBox = document.getElementById('modalError');
+    const btnCancel = document.getElementById('modalCancel');
+    const btnOk = document.getElementById('modalOk');
 
-  // Handle clicks on protected links
-  document.addEventListener('click', function(e) {
-    const a = e.target.closest('a.protected-link');
-    if (!a) return;
-    e.preventDefault();
-    currentLink = a;
-    currentCode = a.getAttribute('data-code') || '';
-    showModal();
-  });
+    let currentLink = null;
+    let currentCode = null;
 
-  function showModal() {
-    errorBox.style.display = 'none';
-    input.value = '';
-    modalOverlay.style.display = 'flex';
-    modalOverlay.setAttribute('aria-hidden', 'false');
-    setTimeout(() => input.focus(), 100);
-    document.addEventListener('keydown', handleKeydown);
-  }
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('a.protected-link');
+      if (!a) return;
+      e.preventDefault();
+      currentLink = a;
+      currentCode = a.getAttribute('data-code') || '';
+      showModal();
+    });
 
-  function hideModal() {
-    modalOverlay.style.display = 'none';
-    modalOverlay.setAttribute('aria-hidden', 'true');
-    errorBox.style.display = 'none';
-    input.value = '';
-    currentLink = null;
-    currentCode = null;
-    document.removeEventListener('keydown', handleKeydown);
-  }
-
-  function handleKeydown(e) {
-    if (e.key === 'Escape') hideModal();
-    if (e.key === 'Enter') tryOpen();
-  }
-
-  btnCancel.addEventListener('click', hideModal);
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === modalOverlay) hideModal();
-  });
-
-  btnOk.addEventListener('click', tryOpen);
-
-  function tryOpen() {
-    const val = input.value.trim();
-    if (!currentLink) { hideModal(); return; }
-    if (val === currentCode) {
-      const href = currentLink.getAttribute('data-href');
-      window.location.href = href; // always same tab
-      hideModal();
-    } else {
-      errorBox.style.display = 'block';
-      errorBox.textContent = 'Wrong code. Try again.';
-      input.focus();
-      input.select();
+    function showModal() {
+      errorBox.style.display = 'none';
+      input.value = '';
+      modalOverlay.classList.add('active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      setTimeout(() => input.focus(), 100);
+      document.addEventListener('keydown', handleKeydown);
     }
-  }
-})();
-</script>
 
+    function hideModal() {
+      modalOverlay.classList.remove('active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      errorBox.style.display = 'none';
+      input.value = '';
+      currentLink = null;
+      currentCode = null;
+      document.removeEventListener('keydown', handleKeydown);
+    }
+
+    function handleKeydown(e) {
+      if (e.key === 'Escape') hideModal();
+      if (e.key === 'Enter') tryOpen();
+    }
+
+    btnCancel.addEventListener('click', hideModal);
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) hideModal();
+    });
+    btnOk.addEventListener('click', tryOpen);
+
+    function tryOpen() {
+      const val = input.value.trim();
+      if (!currentLink) { hideModal(); return; }
+      if (val === currentCode) {
+        window.location.href = currentLink.getAttribute('data-href');
+        hideModal();
+      } else {
+        errorBox.style.display = 'block';
+        input.focus();
+        input.select();
+      }
+    }
+  })();
+  </script>
 </body>
 </html>
