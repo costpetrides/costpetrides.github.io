@@ -27,6 +27,9 @@
         <li><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
       </ul>
+      <div class="site-nav__actions">
+        <button type="button" class="icon-btn" data-theme-toggle aria-label="Toggle theme"><span data-theme-icon>☾</span></button>
+      </div>
     </div>
   </nav>
 
@@ -110,25 +113,7 @@
     </div>
   </div>
 
-  <script>
-    const scrollBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-      scrollBtn.classList.toggle('visible', window.scrollY > 300);
-    });
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    const toggle = document.querySelector('.site-nav__toggle');
-    const links = document.querySelector('.site-nav__links');
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
-    });
-  </script>
+  <script src="js/main.js"></script>
 
   <script>
   (function() {

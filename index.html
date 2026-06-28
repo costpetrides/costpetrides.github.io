@@ -2,18 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Constantinos Petrides</title>
+  <title>Constantinos Petrides — Computational & Atmospheric Physics</title>
   <meta name="title" content="Constantinos Petrides">
-  <meta name="description" content="Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.">
-  <meta name="keywords" content="Petrides, Constantinos, costpetrides, Physics, Atmospheric Physics, Computational Physics, NKUA, Athens, Research, Fluid Dynamics, Cyprus, GitHub">
+  <meta name="description" content="Physics student at NKUA researching computational and atmospheric physics — fluid dynamics, machine learning, quantum computing, and environmental modeling.">
+  <meta name="keywords" content="Petrides, Constantinos, Physics, Atmospheric Physics, Computational Physics, NKUA, Fluid Dynamics, Machine Learning, Cyprus">
   <meta name="author" content="Constantinos Petrides">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://costpetrides.github.io/">
+  <meta property="og:title" content="Constantinos Petrides">
+  <meta property="og:description" content="Computational & atmospheric physics research — simulations, forecasting, and open-source science.">
+  <meta property="og:image" content="https://costpetrides.github.io/wallpaper.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Constantinos Petrides">
+  <meta name="twitter:description" content="Computational & atmospheric physics research at NKUA.">
+
+  <link rel="canonical" href="https://costpetrides.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Constantinos Petrides",
+    "url": "https://costpetrides.github.io",
+    "jobTitle": "Physics Student",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "National and Kapodistrian University of Athens"
+    },
+    "sameAs": [
+      "https://github.com/costpetrides",
+      "https://www.linkedin.com/in/constantinos-petrides/"
+    ],
+    "knowsAbout": ["Computational Physics", "Fluid Dynamics", "Atmospheric Modeling", "Machine Learning"]
+  }
+  </script>
 </head>
-<body>
+<body class="page-home">
 
   <nav class="site-nav" aria-label="Main navigation">
     <div class="site-nav__inner">
@@ -24,140 +56,115 @@
         <li><a href="#research">Research</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#visualizations">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li><a href="classes.html">Classes</a></li>
         <li><a href="https://github.com/costpetrides" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="mailto:costpetrides@icloud.com">Contact</a></li>
       </ul>
+      <div class="site-nav__actions">
+        <button type="button" class="icon-btn" data-command-open aria-label="Search (⌘K)">⌕</button>
+        <button type="button" class="icon-btn" data-theme-toggle aria-label="Toggle theme"><span data-theme-icon>☾</span></button>
+      </div>
     </div>
   </nav>
 
   <header class="hero" id="top">
     <div class="hero__bg" role="img" aria-label="Atmospheric landscape"></div>
     <div class="hero__overlay"></div>
-    <div class="hero__content">
+    <div class="hero__content reveal">
       <p class="hero__eyebrow">Computational &amp; Atmospheric Physics</p>
       <h1 class="hero__title">Constantinos Petrides</h1>
       <p class="hero__subtitle">Physicist · National and Kapodistrian University of Athens</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <div class="hero__actions">
         <a href="Full_CV.pdf" class="btn btn--primary">Download CV</a>
-        <a href="#about" class="btn btn--outline">Learn more</a>
+        <a href="#projects" class="btn btn--outline">Explore projects</a>
+        <button type="button" class="btn btn--ghost" data-command-open>Search ⌘K</button>
       </div>
     </div>
-    <a href="#about" class="hero__scroll">Scroll</a>
+    <a href="#stats" class="hero__scroll">Scroll</a>
   </header>
+
+  <section class="stats-bar" id="stats" aria-label="Profile statistics">
+    <div class="stats-bar__inner" id="statsBar"></div>
+  </section>
 
   <section class="section" id="about">
     <div class="section__inner">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="section__label">About</span>
         <h2>Welcome</h2>
         <p class="section__lead">A bunch of atoms trying to understand themselves</p>
       </div>
-      <div class="about-card">
-        <p>Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
-        <a href="Full_CV.pdf" class="btn btn--dark" style="margin-top: 1.5rem;">View full CV</a>
+      <div class="about-layout reveal">
+        <div class="about-card">
+          <p>Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
+          <p class="about-card__location">Cyprus · Athens · NKUA Environmental Physics &amp; Meteorology</p>
+          <a href="Full_CV.pdf" class="btn btn--dark" style="margin-top: 1.5rem;">View full CV</a>
+        </div>
+        <div class="about-focus">
+          <h3 class="about-focus__title">Research focus</h3>
+          <div class="chip-row" id="focusAreas"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section--alt" id="research">
     <div class="section__inner">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="section__label">Research</span>
         <h2>Research &amp; Publications</h2>
+        <p class="section__lead">Atmospheric modeling, environmental physics, and applied computational methods</p>
       </div>
-      <ul class="content-list">
-        <li class="content-list__item">
-          <span class="content-list__number">1</span>
-          Fairmode WG5: Model bias correction —
-          <a href="https://knowledge4policy.ec.europa.eu/sites/default/files/fairmode/events/5.FAIREMODE_1706_UoA.pdf" target="_blank" rel="noopener">View publication</a>
-        </li>
-      </ul>
+      <div class="research-grid" id="researchGrid"></div>
     </div>
   </section>
 
   <section class="section" id="projects">
     <div class="section__inner">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="section__label">Open Source</span>
         <h2>GitHub Repositories</h2>
+        <p class="section__lead">Live data from GitHub — filter by topic or search by keyword</p>
       </div>
-      <ul class="content-list">
-        <li class="content-list__item">
-          <span class="content-list__number">1</span>
-          A Hybrid Quantum–Classical Solver for the Incompressible Navier–Stokes Equations —
-          <a href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes" target="_blank" rel="noopener">GitHub</a>
-        </li>
-        <li class="content-list__item">
-          <span class="content-list__number">2</span>
-          Numerical simulation designed to solve the 2D shallow water equations —
-          <a href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes" target="_blank" rel="noopener">GitHub</a>
-        </li>
-        <li class="content-list__item">
-          <span class="content-list__number">3</span>
-          NOx–Ozone Relationship Modeling Using a Machine Learning Approach —
-          <a href="https://github.com/costpetrides/NOx-Ozone-Relationship-Modeling-with-ML" target="_blank" rel="noopener">GitHub</a>
-        </li>
-        <li class="content-list__item">
-          <span class="content-list__number">4</span>
-          Time Series Forecasting of Meteorological Data Using Machine Learning and Statistical Models —
-          <a href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" target="_blank" rel="noopener">GitHub</a>
-        </li>
-        <li class="content-list__item">
-          <span class="content-list__number">5</span>
-          CMS Analysis of the 40MHz scouting data recorded in 2018 —
-          <a href="https://github.com/theofil/dscout" target="_blank" rel="noopener">GitHub</a>
-        </li>
-      </ul>
+
+      <div class="project-toolbar reveal">
+        <div class="filter-group" id="projectFilters" role="tablist" aria-label="Filter projects"></div>
+        <label class="search-field">
+          <span class="search-field__icon" aria-hidden="true">⌕</span>
+          <input type="search" id="projectSearch" placeholder="Search projects…" aria-label="Search projects">
+        </label>
+      </div>
+
+      <div class="project-grid" id="projectGrid"></div>
+      <p class="empty-state" id="projectEmpty" hidden>No projects match your search.</p>
     </div>
   </section>
 
   <section class="section section--alt" id="visualizations">
     <div class="section__inner">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="section__label">Visualizations</span>
         <h2>Simulations &amp; Research Outputs</h2>
-        <p class="section__lead">Click any image to view the related project on GitHub</p>
+        <p class="section__lead">Click any image to open the lightbox, or visit the project on GitHub</p>
       </div>
-      <div class="slideshow" aria-label="Project visualizations slideshow">
-        <div class="slideshow__track">
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" target="_blank" rel="noopener">
-            <img src="LSTM.png" alt="LSTM temperature forecasting visualization" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb" target="_blank" rel="noopener">
-            <img src="hta_1.gif" alt="Fluid dynamics simulation animation" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb" target="_blank" rel="noopener">
-            <img src="classical.png" alt="Classical Navier-Stokes solver output" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb" target="_blank" rel="noopener">
-            <img src="velocity.gif" alt="2D flow around cylinder simulation" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb" target="_blank" rel="noopener">
-            <img src="Forcing.gif" alt="Navier-Stokes forcing simulation" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin–Helmholtz-Instability.ipynb" target="_blank" rel="noopener">
-            <img src="KHI.gif" alt="Kelvin-Helmholtz instability simulation" width="420" height="280">
-          </a>
-          <!-- Duplicated set for seamless infinite scroll -->
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Temperature_Forecasting_MethodComparison" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="LSTM.png" alt="" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="hta_1.gif" alt="" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="classical.png" alt="" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="velocity.gif" alt="" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="Forcing.gif" alt="" width="420" height="280">
-          </a>
-          <a class="slideshow__slide" href="https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin–Helmholtz-Instability.ipynb" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-            <img src="KHI.gif" alt="" width="420" height="280">
-          </a>
+      <div class="slideshow" aria-label="Project visualizations">
+        <div class="slideshow__track" id="galleryTrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="section__inner">
+      <div class="contact-card reveal">
+        <div>
+          <span class="section__label">Contact</span>
+          <h2>Let's connect</h2>
+          <p>Open to research collaborations, internships, and conversations about computational physics and atmospheric science.</p>
+        </div>
+        <div class="contact-card__actions">
+          <a href="mailto:costpetrides@icloud.com" class="btn btn--primary">Send email</a>
+          <button type="button" class="btn btn--dark" id="copyEmail">Copy email</button>
+          <a href="https://www.linkedin.com/in/constantinos-petrides/" class="btn btn--outline-dark" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -191,30 +198,37 @@
       </div>
     </div>
     <div class="site-footer__bottom">
-      <p>&copy; Constantinos Petrides</p>
+      <p>&copy; Constantinos Petrides · Press <kbd>/</kbd> or <kbd>⌘K</kbd> to search</p>
     </div>
   </footer>
 
   <button type="button" class="scroll-top" id="scrollTop" title="Back to top" aria-label="Back to top">↑</button>
 
-  <script>
-    const scrollBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-      scrollBtn.classList.toggle('visible', window.scrollY > 300);
-    });
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close">×</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous">‹</button>
+    <figure class="lightbox__figure">
+      <img id="lightboxImage" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+      <a id="lightboxLink" class="btn btn--primary" href="#" target="_blank" rel="noopener">View on GitHub</a>
+    </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next">›</button>
+  </div>
 
-    const toggle = document.querySelector('.site-nav__toggle');
-    const links = document.querySelector('.site-nav__links');
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
-    });
-  </script>
+  <!-- Command palette -->
+  <div id="commandPalette" class="command-palette" aria-hidden="true" role="dialog" aria-label="Search">
+    <div class="command-palette__panel">
+      <div class="command-palette__header">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" id="commandInput" placeholder="Search pages, projects, research…" aria-label="Site search">
+        <button type="button" data-command-close aria-label="Close">Esc</button>
+      </div>
+      <div id="commandResults" class="command-palette__results"></div>
+    </div>
+  </div>
+
+  <script src="js/site-data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

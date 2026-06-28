@@ -1,0 +1,152 @@
+window.SITE_DATA = {
+  profile: {
+    name: "Constantinos Petrides",
+    title: "Physicist · National and Kapodistrian University of Athens",
+    eyebrow: "Computational & Atmospheric Physics",
+    tagline: "A bunch of atoms trying to understand themselves",
+    bio:
+      "Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.",
+    cv: "Full_CV.pdf",
+    email: "costpetrides@icloud.com",
+    github: "costpetrides",
+    linkedin: "https://www.linkedin.com/in/constantinos-petrides/",
+    location: "Cyprus · Athens",
+  },
+
+  focusAreas: [
+    { label: "Computational Physics", icon: "⚛" },
+    { label: "Fluid Dynamics", icon: "〰" },
+    { label: "Atmospheric Modeling", icon: "☁" },
+    { label: "Machine Learning", icon: "◈" },
+    { label: "Quantum Computing", icon: "◉" },
+    { label: "Environmental Physics", icon: "🌍" },
+  ],
+
+  research: [
+    {
+      title: "Fairmode WG5: Model bias correction",
+      type: "Publication",
+      year: "2024",
+      summary:
+        "Contributed to FAIRMODE working group research on correcting systematic biases in atmospheric chemistry models.",
+      url: "https://knowledge4policy.ec.europa.eu/sites/default/files/fairmode/events/5.FAIREMODE_1706_UoA.pdf",
+      tags: ["Atmospheric", "Modeling"],
+    },
+    {
+      title: "Air pollution impact during COVID-19 lockdown in Greece",
+      type: "Research",
+      year: "2023",
+      summary:
+        "Quantified how nationwide lockdown measures reduced anthropogenic emissions and altered atmospheric pollution levels.",
+      url: "https://github.com/costpetrides/Air-pollution-COVID-19-impact",
+      tags: ["Atmospheric", "Environmental"],
+    },
+  ],
+
+  projectFilters: [
+    { id: "all", label: "All" },
+    { id: "fluid", label: "Fluid Dynamics" },
+    { id: "ml", label: "ML & Forecasting" },
+    { id: "quantum", label: "Quantum" },
+    { id: "atmospheric", label: "Atmospheric" },
+  ],
+
+  projects: [
+    {
+      slug: "Quantum-Classical-Navier-Stokes",
+      title: "Hybrid Quantum–Classical Navier–Stokes Solver",
+      category: "quantum",
+      featured: true,
+      tags: ["Quantum", "CFD", "Python"],
+    },
+    {
+      slug: "Fluid-Dynamics-Navier-Stokes",
+      title: "2D Shallow Water & Navier–Stokes Simulations",
+      category: "fluid",
+      featured: true,
+      tags: ["CFD", "Numerical Methods"],
+    },
+    {
+      slug: "Temperature_Forecasting_MethodComparison",
+      title: "Meteorological Time Series Forecasting",
+      category: "ml",
+      featured: true,
+      tags: ["LSTM", "Prophet", "Time Series"],
+    },
+    {
+      slug: "NOx-Ozone-Relationship-Modeling-with-ML",
+      title: "NOx–Ozone Relationship Modeling with ML",
+      category: "ml",
+      featured: true,
+      tags: ["Machine Learning", "Atmospheric Chemistry"],
+    },
+    {
+      slug: "Air-pollution-COVID-19-impact",
+      title: "COVID-19 Lockdown Air Pollution Impact",
+      category: "atmospheric",
+      featured: false,
+      tags: ["Environmental", "Emissions"],
+    },
+    {
+      slug: "Computational-Physics",
+      title: "Computational Physics Course Codes",
+      category: "fluid",
+      featured: false,
+      tags: ["NKUA", "Numerical Methods"],
+    },
+    {
+      slug: "UCASS-Intercomparison",
+      title: "UCASS Sensor Intercomparison",
+      category: "atmospheric",
+      featured: false,
+      tags: ["UAV Sensors", "Field Campaign"],
+    },
+    {
+      repo: "theofil/dscout",
+      title: "CMS 40 MHz Scouting Data Analysis (2018)",
+      category: "ml",
+      featured: false,
+      tags: ["Particle Physics", "CMS"],
+      external: true,
+    },
+  ],
+
+  gallery: [
+    {
+      src: "LSTM.png",
+      alt: "LSTM temperature forecasting visualization",
+      caption: "Temperature forecasting with deep learning models",
+      url: "https://github.com/costpetrides/Temperature_Forecasting_MethodComparison",
+    },
+    {
+      src: "hta_1.gif",
+      alt: "Fluid dynamics simulation animation",
+      caption: "Shallow water equation simulation",
+      url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb",
+    },
+    {
+      src: "classical.png",
+      alt: "Classical Navier-Stokes solver output",
+      caption: "Classical Navier–Stokes solver",
+      url: "https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb",
+    },
+    {
+      src: "velocity.gif",
+      alt: "2D flow around cylinder simulation",
+      caption: "2D flow around a cylinder",
+      url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb",
+    },
+    {
+      src: "Forcing.gif",
+      alt: "Navier-Stokes forcing simulation",
+      caption: "Forced Navier–Stokes turbulence",
+      url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb",
+    },
+    {
+      src: "KHI.gif",
+      alt: "Kelvin-Helmholtz instability simulation",
+      caption: "Kelvin–Helmholtz instability",
+      url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin%E2%80%93Helmholtz-Instability.ipynb",
+    },
+  ],
+};
