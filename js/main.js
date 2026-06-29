@@ -28,33 +28,6 @@
     return (tags || []).filter((tag) => tag !== "Jupyter Notebook");
   }
 
-  /* ── Theme ─────────────────────────────────────────────── */
-  const THEME_KEY = "cp-theme";
-
-  function getPreferredTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "light" || saved === "dark") return saved;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem(THEME_KEY, theme);
-    document.querySelectorAll("[data-theme-icon]").forEach((el) => {
-      el.textContent = theme === "dark" ? "☀" : "☾";
-    });
-  }
-
-  function initTheme() {
-    applyTheme(getPreferredTheme());
-    document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(next);
-      });
-    });
-  }
-
   /* ── Navigation ──────────────────────────────────────── */
   function initNav() {
     const toggle = document.querySelector(".site-nav__toggle");
@@ -568,7 +541,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
     initNav();
     initScrollTop();
     initReveal();
