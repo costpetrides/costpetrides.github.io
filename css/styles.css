@@ -1039,6 +1039,29 @@ a.btn.btn--secondary:active {
   box-shadow: var(--shadow-lg);
 }
 
+.section--dark .gallery-slide {
+  background: #ffffff;
+  border-color: #e5e5e5;
+}
+
+.section--dark .gallery-slide:hover {
+  border-color: #a3a3a3;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.section--dark .gallery-slide__footer {
+  border-top-color: #e5e5e5;
+}
+
+.section--dark .gallery-slide__topic {
+  background: rgba(0, 0, 0, 0.06);
+  color: #0a0a0a;
+}
+
+.section--dark .gallery-slide__caption {
+  color: #0a0a0a;
+}
+
 .gallery-slide:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
