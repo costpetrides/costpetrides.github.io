@@ -303,28 +303,40 @@
     showcase.innerHTML = items
       .map(
         (item, i) => `
-      <button
-        type="button"
+      <article
         class="viz-card viz-card--${item.layout || "standard"} reveal"
-        data-index="${i}"
-        aria-label="Open ${item.caption}"
-        style="--reveal-delay: ${i * 80}ms"
+        style="--reveal-delay: ${i * 70}ms; --viz-aspect: ${item.aspect || "4 / 3"}"
       >
-        <div class="viz-card__media">
-          <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async">
-          <div class="viz-card__glow" aria-hidden="true"></div>
-        </div>
-        <div class="viz-card__overlay">
+        <button
+          type="button"
+          class="viz-card__trigger"
+          data-index="${i}"
+          aria-label="View ${item.caption}"
+        >
+          <div class="viz-card__frame">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async">
+            <span class="viz-card__zoom" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            </span>
+          </div>
+        </button>
+        <div class="viz-card__body">
           <span class="viz-card__topic">${item.topic || "Simulation"}</span>
           <h3 class="viz-card__title">${item.caption}</h3>
-          <span class="viz-card__cta">Expand <span aria-hidden="true">↗</span></span>
+          <div class="viz-card__footer">
+            <button type="button" class="viz-card__expand" data-index="${i}">View figure</button>
+            <a href="${item.url}" class="viz-card__source" target="_blank" rel="noopener">Source ↗</a>
+          </div>
         </div>
-      </button>`
+      </article>`
       )
       .join("");
 
-    showcase.querySelectorAll(".viz-card").forEach((btn) => {
-      btn.addEventListener("click", () => openLightbox(Number(btn.dataset.index)));
+    showcase.querySelectorAll("[data-index]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".viz-card__source")) return;
+        openLightbox(Number(el.dataset.index));
+      });
     });
 
     initReveal();
@@ -360,13 +372,18 @@
     const caption = document.getElementById("lightboxCaption");
     const topic = document.getElementById("lightboxTopic");
     const link = document.getElementById("lightboxLink");
+    const counter = document.getElementById("lightboxCounter");
     if (img) {
       img.src = item.src;
       img.alt = item.alt;
     }
     if (caption) caption.textContent = item.caption;
-    if (topic) topic.textContent = item.topic || "";
+    if (topic) {
+      topic.textContent = item.topic || "";
+      topic.hidden = !item.topic;
+    }
     if (link) link.href = item.url;
+    if (counter) counter.textContent = `${lightboxIndex + 1} / ${items.length}`;
   }
 
   function initLightbox() {
