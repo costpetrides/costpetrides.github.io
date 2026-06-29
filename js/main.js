@@ -117,6 +117,20 @@
     }
   }
 
+  async function fetchCommitCount() {
+    try {
+      const res = await fetch(
+        `https://api.github.com/search/commits?q=author:${GITHUB_USER}`,
+        { headers: { Accept: "application/vnd.github+json" } }
+      );
+      if (!res.ok) throw new Error("commits fetch failed");
+      const data = await res.json();
+      return data.total_count ?? null;
+    } catch {
+      return null;
+    }
+  }
+
   function repoBySlug(repos, slug) {
     return repos.find((r) => r.name === slug || `${r.owner.login}/${r.name}` === slug);
   }
@@ -135,25 +149,22 @@
         ...item,
         url,
         description: repo?.description || item.summary || "",
-        stars: repo?.stargazers_count ?? 0,
         language: repo?.language || item.tags?.[0] || "",
         updated: repo?.updated_at || null,
       };
     });
   }
 
-  function renderStats(profileData, projects) {
+  function renderStats(profileData, commitCount) {
     const container = document.getElementById("statsBar");
     if (!container) return;
 
-    const totalStars = projects.reduce((sum, p) => sum + (p.stars || 0), 0);
-    const repoCount = profileData?.public_repos ?? projects.length;
-    const followers = profileData?.followers ?? "—";
+    const repoCount = profileData?.public_repos ?? "—";
+    const commits = commitCount != null ? commitCount.toLocaleString() : "—";
 
     const stats = [
       { value: repoCount, label: "Public Repositories" },
-      { value: totalStars, label: "GitHub Stars" },
-      { value: followers, label: "Followers" },
+      { value: commits, label: "Commits" },
       { value: (data.focusAreas || []).length, label: "Research Areas" },
     ];
 
@@ -256,7 +267,6 @@
       <article class="project-card reveal${p.featured ? " project-card--featured" : ""}" data-category="${p.category}">
         <div class="project-card__top">
           <span class="project-card__lang">${p.language || "Code"}</span>
-          ${p.stars ? `<span class="project-card__stars">★ ${p.stars}</span>` : ""}
         </div>
         <h3 class="project-card__title">
           <a href="${p.url}" target="_blank" rel="noopener">${p.title}</a>
@@ -501,9 +511,13 @@
     initCommandPalette();
     initCopyEmail();
 
-    const [ghProfile, repos] = await Promise.all([fetchGitHubProfile(), fetchGitHubRepos()]);
+    const [ghProfile, repos, commitCount] = await Promise.all([
+      fetchGitHubProfile(),
+      fetchGitHubRepos(),
+      fetchCommitCount(),
+    ]);
     allProjects = mergeProjects(repos);
-    renderStats(ghProfile, allProjects);
+    renderStats(ghProfile, commitCount);
     renderProjectGrid();
   }
 

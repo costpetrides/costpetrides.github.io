@@ -327,11 +327,50 @@ p {
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  -webkit-appearance: none;
+  appearance: none;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .btn:hover {
   text-decoration: none;
+}
+
+/* Anchor buttons — Safari/WebKit can override link colors on hover */
+a.btn {
+  color: inherit;
+}
+
+a.btn.btn--primary,
+a.btn.btn--primary:hover,
+a.btn.btn--primary:visited,
+a.btn.btn--primary:active {
+  color: #fff;
+}
+
+a.btn.btn--dark,
+a.btn.btn--dark:hover,
+a.btn.btn--dark:visited,
+a.btn.btn--dark:active {
+  color: #f8fafc;
+}
+
+a.btn.btn--outline,
+a.btn.btn--outline:hover,
+a.btn.btn--outline:visited,
+a.btn.btn--outline:active {
+  color: #fff;
+}
+
+a.btn.btn--outline-dark,
+a.btn.btn--outline-dark:hover,
+a.btn.btn--outline-dark:visited,
+a.btn.btn--outline-dark:active {
+  color: var(--color-heading);
+}
+
+a.btn.btn--outline-dark:hover {
+  color: var(--color-accent);
 }
 
 .btn:focus-visible {
@@ -367,15 +406,27 @@ p {
 
 .btn--dark {
   background: var(--btn-dark-bg);
-  color: #fff;
+  color: #f8fafc;
   border-color: var(--btn-dark-bg);
 }
 
 .btn--dark:hover {
   background: var(--btn-dark-hover);
-  border-color: var(--btn-dark-hover);
+  border-color: var(--color-accent);
   color: #fff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.25);
+}
+
+[data-theme="dark"] .btn--dark {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .btn--dark:hover {
+  background: #1e293b;
+  border-color: var(--color-accent);
+  color: #fff;
 }
 
 .btn--ghost {
@@ -432,7 +483,7 @@ p {
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -511,6 +562,16 @@ p {
 .about-card p {
   text-align: left;
   font-size: 1.05rem;
+}
+
+.about-card__cta {
+  margin-top: 1.5rem;
+}
+
+.about-card a.btn.btn--primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #fff;
 }
 
 .about-layout {
