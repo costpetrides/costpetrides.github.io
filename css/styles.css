@@ -885,181 +885,117 @@ a.btn.btn--secondary:active {
   vertical-align: middle;
 }
 
-/* Visualization showcase */
-.viz-showcase {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+/* Gallery slideshow */
+.slideshow {
   margin-top: 2.5rem;
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 
-.viz-card {
+.slideshow__track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: slideshow-scroll 50s linear infinite;
+}
+
+.slideshow:hover .slideshow__track {
+  animation-play-state: paused;
+}
+
+@keyframes slideshow-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gallery-slide {
+  flex: 0 0 auto;
+  width: min(440px, 82vw);
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-border);
-  border-radius: calc(var(--radius-lg) + 2px);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.35s ease;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
 }
 
-.viz-card--featured {
-  grid-column: 1 / -1;
-}
-
-.viz-card:hover {
-  transform: translateY(-3px);
+.gallery-slide:hover {
+  transform: translateY(-4px);
   border-color: rgba(13, 148, 136, 0.35);
   box-shadow: var(--shadow-lg);
 }
 
-.viz-card__trigger {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font: inherit;
-  color: inherit;
-  position: relative;
-}
-
-.viz-card__trigger:focus-visible {
+.gallery-slide:focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: -2px;
+  outline-offset: 2px;
 }
 
-.viz-card__frame {
-  position: relative;
-  aspect-ratio: var(--viz-aspect, 4 / 3);
+.gallery-slide__media {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
-  background-color: #0b1220;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 20px 20px;
-  overflow: hidden;
+  height: 260px;
+  padding: 1rem;
+  background: #0b1220;
 }
 
-.viz-card__frame img {
+.gallery-slide__media img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 4px;
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
 }
 
-.viz-card:hover .viz-card__frame img {
-  transform: scale(1.02);
-  filter: brightness(1.04);
-}
-
-.viz-card__zoom {
-  position: absolute;
-  top: 0.85rem;
-  right: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.9);
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
-  backdrop-filter: blur(6px);
-  pointer-events: none;
-}
-
-.viz-card:hover .viz-card__zoom {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.viz-card__body {
+.gallery-slide__footer {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  padding: 1.15rem 1.35rem 1.25rem;
+  gap: 0.3rem;
+  padding: 0.9rem 1.1rem 1rem;
   border-top: 1px solid var(--color-border);
 }
 
-.viz-card__topic {
+.gallery-slide__topic {
   display: inline-flex;
   align-self: flex-start;
-  padding: 0.22rem 0.6rem;
+  padding: 0.2rem 0.55rem;
   border-radius: 999px;
   background: var(--color-accent-soft);
-  border: 1px solid rgba(13, 148, 136, 0.2);
   color: var(--color-accent);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.viz-card__title {
-  margin: 0;
+.gallery-slide__caption {
   font-family: var(--font-serif);
-  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-heading);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
-.viz-card--featured .viz-card__title {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-}
-
-.viz-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.35rem;
-  padding-top: 0.65rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.viz-card__expand {
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.viz-card__expand:hover {
-  color: var(--color-accent-hover);
-}
-
-.viz-card__source {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
-}
-
-.viz-card__source:hover {
-  color: var(--color-accent);
-}
-
-.reveal.viz-card {
-  transition-delay: var(--reveal-delay, 0ms);
+@media (prefers-reduced-motion: reduce) {
+  .slideshow__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .project-card__category {
@@ -1617,10 +1553,6 @@ kbd {
     grid-template-columns: 1fr;
   }
 
-  .viz-card--featured {
-    grid-column: auto;
-  }
-
   .site-footer__inner {
     grid-template-columns: 1fr 1fr;
   }
@@ -1657,25 +1589,12 @@ kbd {
     padding: 0.75rem 1rem;
   }
 
-  .viz-showcase {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .viz-card--featured {
-    grid-column: auto;
-  }
-
-  .viz-card__frame {
-    padding: 0.85rem;
-  }
-
-  .viz-card__body {
-    padding: 1rem 1.1rem 1.1rem;
-  }
-
   .stats-bar__inner {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery-slide__media {
+    height: 220px;
   }
 
   .project-toolbar {

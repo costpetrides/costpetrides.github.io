@@ -119,8 +119,6 @@ window.SITE_DATA = {
       alt: "LSTM temperature forecasting visualization",
       caption: "Temperature forecasting with deep learning models",
       topic: "Machine Learning",
-      layout: "featured",
-      aspect: "2 / 1",
       url: "https://github.com/costpetrides/Temperature_Forecasting_MethodComparison",
     },
     {
@@ -128,8 +126,6 @@ window.SITE_DATA = {
       alt: "Fluid dynamics simulation animation",
       caption: "Shallow water equation simulation",
       topic: "Fluid Dynamics",
-      layout: "standard",
-      aspect: "1 / 1",
       url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Simulations.ipynb",
     },
     {
@@ -137,8 +133,6 @@ window.SITE_DATA = {
       alt: "Classical Navier-Stokes solver output",
       caption: "Classical Navier–Stokes solver",
       topic: "Quantum CFD",
-      layout: "standard",
-      aspect: "6 / 5",
       url: "https://github.com/costpetrides/Quantum-Classical-Navier-Stokes/blob/main/Classical.ipynb",
     },
     {
@@ -146,8 +140,6 @@ window.SITE_DATA = {
       alt: "2D flow around cylinder simulation",
       caption: "2D flow around a cylinder",
       topic: "Fluid Dynamics",
-      layout: "standard",
-      aspect: "4 / 3",
       url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/2D-Flow-Cylinder.ipynb",
     },
     {
@@ -155,8 +147,6 @@ window.SITE_DATA = {
       alt: "Navier-Stokes forcing simulation",
       caption: "Forced Navier–Stokes turbulence",
       topic: "Turbulence",
-      layout: "standard",
-      aspect: "1 / 1",
       url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Navier-Stokes-Simulation.ipynb",
     },
     {
@@ -164,8 +154,6 @@ window.SITE_DATA = {
       alt: "Kelvin-Helmholtz instability simulation",
       caption: "Kelvin–Helmholtz instability",
       topic: "Instability",
-      layout: "featured",
-      aspect: "4 / 3",
       url: "https://github.com/costpetrides/Fluid-Dynamics-Navier-Stokes/blob/main/Kelvin%E2%80%93Helmholtz-Instability.ipynb",
     },
   ],
