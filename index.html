@@ -140,11 +140,9 @@
       <div class="section__header reveal">
         <span class="section__label">Visualizations</span>
         <h2>Simulations &amp; Research Outputs</h2>
-        <p class="section__lead">Click any image to open the lightbox, or visit the project on GitHub</p>
+        <p class="section__lead">Simulation outputs and research figures from open-source projects</p>
       </div>
-      <div class="slideshow" aria-label="Project visualizations">
-        <div class="slideshow__track" id="galleryTrack"></div>
-      </div>
+      <div class="viz-showcase" id="galleryShowcase" aria-label="Project visualizations"></div>
     </div>
   </section>
 
@@ -205,6 +203,7 @@
     <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous">‹</button>
     <figure class="lightbox__figure">
       <img id="lightboxImage" src="" alt="">
+      <p class="lightbox__topic" id="lightboxTopic"></p>
       <figcaption id="lightboxCaption"></figcaption>
       <a id="lightboxLink" class="btn btn--primary" href="#" target="_blank" rel="noopener">View on GitHub</a>
     </figure>

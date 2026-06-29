@@ -5,6 +5,29 @@
   const profile = data.profile || {};
   const GITHUB_USER = profile.github || "costpetrides";
 
+  const CATEGORY_LABELS = {
+    fluid: "Fluid Dynamics",
+    ml: "ML & Forecasting",
+    quantum: "Quantum",
+    atmospheric: "Atmospheric",
+    computational: "Computational",
+    particle: "Particle Physics",
+  };
+
+  function projectCategoryLabel(category) {
+    return CATEGORY_LABELS[category] || "Research";
+  }
+
+  function projectBadge(project) {
+    const lang = project.language;
+    if (lang && lang !== "Jupyter Notebook") return lang;
+    return projectCategoryLabel(project.category);
+  }
+
+  function projectTags(tags) {
+    return (tags || []).filter((tag) => tag !== "Jupyter Notebook");
+  }
+
   /* ── Theme ─────────────────────────────────────────────── */
   const THEME_KEY = "cp-theme";
 
@@ -149,7 +172,7 @@
         ...item,
         url,
         description: repo?.description || item.summary || "",
-        language: repo?.language || item.tags?.[0] || "",
+        language: repo?.language || "",
         updated: repo?.updated_at || null,
       };
     });
@@ -247,7 +270,14 @@
     return allProjects.filter((p) => {
       const matchesFilter = activeFilter === "all" || p.category === activeFilter;
       const q = searchQuery.toLowerCase();
-      const haystack = [p.title, p.description, ...(p.tags || [])].join(" ").toLowerCase();
+      const haystack = [
+        p.title,
+        p.description,
+        projectCategoryLabel(p.category),
+        ...(p.tags || []),
+      ]
+        .join(" ")
+        .toLowerCase();
       const matchesSearch = !q || haystack.includes(q);
       return matchesFilter && matchesSearch;
     });
@@ -266,14 +296,14 @@
         (p) => `
       <article class="project-card reveal${p.featured ? " project-card--featured" : ""}" data-category="${p.category}">
         <div class="project-card__top">
-          <span class="project-card__lang">${p.language || "Code"}</span>
+          <span class="project-card__category">${projectBadge(p)}</span>
         </div>
         <h3 class="project-card__title">
           <a href="${p.url}" target="_blank" rel="noopener">${p.title}</a>
         </h3>
         <p class="project-card__desc">${p.description || "Open-source research project."}</p>
         <div class="project-card__tags">
-          ${(p.tags || []).map((t) => `<span class="tag tag--soft">${t}</span>`).join("")}
+          ${projectTags(p.tags).map((t) => `<span class="tag tag--soft">${t}</span>`).join("")}
         </div>
       </article>`
       )
@@ -292,25 +322,39 @@
   }
 
   function renderGallery() {
-    const track = document.getElementById("galleryTrack");
-    if (!track) return;
+    const showcase = document.getElementById("galleryShowcase");
+    if (!showcase) return;
 
     const items = data.gallery || [];
-    const slides = [...items, ...items];
 
-    track.innerHTML = slides
+    showcase.innerHTML = items
       .map(
         (item, i) => `
-      <button type="button" class="gallery-slide reveal" data-index="${i % items.length}" aria-label="Open ${item.caption}">
-        <img src="${item.src}" alt="${item.alt}" width="420" height="280" loading="lazy">
-        <span class="gallery-slide__caption">${item.caption}</span>
+      <button
+        type="button"
+        class="viz-card viz-card--${item.layout || "standard"} reveal"
+        data-index="${i}"
+        aria-label="Open ${item.caption}"
+        style="--reveal-delay: ${i * 80}ms"
+      >
+        <div class="viz-card__media">
+          <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async">
+          <div class="viz-card__glow" aria-hidden="true"></div>
+        </div>
+        <div class="viz-card__overlay">
+          <span class="viz-card__topic">${item.topic || "Simulation"}</span>
+          <h3 class="viz-card__title">${item.caption}</h3>
+          <span class="viz-card__cta">Expand <span aria-hidden="true">↗</span></span>
+        </div>
       </button>`
       )
       .join("");
 
-    track.querySelectorAll(".gallery-slide").forEach((btn) => {
+    showcase.querySelectorAll(".viz-card").forEach((btn) => {
       btn.addEventListener("click", () => openLightbox(Number(btn.dataset.index)));
     });
+
+    initReveal();
   }
 
   /* ── Lightbox ────────────────────────────────────────── */
@@ -341,12 +385,14 @@
 
     const img = document.getElementById("lightboxImage");
     const caption = document.getElementById("lightboxCaption");
+    const topic = document.getElementById("lightboxTopic");
     const link = document.getElementById("lightboxLink");
     if (img) {
       img.src = item.src;
       img.alt = item.alt;
     }
     if (caption) caption.textContent = item.caption;
+    if (topic) topic.textContent = item.topic || "";
     if (link) link.href = item.url;
   }
 
@@ -418,7 +464,7 @@
         title: p.title,
         url: p.url,
         type: "Project",
-        meta: p.language,
+        meta: projectBadge(p) || p.type,
       }));
 
       const researchItems = (data.research || []).map((r) => ({
