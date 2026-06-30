@@ -870,7 +870,7 @@ a.btn.btn--secondary:active {
 
 /* Contact */
 .contact-section {
-  padding-bottom: 6rem;
+  padding-bottom: 5rem;
 }
 
 .contact-card {
@@ -907,41 +907,55 @@ a.btn.btn--secondary:active {
   gap: 0.65rem;
 }
 
-.contact-card .btn--primary {
-  background: #fff;
+.contact-card .btn.btn--primary,
+.contact-card a.btn.btn--primary,
+.contact-card a.btn.btn--primary:hover,
+.contact-card a.btn.btn--primary:visited,
+.contact-card a.btn.btn--primary:active {
+  background: #ffffff;
   color: #0a0a0a;
-  border-color: #fff;
+  border-color: #ffffff;
 }
 
-.contact-card .btn--primary:hover {
+.contact-card .btn.btn--primary:hover,
+.contact-card a.btn.btn--primary:hover {
   background: #f5f5f5;
   border-color: #f5f5f5;
   color: #0a0a0a;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.contact-card .btn--secondary {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-.contact-card .btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.35);
-  color: #fff;
-}
-
-.contact-card .btn--outline {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
-.contact-card .btn--outline:hover {
+.contact-card .btn.btn--secondary,
+.contact-card button.btn.btn--secondary,
+.contact-card button.btn.btn--secondary:hover,
+.contact-card button.btn.btn--secondary:focus {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
-  color: #fff;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.contact-card .btn.btn--secondary:hover,
+.contact-card button.btn.btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.contact-card .btn.btn--outline,
+.contact-card a.btn.btn--outline,
+.contact-card a.btn.btn--outline:hover,
+.contact-card a.btn.btn--outline:visited,
+.contact-card a.btn.btn--outline:active {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-card .btn.btn--outline:hover,
+.contact-card a.btn.btn--outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 /* Lists */
@@ -986,20 +1000,47 @@ a.btn.btn--secondary:active {
   vertical-align: middle;
 }
 
+/* Gallery section — white, seamless figures */
+#visualizations.section--gallery {
+  --color-surface: #ffffff;
+  --color-text: #525252;
+  --color-text-muted: #737373;
+  --color-heading: #0a0a0a;
+  --color-border: transparent;
+  --color-accent-soft: rgba(0, 0, 0, 0.04);
+  background: #ffffff !important;
+  color: var(--color-text);
+  padding-top: 5.5rem;
+  padding-bottom: 6rem;
+}
+
+#visualizations.section--gallery .section__label {
+  color: #737373;
+}
+
+#visualizations.section--gallery h2 {
+  color: #0a0a0a;
+}
+
+#visualizations.section--gallery .section__lead {
+  color: #737373;
+}
+
 /* Gallery slideshow */
 .slideshow {
   margin-top: 2.5rem;
   overflow: hidden;
   width: 100%;
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #fff 10%, #fff 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #fff 10%, #fff 90%, transparent);
 }
 
 .slideshow__track {
   display: flex;
-  gap: 1.25rem;
+  gap: 2rem;
   width: max-content;
-  animation: slideshow-scroll 50s linear infinite;
+  animation: slideshow-scroll 55s linear infinite;
+  will-change: transform;
 }
 
 .slideshow:hover .slideshow__track {
@@ -1017,15 +1058,15 @@ a.btn.btn--secondary:active {
 
 .gallery-slide {
   flex: 0 0 auto;
-  width: min(440px, 82vw);
+  width: min(420px, 78vw);
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   padding: 0;
   cursor: pointer;
   font: inherit;
@@ -1034,46 +1075,22 @@ a.btn.btn--secondary:active {
 }
 
 .gallery-slide:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: var(--shadow-lg);
-}
-
-.section--dark .gallery-slide {
-  background: #ffffff;
-  border-color: #e5e5e5;
-}
-
-.section--dark .gallery-slide:hover {
-  border-color: #a3a3a3;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-}
-
-.section--dark .gallery-slide__footer {
-  border-top-color: #e5e5e5;
-}
-
-.section--dark .gallery-slide__topic {
-  background: rgba(0, 0, 0, 0.06);
-  color: #0a0a0a;
-}
-
-.section--dark .gallery-slide__caption {
-  color: #0a0a0a;
+  transform: translateY(-5px);
+  box-shadow: none;
 }
 
 .gallery-slide:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: 3px;
 }
 
 .gallery-slide__media {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 260px;
-  padding: 1rem;
-  background: #171717;
+  height: 280px;
+  padding: 0 0.5rem;
+  background: #ffffff;
 }
 
 .gallery-slide__media img {
@@ -1087,30 +1104,31 @@ a.btn.btn--secondary:active {
 .gallery-slide__footer {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.9rem 1.1rem 1rem;
-  border-top: 1px solid var(--color-border);
+  gap: 0.45rem;
+  padding: 1rem 0.5rem 0;
+  background: transparent;
 }
 
 .gallery-slide__topic {
   display: inline-flex;
   align-self: flex-start;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  background: #f5f5f5;
+  color: #737373;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .gallery-slide__caption {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-heading);
-  line-height: 1.35;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0a0a0a;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 @media (prefers-reduced-motion: reduce) {
