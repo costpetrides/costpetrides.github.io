@@ -6,12 +6,9 @@
   const GITHUB_USER = profile.github || "costpetrides";
 
   const CATEGORY_LABELS = {
-    fluid: "Fluid Dynamics",
-    ml: "ML & Forecasting",
-    quantum: "Quantum",
-    atmospheric: "Atmospheric",
-    computational: "Computational",
-    particle: "Particle Physics",
+    atmospheric: "Atmospheric Modeling",
+    ml: "Machine Learning",
+    quantum: "Quantum Computing",
   };
 
   function projectCategoryLabel(category) {
@@ -30,9 +27,18 @@
 
   /* ── Navigation ──────────────────────────────────────── */
   function initNav() {
+    const nav = document.querySelector(".site-nav");
     const toggle = document.querySelector(".site-nav__toggle");
     const links = document.querySelector(".site-nav__links");
     if (!toggle || !links) return;
+
+    if (nav?.classList.contains("site-nav--over-hero")) {
+      const onScroll = () => {
+        nav.classList.toggle("site-nav--scrolled", window.scrollY > 48);
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
 
     toggle.addEventListener("click", () => {
       const open = links.classList.toggle("open");

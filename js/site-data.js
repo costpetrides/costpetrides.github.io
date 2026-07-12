@@ -1,11 +1,11 @@
 window.SITE_DATA = {
   profile: {
     name: "Constantinos Petrides",
-    title: "Physicist · National and Kapodistrian University of Athens",
+    title: "Physics Student · National and Kapodistrian University of Athens",
     eyebrow: "Computational & Atmospheric Physics",
     tagline: "A bunch of atoms trying to understand themselves",
     bio:
-      "Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.",
+      "Physics student at the National and Kapodistrian University of Athens, specializing in computational and atmospheric physics with emphasis on fluid dynamics, environmental modeling, and machine learning applications.",
     cv: "Full_CV.pdf",
     email: "costpetrides@icloud.com",
     github: "costpetrides",
@@ -14,12 +14,9 @@ window.SITE_DATA = {
   },
 
   focusAreas: [
-    { label: "Computational Physics", icon: "⚛" },
-    { label: "Fluid Dynamics", icon: "〰" },
     { label: "Atmospheric Modeling", icon: "☁" },
     { label: "Machine Learning", icon: "◈" },
     { label: "Quantum Computing", icon: "◉" },
-    { label: "Environmental Physics", icon: "🌍" },
   ],
 
   research: [
@@ -45,12 +42,9 @@ window.SITE_DATA = {
 
   projectFilters: [
     { id: "all", label: "All" },
-    { id: "fluid", label: "Fluid Dynamics" },
-    { id: "ml", label: "ML & Forecasting" },
-    { id: "quantum", label: "Quantum" },
-    { id: "atmospheric", label: "Atmospheric" },
-    { id: "computational", label: "Computational" },
-    { id: "particle", label: "Particle Physics" },
+    { id: "atmospheric", label: "Atmospheric Modeling" },
+    { id: "ml", label: "Machine Learning" },
+    { id: "quantum", label: "Quantum Computing" },
   ],
 
   projects: [

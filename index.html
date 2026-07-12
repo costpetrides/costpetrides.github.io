@@ -21,6 +21,7 @@
   <meta name="twitter:description" content="Computational & atmospheric physics research at NKUA.">
 
   <link rel="canonical" href="https://costpetrides.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +48,7 @@
 </head>
 <body class="page-home">
 
-  <nav class="site-nav" aria-label="Main navigation">
+  <nav class="site-nav site-nav--over-hero" aria-label="Main navigation">
     <div class="site-nav__inner">
       <a href="#top" class="site-nav__brand">Constantinos Petrides</a>
       <button class="site-nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
@@ -70,9 +71,10 @@
     <div class="hero__bg" role="img" aria-label="Atmospheric landscape"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content reveal">
+      <div class="hero__monogram" aria-hidden="true">CP</div>
       <p class="hero__eyebrow">Computational &amp; Atmospheric Physics</p>
       <h1 class="hero__title">Constantinos Petrides</h1>
-      <p class="hero__subtitle">Physicist · National and Kapodistrian University of Athens</p>
+      <p class="hero__subtitle">Physics Student · National and Kapodistrian University of Athens</p>
     </div>
     <a href="#stats" class="hero__scroll">Scroll</a>
   </header>
@@ -90,9 +92,18 @@
       </div>
       <div class="about-layout reveal">
         <div class="about-card">
-          <p>Hi, I'm Petrides Constantinos, a Physics student at the National and Kapodistrian University of Athens. My research combines computational and atmospheric physics with a strong focus on practical, real-world applications.</p>
-          <p class="about-card__location">Cyprus · Athens · NKUA Environmental Physics &amp; Meteorology</p>
-          <a href="Full_CV.pdf" class="btn btn--primary about-card__cta">View full CV</a>
+          <div class="about-card__header">
+            <div class="about-avatar" aria-hidden="true">CP</div>
+            <div class="about-card__identity">
+              <h3 class="about-card__name">Constantinos Petrides</h3>
+              <p class="about-card__role">B.Sc. Physics · NKUA</p>
+            </div>
+          </div>
+          <p>Physics student at the National and Kapodistrian University of Athens, specializing in computational and atmospheric physics with emphasis on fluid dynamics, environmental modeling, and machine learning applications.</p>
+          <div class="about-card__cta-row">
+            <a href="Full_CV.pdf" class="btn btn--primary">Download CV</a>
+            <a href="https://www.linkedin.com/in/constantinos-petrides/" class="btn btn--outline" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
         </div>
         <div class="about-focus">
           <h3 class="about-focus__title">Research focus</h3>
@@ -118,7 +129,7 @@
       <div class="section__header reveal">
         <span class="section__label">Open Source</span>
         <h2>GitHub Repositories</h2>
-        <p class="section__lead">Live data from GitHub — filter by topic or search by keyword</p>
+        <p class="section__lead">Live data from GitHub — filter by research focus or search by keyword</p>
       </div>
 
       <div class="project-toolbar reveal">
