@@ -2,7 +2,7 @@
 
 **Website:** https://costpetrides.github.io/
 
-A minimal, single-page academic/developer portfolio built with HTML, CSS and vanilla JavaScript. No build step is required.
+A minimal, editorial-style academic/developer portfolio built with HTML, CSS and vanilla JavaScript. No build step is required. The original starfield hero photo is retained, with a compact, readable layout and navigation that adapts from dark to light as visitors scroll.
 
 ## Site structure
 
@@ -18,9 +18,10 @@ Repositories are loaded using the public GitHub API. The six static repository l
 
 | Path | Purpose |
 | --- | --- |
-| `index.html` | Accessible one-page layout, metadata and static fallback content |
+| `index.html` | Accessible homepage, starfield hero, metadata and static fallback content |
 | `css/portfolio.css` | Minimal design system and responsive styles |
 | `js/portfolio.js` | Mobile navigation, legacy hash support, curated repository display and expansion |
+| `wallpaper.jpg` | Original background photo used in the cinematic hero (preloaded for faster first render) |
 | `favicon.svg` | Site favicon |
 | `Full_CV.pdf` | Existing CV |
 
