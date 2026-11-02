@@ -21,6 +21,22 @@
 
   let githubRepositories = null;
 
+  // Preserve bookmarked links from the previous homepage structure.
+  const oldSections = {
+    "#research": "#about",
+    "#projects": "#repositories",
+    "#visualizations": "#animations",
+    "#contact": "#about"
+  };
+  const currentHash = window.location.hash.toLowerCase();
+  if (oldSections[currentHash]) {
+    const destination = oldSections[currentHash];
+    window.history.replaceState(null, "", destination);
+    window.requestAnimationFrame(() => {
+      document.querySelector(destination)?.scrollIntoView();
+    });
+  }
+
   function closeMenu() {
     if (!navToggle || !navLinks) return;
     navLinks.classList.remove("open");
