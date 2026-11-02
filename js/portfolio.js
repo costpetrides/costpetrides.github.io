@@ -1,210 +1,191 @@
-/* Home page interactions.
-   Classes and the existing Fluid Dynamics website are intentionally independent. */
-
+/* Minimal homepage interactions: responsive navigation and GitHub repositories.
+   The separate Fluid Dynamics gallery is not modified. */
 (() => {
   "use strict";
 
-  const username = "costpetrides";
+  const githubUser = "costpetrides";
   const featured = [
-    "Fluid-Dynamics-Navier-Stokes",
-    "Quantum-Classical-Navier-Stokes",
-    "Temperature_Forecasting_MethodComparison",
-    "NOx-Ozone-Relationship-Modeling-with-ML"
+    { name: "Fluid-Dynamics-Navier-Stokes", title: "Fluid Dynamics / Navier–Stokes", summary: "Numerical flow simulations and visualisations." },
+    { name: "Quantum-Classical-Navier-Stokes", title: "Quantum–Classical Navier–Stokes", summary: "Hybrid quantum-classical methods for fluid dynamics." },
+    { name: "FAIRMODE-WG5", title: "FAIRMODE WG5", summary: "Bias correction for air-quality model predictions." },
+    { name: "NOx-Ozone-Relationship-Modeling-with-ML", title: "NOx–Ozone Modelling", summary: "Machine learning applied to atmospheric chemistry." },
+    { name: "Temperature_Forecasting_MethodComparison", title: "Temperature Forecasting", summary: "Comparison of time-series forecasting methods." },
+    { name: "UCASS-Intercomparison", title: "UCASS Intercomparison", summary: "Atmospheric measurement and sensor comparison." }
   ];
 
-  const navToggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelector(".nav-links");
-  const grid = document.getElementById("repoGrid");
-  const search = document.getElementById("repoSearch");
+  const curated = new Map(featured.map((item) => [item.name, item]));
+  const menu = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  const list = document.getElementById("repoList");
+  const showAllButton = document.getElementById("showAllRepos");
   const status = document.getElementById("repoStatus");
-  const empty = document.getElementById("repoEmpty");
 
-  let githubRepositories = null;
+  let repositories = null;
+  let showAll = false;
 
-  // Preserve bookmarked links from the previous homepage structure.
-  const oldSections = {
+  function closeMenu() {
+    if (!menu || !navLinks) return;
+    navLinks.classList.remove("is-open");
+    menu.setAttribute("aria-expanded", "false");
+  }
+
+  if (menu && navLinks) {
+    menu.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("is-open");
+      menu.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target) && !navLinks.contains(event.target)) closeMenu();
+    });
+  }
+
+  // Support incoming links/bookmarks created before this redesign.
+  const oldAnchors = {
     "#research": "#about",
     "#projects": "#repositories",
     "#visualizations": "#animations",
     "#contact": "#about"
   };
-  const currentHash = window.location.hash.toLowerCase();
-  if (oldSections[currentHash]) {
-    const destination = oldSections[currentHash];
-    window.history.replaceState(null, "", destination);
+  const oldHash = window.location.hash.toLowerCase();
+  if (oldAnchors[oldHash]) {
+    const newAnchor = oldAnchors[oldHash];
+    window.history.replaceState(null, "", newAnchor);
     window.requestAnimationFrame(() => {
-      document.querySelector(destination)?.scrollIntoView();
+      document.querySelector(newAnchor)?.scrollIntoView();
     });
   }
 
-  function closeMenu() {
-    if (!navToggle || !navLinks) return;
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-  }
-
-  if (navToggle && navLinks) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
-    document.addEventListener("click", (event) => {
-      if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
-        closeMenu();
-      }
-    });
-  }
-
-  // A visible highlight follows the section currently being read.
   if ("IntersectionObserver" in window && navLinks) {
-    const links = [...navLinks.querySelectorAll('a[href^="#"]')];
-    const sections = links
-      .map((link) => document.querySelector(link.getAttribute("href")))
+    const navAnchors = [...navLinks.querySelectorAll('a[href^="#"]')];
+    const targets = navAnchors
+      .map((anchor) => document.querySelector(anchor.getAttribute("href")))
       .filter(Boolean);
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        links.forEach((link) => {
-          if (link.getAttribute("href") === "#" + entry.target.id) {
-            link.setAttribute("aria-current", "location");
+        navAnchors.forEach((anchor) => {
+          if (anchor.getAttribute("href") === "#" + entry.target.id) {
+            anchor.setAttribute("aria-current", "location");
           } else {
-            link.removeAttribute("aria-current");
+            anchor.removeAttribute("aria-current");
           }
         });
       });
-    }, { rootMargin: "-25% 0px -60% 0px", threshold: 0 });
-    sections.forEach((section) => observer.observe(section));
+    }, { rootMargin: "-20% 0px -65% 0px", threshold: 0 });
+    targets.forEach((target) => observer.observe(target));
   }
 
-  function addText(parent, tag, className, value) {
-    const node = document.createElement(tag);
-    if (className) node.className = className;
-    node.textContent = value;
-    parent.appendChild(node);
-    return node;
+  function repositoryURL(name) {
+    return "https://github.com/" + githubUser + "/" + encodeURIComponent(name);
   }
 
-  function makeRepositoryCard(repo) {
-    const card = document.createElement("article");
-    card.className = "repo-card";
-
-    addText(card, "p", "repo-card-label", repo.language || "GitHub repository");
-
-    const heading = document.createElement("h3");
+  function createRepositoryRow(repo) {
+    const info = curated.get(repo.name);
     const link = document.createElement("a");
-    // Build the URL from the known account and the GitHub repository name.
-    link.href = "https://github.com/" + username + "/" + encodeURIComponent(repo.name);
+    link.className = "repo-item";
+    link.href = repositoryURL(repo.name);
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = repo.name + " ↗";
-    heading.appendChild(link);
-    card.appendChild(heading);
 
-    addText(card, "p", "", repo.description || "Open-source code and experiments.");
+    const main = document.createElement("span");
+    main.className = "repo-main";
+    const title = document.createElement("strong");
+    title.textContent = info?.title || repo.name;
+    main.appendChild(title);
 
-    const meta = document.createElement("div");
-    meta.className = "repo-card-meta";
-    if (repo.stargazers_count > 0) {
-      addText(meta, "span", "", "★ " + repo.stargazers_count);
+    // Limit uncurated API descriptions so the expanded list stays compact.
+    const rawSummary = info?.summary || repo.description || "";
+    const shortSummary = rawSummary.replace(/\s+/g, " ").trim().slice(0, 110);
+    if (shortSummary) {
+      const description = document.createElement("span");
+      description.textContent = shortSummary + (rawSummary.length > 110 ? "…" : "");
+      main.appendChild(description);
     }
-    if (repo.archived) addText(meta, "span", "", "Archived");
-    if (repo.pushed_at) {
-      const date = new Date(repo.pushed_at);
-      if (!Number.isNaN(date.getTime())) {
-        addText(meta, "span", "", "Updated " + date.toLocaleDateString("en-GB", { month: "short", year: "numeric" }));
-      }
-    }
-    if (meta.children.length > 0) card.appendChild(meta);
-    return card;
+
+    const arrow = document.createElement("span");
+    arrow.className = "repo-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "↗";
+
+    link.append(main, arrow);
+    return link;
   }
 
-  function getSearchTerm() {
-    return search ? search.value.trim().toLocaleLowerCase() : "";
+  function selectedFirst(items) {
+    const byName = new Map(items.map((repo) => [repo.name, repo]));
+    const selected = featured.map((item) => byName.get(item.name)).filter(Boolean);
+    const selectedNames = new Set(selected.map((repo) => repo.name));
+    const rest = items
+      .filter((repo) => !selectedNames.has(repo.name))
+      .sort((a, b) => new Date(b.pushed_at || 0) - new Date(a.pushed_at || 0));
+    return [...selected, ...rest];
   }
 
   function renderRepositories() {
-    if (!grid || !githubRepositories) return;
-    const term = getSearchTerm();
+    if (!list || !repositories) return;
 
-    const matching = githubRepositories.filter((repo) => (
-      [repo.name, repo.description, repo.language]
-        .filter(Boolean)
-        .join(" ")
-        .toLocaleLowerCase()
-        .includes(term)
-    ));
-
+    const visible = showAll ? repositories : repositories.slice(0, 6);
     const fragment = document.createDocumentFragment();
-    matching.forEach((repo) => fragment.appendChild(makeRepositoryCard(repo)));
-    grid.replaceChildren(fragment);
-    if (empty) empty.hidden = matching.length !== 0;
-  }
+    visible.forEach((repo) => fragment.appendChild(createRepositoryRow(repo)));
+    list.replaceChildren(fragment);
 
-  function filterFallbackCards() {
-    if (!grid) return;
-    const term = getSearchTerm();
-    let visible = 0;
-    grid.querySelectorAll(".repo-card").forEach((card) => {
-      const matches = card.textContent.toLocaleLowerCase().includes(term);
-      card.hidden = !matches;
-      if (matches) visible += 1;
-    });
-    if (empty) empty.hidden = visible !== 0;
-  }
-
-  if (search) {
-    search.addEventListener("input", () => {
-      if (githubRepositories) renderRepositories();
-      else filterFallbackCards();
-    });
-  }
-
-  async function loadRepositories() {
-    if (!grid) return;
-    try {
-      const response = await fetch(
-        "https://api.github.com/users/" + username + "/repos?sort=pushed&per_page=100&type=owner",
-        { headers: { Accept: "application/vnd.github+json" } }
-      );
-      if (!response.ok) throw new Error("GitHub API status " + response.status);
-
-      const result = await response.json();
-      if (!Array.isArray(result)) throw new Error("Unexpected GitHub API response");
-
-      // Do not silently present other users' forks as personal repositories.
-      githubRepositories = result.filter((repo) => (
-        repo && repo.name && repo.owner &&
-        repo.owner.login.toLowerCase() === username &&
-        repo.fork === false && repo.private === false
-      ));
-
-      // Keep selected projects visible first, then list the rest by activity.
-      githubRepositories.sort((a, b) => {
-        const aIndex = featured.indexOf(a.name);
-        const bIndex = featured.indexOf(b.name);
-        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-        if (aIndex !== -1) return -1;
-        if (bIndex !== -1) return 1;
-        return new Date(b.pushed_at || 0) - new Date(a.pushed_at || 0);
-      });
-
-      renderRepositories();
-      if (status) status.textContent =
-        githubRepositories.length + " public repositories · fetched from GitHub.";
-    } catch (error) {
-      // The static cards are preserved on rate limits, offline access and API errors.
-      githubRepositories = null;
-      filterFallbackCards();
-      if (status) status.textContent =
-        "Live GitHub list unavailable. Showing selected repositories; the full list is linked above.";
+    if (showAllButton) {
+      showAllButton.hidden = repositories.length <= 6;
+      showAllButton.textContent = showAll
+        ? "Show selected repositories ↑"
+        : "Show all " + repositories.length + " repositories ↓";
+      showAllButton.setAttribute("aria-expanded", String(showAll));
+    }
+    if (status) {
+      status.textContent = showAll
+        ? repositories.length + " public repositories"
+        : visible.length + " selected · " + repositories.length + " public repositories";
     }
   }
 
-  loadRepositories();
+  if (showAllButton) {
+    showAllButton.addEventListener("click", () => {
+      showAll = !showAll;
+      renderRepositories();
+      if (!showAll) {
+        document.getElementById("repositories")?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start"
+        });
+      }
+    });
+  }
+
+  async function fetchRepositories() {
+    if (!list) return;
+    try {
+      const response = await fetch(
+        "https://api.github.com/users/" + githubUser + "/repos?type=owner&sort=pushed&per_page=100",
+        { headers: { Accept: "application/vnd.github+json" } }
+      );
+      if (!response.ok) throw new Error("GitHub request failed");
+      const payload = await response.json();
+      if (!Array.isArray(payload)) throw new Error("Invalid GitHub response");
+
+      // Display only public repositories owned by this account; exclude forks.
+      const owned = payload.filter((repo) =>
+        repo && typeof repo.name === "string" &&
+        repo.owner?.login?.toLowerCase() === githubUser &&
+        repo.private === false && repo.fork === false
+      );
+      if (!owned.length) throw new Error("Empty GitHub response");
+      repositories = selectedFirst(owned);
+      renderRepositories();
+    } catch {
+      // The six verified HTML links above are always available as a fallback.
+      if (showAllButton) showAllButton.hidden = true;
+      if (status) status.textContent = "Selected repositories · More on GitHub";
+    }
+  }
+
+  fetchRepositories();
 })();
