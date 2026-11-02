@@ -53,6 +53,9 @@ input:focus-visible {
 
 img { max-width: 100%; display: block; }
 
+/* Author display rules must not override the HTML hidden attribute. */
+[hidden] { display: none !important; }
+
 .container {
   width: min(var(--page-width), calc(100% - 48px));
   margin: 0 auto;
