@@ -165,6 +165,8 @@
   if (showAllButton) {
     showAllButton.addEventListener("click", () => {
       showAll = !showAll;
+      // Expanded lists can be taller than the viewport; disable snapping until collapsed.
+      document.documentElement.classList.toggle("expanded-repositories", showAll);
       renderRepositories();
       if (!showAll) {
         document.getElementById("repositories")?.scrollIntoView({

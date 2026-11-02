@@ -4,6 +4,12 @@
 
 A minimal, editorial-style academic/developer portfolio built with HTML, CSS and vanilla JavaScript. No build step is required. The original starfield hero photo is retained, with a compact, readable layout and navigation that adapts from dark to light as visitors scroll.
 
+## Full-viewport scrolling
+
+The hero and the three main sections are full-width panels with a minimum height of the available viewport (`100svh`). Content is vertically aligned within each panel and uses a responsive layout up to 1480 px wide. On large desktop viewports, native CSS scroll snapping aligns one panel at a time without JavaScript intercepting scrolling. Snapping is relaxed for shorter and mobile viewports, reduced-motion preferences, and expanded repository lists, so content never becomes trapped or clipped.
+
+The final footer is included at the bottom of the Simulations panel.
+
 ## Site structure
 
 The name in the navigation links to the top of the page; the navigation has three main destinations:
