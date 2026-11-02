@@ -1,49 +1,47 @@
-# Constantinos Petrides — Personal Website
+# Constantinos Petrides — Personal Portfolio
 
-Live website: https://costpetrides.github.io/
+**Website:** https://costpetrides.github.io/
 
-A lightweight GitHub Pages portfolio built with plain HTML, CSS and JavaScript.
+A minimal, single-page academic/developer portfolio built with HTML, CSS and vanilla JavaScript. No build step is required.
 
-## Main navigation
+## Site structure
 
-- **Home:** short introduction.
-- **About Me:** bio, CV, email and LinkedIn.
-- **GitHub Repos:** public, non-fork repositories from the GitHub API, with search. If the API is unavailable or rate-limited, a small set of static repository links remains visible.
-- **Animations:** lightweight previews linking to individual simulation pages on the existing [Fluid Dynamics website](https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/), plus a link to its gallery and source repository.
+The name in the navigation links to the top of the page; the navigation has three main destinations:
 
-Research-area categories and Teaching do not appear in the homepage navigation.
+- **About:** a short biography with CV, GitHub, LinkedIn and email links.
+- **Repositories:** six selected public GitHub repositories shown in compact rows, with an optional control to reveal the entire list.
+- **Simulations:** three lightweight poster previews linking to existing individual simulation pages in the separate [Fluid Dynamics gallery](https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/).
 
-## Source files
+Repositories are loaded using the public GitHub API. The six static repository links remain available if JavaScript is disabled or GitHub rate-limits a visitor. The full GitHub profile is always linked.
 
-| File | Responsibility |
+## Homepage files
+
+| Path | Purpose |
 | --- | --- |
-| `index.html` | Homepage markup, metadata, featured repository fallback and animation links |
-| `css/portfolio.css` | Responsive homepage styling |
-| `js/portfolio.js` | Mobile navigation, GitHub API listing and repository search |
-| `wallpaper.jpg` | Existing homepage hero background |
+| `index.html` | Accessible one-page layout, metadata and static fallback content |
+| `css/portfolio.css` | Minimal design system and responsive styles |
+| `js/portfolio.js` | Mobile navigation, legacy hash support, curated repository display and expansion |
+| `favicon.svg` | Site favicon |
 | `Full_CV.pdf` | Existing CV |
 
-### Legacy files retained
+**Animation posters are loaded directly from the Fluid Dynamics repository.** This homepage does not auto-play or duplicate GIFs/MP4s.
 
-`classes.html` remains as a legacy course-notes page, with its navigation links updated to the new sections. Its course content and seven PDF links are preserved. `css/styles.css`, `js/main.js`, `js/site-data.js` and the existing PDFs/media remain in place. Old homepage anchors (`#research`, `#projects`, `#visualizations` and `#contact`) redirect to the corresponding new sections.
+## Legacy compatibility
 
-## Fluid Dynamics links
+The unlisted `classes.html` course-material page remains accessible at its old URL, with all existing PDF links intact. It uses the original `css/styles.css` and `js/main.js`. Existing PDF and media files remain untouched.
 
-The animation preview photos are served directly from
-`https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/`.
-
-The main website does **not** duplicate large GIF or MP4 animations. Each preview links to an existing simulation page in that separate repository.
+Old homepage fragment links are retained through redirects in `js/portfolio.js`: `#research`, `#projects`, `#visualizations`, and `#contact`.
 
 ## Local preview
 
-From the repository root:
+Run in the repository root:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000/`. The GitHub API requires internet access; the fallback repository cards work offline.
+Visit `http://localhost:8000/`.
 
 ## Deployment
 
-The site is static and published via GitHub Pages from the default repository branch. No build or npm install is required.
+Static files are served by GitHub Pages from the `main` branch; there is no npm install or compilation.
