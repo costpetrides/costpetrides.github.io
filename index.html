@@ -19,8 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/portfolio.css?v=fullscreen-20261102-v2">
-  <script src="js/portfolio.js?v=fullscreen-20261102-v2" defer></script>
+  <link rel="stylesheet" href="css/portfolio.css?v=slideshow-20261102">
+  <script src="js/portfolio.js?v=slideshow-20261102" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -135,19 +135,31 @@
           </div>
           <a class="text-link subtle-link" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/" target="_blank" rel="noopener noreferrer">Full gallery <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="simulation-grid">
-          <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/semicircular-hill.html" target="_blank" rel="noopener noreferrer">
-            <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/GFD-NKUA/semicircular_hill_poster.jpg" alt="Streamlines and particles passing over a semicircular hill" width="640" height="400" loading="lazy" decoding="async"></span>
-            <span class="simulation-caption"><strong>Semicircular Hill</strong><span aria-hidden="true">↗</span></span>
-          </a>
-          <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/shallow-water.html" target="_blank" rel="noopener noreferrer">
-            <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/hta_1_poster.jpg" alt="Three-dimensional surface elevation from the shallow water simulation" width="640" height="400" loading="lazy" decoding="async"></span>
-            <span class="simulation-caption"><strong>Shallow Water</strong><span aria-hidden="true">↗</span></span>
-          </a>
-          <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/kelvin-helmholtz.html" target="_blank" rel="noopener noreferrer">
-            <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/KHI_poster.jpg" alt="Kelvin–Helmholtz instability interface visualisation" width="640" height="400" loading="lazy" decoding="async"></span>
-            <span class="simulation-caption"><strong>Kelvin–Helmholtz Instability</strong><span aria-hidden="true">↗</span></span>
-          </a>
+        <div class="slideshow-controls">
+          <span class="slideshow-caption">Explore the simulations — select a preview to open its page.</span>
+          <button class="slideshow-toggle" id="slideshowToggle" type="button" aria-pressed="false" hidden>Pause slideshow</button>
+        </div>
+        <div class="simulation-marquee" id="simulationSlideshow" role="region" aria-label="Simulation slideshow">
+          <div class="simulation-track">
+            <div class="simulation-set">
+              <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/semicircular-hill.html" target="_blank" rel="noopener noreferrer">
+                <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/GFD-NKUA/semicircular_hill_poster.jpg" alt="Potential flow over a semicircular hill with tracer particle trajectories" width="640" height="400" loading="lazy" decoding="async"></span>
+                <span class="simulation-caption"><strong>Semicircular Hill Flow</strong><span aria-hidden="true">↗</span></span>
+              </a>
+              <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/shallow-water.html" target="_blank" rel="noopener noreferrer">
+                <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/hta_1_poster.jpg" alt="Three-dimensional shallow-water surface elevation simulation" width="640" height="400" loading="lazy" decoding="async"></span>
+                <span class="simulation-caption"><strong>Shallow Water</strong><span aria-hidden="true">↗</span></span>
+              </a>
+              <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/kelvin-helmholtz.html" target="_blank" rel="noopener noreferrer">
+                <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/KHI_poster.jpg" alt="Kelvin–Helmholtz instability at a fluid interface" width="640" height="400" loading="lazy" decoding="async"></span>
+                <span class="simulation-caption"><strong>Kelvin–Helmholtz</strong><span aria-hidden="true">↗</span></span>
+              </a>
+              <a class="simulation-item" href="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/simulations/forcing.html" target="_blank" rel="noopener noreferrer">
+                <span class="simulation-preview"><img src="https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/Forcing_poster.jpg" alt="Forced flow simulation with velocity field visualization" width="640" height="400" loading="lazy" decoding="async"></span>
+                <span class="simulation-caption"><strong>Forced Flow</strong><span aria-hidden="true">↗</span></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <footer class="site-footer">

@@ -399,14 +399,63 @@ h2 {
 
 .repo-status { font-size: 12px; color: var(--muted); }
 
-/* Simple three-column gallery, still-image previews only. */
-.simulation-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(20px, 2.5vw, 36px);
+/* Gentle, seamless simulation slideshow. Images move; media does not autoplay. */
+.slideshow-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: -9px 0 22px;
 }
 
-.simulation-item { display: block; min-width: 0; }
+.slideshow-caption {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.slideshow-toggle {
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid #bdbdbd;
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.slideshow-toggle:hover { border-color: var(--ink); }
+
+.simulation-marquee {
+  --slide-gap: clamp(18px, 2vw, 30px);
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
+}
+
+/* Two identical sets are laid end to end, making -50% an exact loop. */
+.simulation-track {
+  display: flex;
+  width: max-content;
+}
+
+.simulation-set {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--slide-gap);
+  padding-right: var(--slide-gap);
+  width: max-content;
+}
+
+.simulation-item {
+  display: block;
+  flex: 0 0 clamp(255px, 29vw, 450px);
+  min-width: 0;
+  scroll-snap-align: start;
+}
 
 .simulation-preview {
   display: flex;
@@ -416,7 +465,7 @@ h2 {
   aspect-ratio: 16 / 10;
   background: var(--soft);
   border: 1px solid var(--line);
-  border-radius: 5px;
+  border-radius: 6px;
   transition: border-color .2s ease;
 }
 
@@ -432,12 +481,12 @@ h2 {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  margin-top: 13px;
+  margin-top: 14px;
   color: var(--ink);
 }
 
 .simulation-caption strong {
-  font-size: 13px;
+  font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 600;
   line-height: 1.5;
 }
@@ -446,6 +495,31 @@ h2 {
 
 .simulation-item:hover .simulation-preview { border-color: #aaa; }
 .simulation-item:hover .simulation-caption strong { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Activated only when JavaScript has cloned the first set successfully. */
+@media (prefers-reduced-motion: no-preference) {
+  .simulation-marquee.is-playing {
+    overflow-x: hidden;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+  }
+
+  .simulation-marquee.is-playing .simulation-track {
+    animation: simulation-drift 55s linear infinite;
+    will-change: transform;
+  }
+
+  .simulation-marquee.is-playing:hover .simulation-track,
+  .simulation-marquee.is-playing:focus-within .simulation-track,
+  .simulation-marquee.is-playing.is-paused .simulation-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes simulation-drift {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+}
 
 /* The footer belongs to the final full-viewport section, not a separate half-screen. */
 #animations { padding: 0; }
@@ -537,7 +611,8 @@ main > section.screen-section {
   .section-heading { align-items: flex-start; }
   .repo-list { grid-template-columns: 1fr; }
   .repo-item { min-height: 0; padding: 18px 0; }
-  .simulation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 21px 14px; }
+  .simulation-item { flex-basis: min(82vw, 360px); }
+  .slideshow-controls { margin-top: 0; }
   #animations { padding: 0; }
   #animations > .container { padding-top: calc(var(--header-height) + 30px); padding-bottom: 48px; }
 }
@@ -549,8 +624,8 @@ main > section.screen-section {
   .hero-eyebrow { font-size: 10px; letter-spacing: .15em; }
   .section-heading { display: block; }
   .subtle-link { margin-top: 13px; }
-  .simulation-grid { grid-template-columns: 1fr; gap: 24px; }
-  .simulation-preview { aspect-ratio: 16 / 9; }
+  .simulation-item { flex-basis: min(84vw, 360px); }
+  .simulation-preview { aspect-ratio: 16 / 10; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
@@ -562,6 +637,8 @@ main > section.screen-section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .simulation-marquee { overflow-x: auto; scroll-snap-type: x proximity; }
+  .simulation-track { animation: none !important; transform: none !important; }
   html { scroll-behavior: auto; scroll-snap-type: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }

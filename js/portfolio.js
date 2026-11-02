@@ -204,5 +204,35 @@
     }
   }
 
+  // Smooth, continuous slide motion; a cloned second set makes looping seamless.
+  // No videos or GIFs autoplay. The first set remains the accessible link collection.
+  const slideshow = document.getElementById("simulationSlideshow");
+  const pauseButton = document.getElementById("slideshowToggle");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function initialiseSlideshow() {
+    if (!slideshow || !pauseButton || reducedMotion.matches) return;
+    const track = slideshow.querySelector(".simulation-track");
+    const originalSet = track?.querySelector(".simulation-set");
+    if (!track || !originalSet || originalSet.querySelectorAll("a").length < 2) return;
+
+    const duplicate = originalSet.cloneNode(true);
+    duplicate.setAttribute("aria-hidden", "true");
+    duplicate.querySelectorAll("a").forEach((link) => {
+      // Pointer clicks still open the linked simulation; duplicates are skipped by Tab.
+      link.setAttribute("tabindex", "-1");
+    });
+    track.appendChild(duplicate);
+
+    slideshow.classList.add("is-playing");
+    pauseButton.hidden = false;
+    pauseButton.addEventListener("click", () => {
+      const paused = slideshow.classList.toggle("is-paused");
+      pauseButton.setAttribute("aria-pressed", String(paused));
+      pauseButton.textContent = paused ? "Resume slideshow" : "Pause slideshow";
+    });
+  }
+
+  initialiseSlideshow();
   fetchRepositories();
 })();
