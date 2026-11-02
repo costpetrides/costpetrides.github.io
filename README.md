@@ -17,20 +17,20 @@ Research-area categories and Teaching do not appear in the homepage navigation.
 
 | File | Responsibility |
 | --- | --- |
-| \`index.html\` | Homepage markup, metadata, featured repository fallback and animation links |
-| \`css/portfolio.css\` | Responsive homepage styling |
-| \`js/portfolio.js\` | Mobile navigation, GitHub API listing and repository search |
-| \`wallpaper.jpg\` | Existing homepage hero background |
-| \`Full_CV.pdf\` | Existing CV |
+| `index.html` | Homepage markup, metadata, featured repository fallback and animation links |
+| `css/portfolio.css` | Responsive homepage styling |
+| `js/portfolio.js` | Mobile navigation, GitHub API listing and repository search |
+| `wallpaper.jpg` | Existing homepage hero background |
+| `Full_CV.pdf` | Existing CV |
 
 ### Legacy files retained
 
-\`classes.html\`, \`css/styles.css\`, \`js/main.js\`, \`js/site-data.js\` and existing PDFs/media remain unchanged, so old URLs keep working. The main homepage no longer links to Classes. Legacy assets can be reorganized separately later without breaking external links.
+`classes.html` remains as a legacy course-notes page, with its navigation links updated to the new sections. Its course content and seven PDF links are preserved. `css/styles.css`, `js/main.js`, `js/site-data.js` and the existing PDFs/media remain in place. Old homepage anchors (`#research`, `#projects`, `#visualizations` and `#contact`) redirect to the corresponding new sections.
 
 ## Fluid Dynamics links
 
 The animation preview photos are served directly from
-\`https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/\`.
+`https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/`.
 
 The main website does **not** duplicate large GIF or MP4 animations. Each preview links to an existing simulation page in that separate repository.
 
@@ -38,11 +38,11 @@ The main website does **not** duplicate large GIF or MP4 animations. Each previe
 
 From the repository root:
 
-\`\`\`bash
+```bash
 python3 -m http.server 8000
-\`\`\`
+```
 
-Then open \`http://localhost:8000/\`. The GitHub API requires internet access; the fallback repository cards work offline.
+Then open `http://localhost:8000/`. The GitHub API requires internet access; the fallback repository cards work offline.
 
 ## Deployment
 
