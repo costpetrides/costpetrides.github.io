@@ -465,6 +465,22 @@ h2 {
   width: 100%;
 }
 
+/* One distinct section per screen. The sections fill the viewport horizontally
+   and vertically; min-height lets long repository lists grow without clipping. */
+main > section.screen-section {
+  width: 100%;
+  min-height: 100vh;  /* older browsers */
+  min-height: 100svh; /* stable viewport with browser chrome */
+  min-height: 100dvh; /* visible viewport, including Safari changes */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Do not prevent shorter displays, large text, or expanded content from scrolling. */
+@media (max-width: 899px), (max-height: 849px) {
+  main > section.screen-section { scroll-snap-stop: normal; }
+}
+
 /* Quiet footer. */
 .site-footer { padding: 24px 0 36px; border-top: 1px solid var(--line); }
 
