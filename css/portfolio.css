@@ -61,15 +61,30 @@ button:focus-visible {
 
 .skip-link:focus { top: 10px; }
 
-/* A quiet, compact navigation bar. */
+/* Transparent on the image; light once the page moves into the content. */
 .site-header {
-  position: sticky;
-  top: 0;
+  --nav-text: #fff;
+  --nav-muted: rgba(255,255,255,.80);
+  --nav-edge: rgba(255,255,255,.22);
+  --nav-menu: rgba(11,17,22,.98);
+  position: fixed;
+  inset: 0 0 auto;
   z-index: 100;
-  background: rgba(255,255,255,.97);
-  border-bottom: 1px solid var(--line);
+  background: rgba(9,15,20,.22);
+  border-bottom: 1px solid rgba(255,255,255,.15);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  transition: background .26s ease, border-color .26s ease, box-shadow .26s ease;
+}
+
+.site-header.is-scrolled {
+  --nav-text: var(--ink);
+  --nav-muted: #666;
+  --nav-edge: var(--line);
+  --nav-menu: #fff;
+  background: rgba(255,255,255,.97);
+  border-bottom-color: var(--line);
+  box-shadow: 0 3px 16px rgba(0,0,0,.025);
 }
 
 .nav-shell {
@@ -81,11 +96,12 @@ button:focus-visible {
 }
 
 .brand {
-  color: var(--ink);
+  color: var(--nav-text);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -.015em;
+  font-weight: 600;
+  letter-spacing: -.018em;
   white-space: nowrap;
+  transition: color .26s ease;
 }
 
 .nav-links {
@@ -99,60 +115,118 @@ button:focus-visible {
 
 .nav-links a {
   display: inline-block;
-  color: var(--muted);
+  color: var(--nav-muted);
   font-size: 13px;
   transition: color .2s ease;
 }
 
 .nav-links a:hover,
-.nav-links a[aria-current="location"] { color: var(--ink); }
+.nav-links a[aria-current="location"] { color: var(--nav-text); }
 
 .menu-toggle {
   display: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--nav-edge);
   border-radius: 6px;
-  background: #fff;
+  background: transparent;
   padding: 5px 10px;
-  color: var(--ink);
+  color: var(--nav-text);
   font-size: 18px;
   line-height: 1.3;
   cursor: pointer;
 }
 
-/* Introduction: no full-screen wallpaper or ornamental logo. */
-.intro {
-  padding-top: clamp(96px, 12vw, 136px);
-  padding-bottom: clamp(94px, 11vw, 126px);
+/* Restrained cinematic hero, using the original starfield photograph. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(540px, 74svh, 700px);
+  padding: calc(var(--header-height) + 75px) 0 108px;
+  overflow: hidden;
+  background: #0b1218;
+  color: #fff;
 }
 
-.overline {
-  margin: 0 0 16px;
-  color: var(--muted);
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(90deg, rgba(5,9,15,.82) 0%, rgba(6,12,18,.53) 48%, rgba(6,12,18,.18) 100%),
+    linear-gradient(0deg, rgba(5,10,15,.44), rgba(5,10,15,.08) 52%, rgba(5,10,15,.16)),
+    url("../wallpaper.jpg");
+  background-position: center, center, center 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+.hero-content { max-width: 670px; }
+
+.hero-eyebrow {
+  margin: 0 0 25px;
+  color: rgba(255,255,255,.83);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .12em;
+  font-weight: 600;
+  letter-spacing: .18em;
+  line-height: 1.65;
   text-transform: uppercase;
 }
 
 h1, h2, p { margin-top: 0; }
-
 h1, h2 { color: var(--ink); font-family: var(--font); }
 
-h1 {
-  margin-bottom: 17px;
-  font-size: clamp(40px, 6vw, 62px);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -.055em;
+.hero h1 {
+  margin: 0;
+  color: #fff;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(72px, 8.4vw, 109px);
+  font-weight: 500;
+  letter-spacing: -.042em;
+  line-height: .86;
+  text-wrap: balance;
 }
 
-.intro-lead {
-  max-width: 670px;
-  margin-bottom: 24px;
-  font-size: clamp(16px, 2.1vw, 19px);
-  line-height: 1.65;
-  color: var(--body);
+.hero h1 span { display: block; }
+
+.hero-description {
+  max-width: 430px;
+  margin: 30px 0 24px;
+  color: rgba(255,255,255,.83);
+  font-size: clamp(15px, 1.7vw, 17px);
+  line-height: 1.75;
 }
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.6);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color .2s ease, gap .2s ease;
+}
+
+.hero-cta:hover { gap: 17px; border-color: #fff; }
+
+.hero-scroll {
+  position: absolute;
+  right: max(28px, calc((100vw - var(--container))/2));
+  bottom: 31px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,.80);
+  font-size: 11px;
+  letter-spacing: .035em;
+  transition: color .2s ease;
+}
+
+.hero-scroll:hover { color: #fff; }
 
 .text-link {
   display: inline-flex;
@@ -168,7 +242,17 @@ h1 {
 }
 
 .text-link:hover { text-decoration-color: var(--ink); }
-.intro-link { margin-top: 5px; }
+
+#about { border-top: 0; }
+
+/* Quiet entrance, without parallax, autoplay media or scroll-jacking. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content { animation: hero-appear .85s cubic-bezier(.22, 1, .36, 1) both; }
+  @keyframes hero-appear {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
 
 /* Three clear content sections, with whitespace instead of cards. */
 .content-section {
@@ -372,16 +456,21 @@ h2 {
     right: -18px;
     left: -18px;
     padding: 9px 18px 17px;
-    background: #fff;
-    border-bottom: 1px solid var(--line);
+    background: var(--nav-menu);
+    border-bottom: 1px solid var(--nav-edge);
     flex-direction: column;
     align-items: stretch;
     gap: 0;
   }
   .nav-links.is-open { display: flex; }
   .nav-links a { display: block; padding: 11px 0; font-size: 14px; }
-  .intro { padding-top: 97px; padding-bottom: 89px; }
-  h1 { font-size: clamp(37px, 9vw, 49px); }
+  .hero {
+    min-height: clamp(540px, 76svh, 660px);
+    padding: calc(var(--header-height) + 85px) 0 112px;
+  }
+  .hero h1 { font-size: clamp(68px, 12vw, 91px); }
+  .hero-description { max-width: 390px; }
+  .hero-scroll { right: 18px; bottom: 26px; }
   .content-section { padding: 57px 0 62px; }
   .section-layout { grid-template-columns: 1fr; gap: 23px; }
   .about-copy { font-size: 15px; line-height: 1.85; }
@@ -392,6 +481,10 @@ h2 {
 }
 
 @media (max-width: 460px) {
+  .hero { min-height: 570px; padding-top: calc(var(--header-height) + 70px); }
+  .hero h1 { font-size: clamp(58px, 14.2vw, 76px); }
+  .hero-media { background-position: center, center, 54% 50%; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: .15em; }
   .section-heading { display: block; }
   .subtle-link { margin-top: 13px; }
   .simulation-grid { grid-template-columns: 1fr; gap: 24px; }
