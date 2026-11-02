@@ -9,7 +9,7 @@
   --line: #e5e5e5;
   --soft: #f7f7f7;
   --font: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --container: 980px;
+  --container: 1480px;
   --header-height: 64px;
 }
 
@@ -19,8 +19,17 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 28px);
+  scroll-padding-top: 0;
+  /* One complete panel at a time on larger screens, without wheel-event hijacking. */
+  scroll-snap-type: y proximity;
 }
+
+@media (min-width: 900px) and (min-height: 700px) {
+  html { scroll-snap-type: y mandatory; }
+}
+
+/* Expanded repositories can exceed a viewport; allow uninterrupted natural scrolling. */
+html.expanded-repositories { scroll-snap-type: none; }
 
 body {
   margin: 0;
@@ -45,7 +54,7 @@ button:focus-visible {
 [hidden] { display: none !important; }
 
 .container {
-  width: min(var(--container), calc(100% - 56px));
+  width: min(var(--container), calc(100% - clamp(40px, 7vw, 140px)));
   margin-inline: auto;
 }
 
@@ -141,8 +150,9 @@ button:focus-visible {
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: clamp(540px, 74svh, 700px);
-  padding: calc(var(--header-height) + 75px) 0 108px;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--header-height) + 72px) 0 100px;
   overflow: hidden;
   background: #0b1218;
   color: #fff;
@@ -162,6 +172,9 @@ button:focus-visible {
 }
 
 .hero-inner { position: relative; z-index: 1; }
+
+.hero,
+.content-section { scroll-snap-align: start; }
 
 .hero-content { max-width: 670px; }
 
@@ -215,7 +228,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 
 .hero-scroll {
   position: absolute;
-  right: max(28px, calc((100vw - var(--container))/2));
+  right: max(28px, calc((100vw - min(var(--container), calc(100vw - clamp(40px, 7vw, 140px)))) / 2));
   bottom: 31px;
   display: inline-flex;
   align-items: center;
@@ -257,40 +270,50 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 /* Three clear content sections, with whitespace instead of cards. */
 .content-section {
   border-top: 1px solid var(--line);
-  padding: 69px 0 76px;
-  scroll-margin-top: var(--header-height);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--header-height) + 55px) 0 72px;
+  scroll-margin-top: 0;
 }
+
+#about { background: #fff; }
+#repositories { background: #f8f8f8; }
+#animations { background: #fff; }
 
 .section-layout {
   display: grid;
-  grid-template-columns: minmax(140px, 230px) minmax(0, 1fr);
-  column-gap: 42px;
+  grid-template-columns: minmax(180px, .65fr) minmax(0, 1.35fr);
+  align-items: center;
+  column-gap: clamp(40px, 5vw, 95px);
 }
 
 h2 {
   margin-bottom: 0;
-  font-size: clamp(25px, 3vw, 32px);
+  font-size: clamp(30px, 3.4vw, 47px);
   font-weight: 600;
   letter-spacing: -.04em;
   line-height: 1.25;
 }
 
 .about-copy {
-  max-width: 665px;
-  margin-bottom: 27px;
+  max-width: 790px;
+  margin-bottom: 32px;
   color: var(--body);
-  font-size: 16px;
-  line-height: 1.9;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.85;
 }
 
-.link-row { display: flex; flex-wrap: wrap; gap: 15px 27px; }
+.link-row { display: flex; flex-wrap: wrap; gap: 18px 32px; }
 
 .section-heading {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 28px;
+  gap: 28px;
+  margin-bottom: clamp(34px, 5vh, 52px);
 }
 
 .section-description {
@@ -305,7 +328,7 @@ h2 {
 .repo-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 42px;
+  column-gap: clamp(35px, 5vw, 92px);
   border-top: 1px solid var(--line);
 }
 
@@ -314,17 +337,17 @@ h2 {
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
-  padding: 23px 0 21px;
+  padding: clamp(22px, 3vh, 30px) 0;
   border-bottom: 1px solid var(--line);
   min-width: 0;
-  min-height: 111px;
+  min-height: 115px;
   transition: color .2s ease;
 }
 
 .repo-main { display: flex; flex-direction: column; min-width: 0; }
 
 .repo-main strong {
-  font-size: 14px;
+  font-size: clamp(15px, 1.15vw, 18px);
   font-weight: 600;
   color: var(--ink);
   line-height: 1.5;
@@ -336,7 +359,7 @@ h2 {
   display: block;
   margin-top: 6px;
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: clamp(13px, .94vw, 15px);
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -380,7 +403,7 @@ h2 {
 .simulation-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 23px;
+  gap: clamp(20px, 2.5vw, 36px);
 }
 
 .simulation-item { display: block; min-width: 0; }
@@ -424,6 +447,24 @@ h2 {
 .simulation-item:hover .simulation-preview { border-color: #aaa; }
 .simulation-item:hover .simulation-caption strong { text-decoration: underline; text-underline-offset: 3px; }
 
+/* The footer belongs to the final full-viewport section, not a separate half-screen. */
+#animations { padding: 0; }
+
+#animations > .container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--header-height) + 54px);
+  padding-bottom: 48px;
+}
+
+#animations .site-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
 /* Quiet footer. */
 .site-footer { padding: 24px 0 36px; border-top: 1px solid var(--line); }
 
@@ -439,13 +480,15 @@ h2 {
 .footer-inner a { color: var(--ink); }
 .footer-inner a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-@media (max-width: 800px) {
-  .section-layout { grid-template-columns: 160px minmax(0, 1fr); column-gap: 28px; }
+@media (max-width: 900px) {
+  html { scroll-snap-type: proximity; }
+  .section-layout { grid-template-columns: minmax(140px, .6fr) minmax(0, 1.4fr); column-gap: 28px; }
   .repo-list { column-gap: 24px; }
 }
 
 @media (max-width: 670px) {
   :root { --header-height: 60px; }
+  html { scroll-snap-type: none; }
   .container { width: calc(100% - 36px); }
   .nav-shell { position: relative; }
   .menu-toggle { display: inline-block; }
@@ -465,23 +508,26 @@ h2 {
   .nav-links.is-open { display: flex; }
   .nav-links a { display: block; padding: 11px 0; font-size: 14px; }
   .hero {
-    min-height: clamp(540px, 76svh, 660px);
-    padding: calc(var(--header-height) + 85px) 0 112px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(var(--header-height) + 60px) 0 88px;
   }
   .hero h1 { font-size: clamp(68px, 12vw, 91px); }
   .hero-description { max-width: 390px; }
   .hero-scroll { right: 18px; bottom: 26px; }
-  .content-section { padding: 57px 0 62px; }
+  .content-section { padding: calc(var(--header-height) + 30px) 0 54px; }
   .section-layout { grid-template-columns: 1fr; gap: 23px; }
-  .about-copy { font-size: 15px; line-height: 1.85; }
+  .about-copy { font-size: 16px; line-height: 1.85; }
   .section-heading { align-items: flex-start; }
   .repo-list { grid-template-columns: 1fr; }
   .repo-item { min-height: 0; padding: 18px 0; }
   .simulation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 21px 14px; }
+  #animations { padding: 0; }
+  #animations > .container { padding-top: calc(var(--header-height) + 30px); padding-bottom: 48px; }
 }
 
 @media (max-width: 460px) {
-  .hero { min-height: 570px; padding-top: calc(var(--header-height) + 70px); }
+  .hero { min-height: 100vh; min-height: 100svh; padding-top: calc(var(--header-height) + 60px); }
   .hero h1 { font-size: clamp(58px, 14.2vw, 76px); }
   .hero-media { background-position: center, center, 54% 50%; }
   .hero-eyebrow { font-size: 10px; letter-spacing: .15em; }
@@ -492,7 +538,14 @@ h2 {
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
+@media (max-height: 699px) {
+  /* Short/landscape screens must never be forced to skip overflowed content. */
+  html { scroll-snap-type: none; }
+  .content-section { padding-top: calc(var(--header-height) + 32px); padding-bottom: 36px; }
+  #animations > .container { padding-top: calc(var(--header-height) + 32px); padding-bottom: 36px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html { scroll-behavior: auto; scroll-snap-type: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
