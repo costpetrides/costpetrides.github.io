@@ -24,7 +24,7 @@ html {
   scroll-snap-type: y proximity;
 }
 
-@media (min-width: 900px) and (min-height: 850px) {
+@media (min-width: 900px) and (min-height: 700px) {
   html { scroll-snap-type: y mandatory; }
 }
 
