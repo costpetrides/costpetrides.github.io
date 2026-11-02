@@ -23,6 +23,21 @@
   let repositories = null;
   let showAll = false;
 
+  // Keep navigation translucent over the photograph and readable over white content.
+  const header = document.querySelector(".site-header");
+  const hero = document.querySelector(".hero");
+
+  function syncHeaderAppearance() {
+    if (!header || !hero) return;
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    header.classList.toggle("is-scrolled", heroBottom <= header.offsetHeight + 8);
+  }
+
+  window.addEventListener("scroll", syncHeaderAppearance, { passive: true });
+  window.addEventListener("resize", syncHeaderAppearance, { passive: true });
+  syncHeaderAppearance();
+  window.requestAnimationFrame(syncHeaderAppearance);
+
   function closeMenu() {
     if (!menu || !navLinks) return;
     navLinks.classList.remove("is-open");
