@@ -24,7 +24,7 @@ html {
   scroll-snap-type: y proximity;
 }
 
-@media (min-width: 900px) and (min-height: 700px) {
+@media (min-width: 900px) and (min-height: 850px) {
   html { scroll-snap-type: y mandatory; }
 }
 
@@ -481,7 +481,7 @@ h2 {
 .footer-inner a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 @media (max-width: 900px) {
-  html { scroll-snap-type: proximity; }
+  html { scroll-snap-type: y proximity; }
   .section-layout { grid-template-columns: minmax(140px, .6fr) minmax(0, 1.4fr); column-gap: 28px; }
   .repo-list { column-gap: 24px; }
 }
