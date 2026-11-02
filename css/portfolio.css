@@ -24,7 +24,7 @@ html {
   scroll-snap-type: y proximity;
 }
 
-@media (min-width: 900px) and (min-height: 850px) {
+@media (min-width: 900px) and (min-height: 700px) {
   html { scroll-snap-type: y mandatory; }
 }
 
@@ -463,6 +463,22 @@ h2 {
   flex-shrink: 0;
   margin-top: auto;
   width: 100%;
+}
+
+/* One distinct section per screen. The sections fill the viewport horizontally
+   and vertically; min-height lets long repository lists grow without clipping. */
+main > section.screen-section {
+  width: 100%;
+  min-height: 100vh;  /* older browsers */
+  min-height: 100svh; /* stable viewport with browser chrome */
+  min-height: 100dvh; /* visible viewport, including Safari changes */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Do not prevent shorter displays, large text, or expanded content from scrolling. */
+@media (max-width: 899px), (max-height: 849px) {
+  main > section.screen-section { scroll-snap-stop: normal; }
 }
 
 /* Quiet footer. */

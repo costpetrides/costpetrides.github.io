@@ -6,9 +6,11 @@ A minimal, editorial-style academic/developer portfolio built with HTML, CSS and
 
 ## Full-viewport scrolling
 
-The hero and the three main sections are full-width panels with a minimum height of the available viewport (`100svh`). Content is vertically aligned within each panel and uses a responsive layout up to 1480 px wide. On large desktop viewports, native CSS scroll snapping aligns one panel at a time without JavaScript intercepting scrolling. Snapping is relaxed for shorter and mobile viewports, reduced-motion preferences, and expanded repository lists, so content never becomes trapped or clipped.
+The hero and the three main sections are explicit `screen-section` panels with full browser width and a minimum height equal to the live viewport (`100dvh`, with `100svh`/`100vh` fallbacks). Content is vertically aligned within each panel and uses a responsive layout up to 1480 px wide. On desktop viewports at least 900px wide and 700px tall, native CSS scroll snapping aligns one panel at a time without JavaScript intercepting scrolling. Snapping is relaxed for shorter and mobile viewports, reduced-motion preferences, and expanded repository lists, so content never becomes trapped or clipped.
 
 The final footer is included at the bottom of the Simulations panel.
+
+The homepage CSS and JavaScript URLs include a version parameter so browsers such as Safari retrieve the latest layout after deployments instead of rendering previously cached section heights.
 
 ## Site structure
 
