@@ -18,7 +18,7 @@ The name in the navigation links to the top of the page; the navigation has thre
 
 - **About:** a short biography with CV, GitHub, LinkedIn and email links.
 - **Repositories:** six selected public GitHub repositories shown in compact rows, with an optional control to reveal the entire list.
-- **Simulations:** four lightweight poster previews in a slow, seamlessly looping horizontal slideshow. Selecting any card opens its existing simulation page in the separate [Fluid Dynamics gallery](https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/). The slideshow pauses on hover or keyboard focus, includes a Pause/Resume control, and becomes a manually scrollable gallery when reduced motion is requested.
+- **Simulations:** six lightweight previews (four simulation posters and two notebook visualisations) in a slow, seamlessly looping horizontal slideshow. Selecting any card opens its existing simulation page in the separate [Fluid Dynamics gallery](https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/). The slideshow pauses on hover or keyboard focus, includes a Pause/Resume control, and becomes a manually scrollable gallery when reduced motion is requested.
 
 Repositories are loaded using the public GitHub API. The six static repository links remain available if JavaScript is disabled or GitHub rate-limits a visitor. The full GitHub profile is always linked.
 
@@ -33,7 +33,7 @@ Repositories are loaded using the public GitHub API. The six static repository l
 | `favicon.svg` | Site favicon |
 | `Full_CV.pdf` | Existing CV |
 
-**Animation posters are loaded directly from the Fluid Dynamics repository.** The moving slideshow only animates the cards' position; it does not auto-play GIFs/MP4s. Its second image set is generated client-side for seamless looping, omitted from keyboard navigation and hidden from screen readers.
+**Simulation and notebook previews are loaded directly from the Fluid Dynamics repository.** The moving slideshow only animates the cards' position; it does not auto-play GIFs/MP4s. Its second image set is generated client-side for seamless looping, omitted from keyboard navigation and hidden from screen readers.
 
 ## Legacy compatibility
 
