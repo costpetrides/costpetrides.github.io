@@ -505,7 +505,7 @@ h2 {
   }
 
   .simulation-marquee.is-playing .simulation-track {
-    animation: simulation-drift 55s linear infinite;
+    animation: simulation-drift 82s linear infinite;
     will-change: transform;
   }
 
