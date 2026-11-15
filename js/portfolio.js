@@ -204,33 +204,155 @@
     }
   }
 
-  // Smooth, continuous slide motion; a cloned second set makes looping seamless.
-  // No videos or GIFs autoplay. The first set remains the accessible link collection.
+  // One scroll position for autoplay, mouse dragging and native touch/trackpad scrolling.
+  // Three copies allow seamless wrapping in BOTH directions; only the middle set
+  // is exposed to keyboard navigation and screen readers.
   const slideshow = document.getElementById("simulationSlideshow");
   const pauseButton = document.getElementById("slideshowToggle");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const hoverCapable = window.matchMedia("(hover: hover)");
 
   function initialiseSlideshow() {
-    if (!slideshow || !pauseButton || reducedMotion.matches) return;
+    if (!slideshow || !pauseButton) return;
     const track = slideshow.querySelector(".simulation-track");
-    const originalSet = track?.querySelector(".simulation-set");
-    if (!track || !originalSet || originalSet.querySelectorAll("a").length < 2) return;
+    const original = track?.querySelector(".simulation-set");
+    if (!track || !original || original.querySelectorAll("a").length < 2) return;
 
-    const duplicate = originalSet.cloneNode(true);
-    duplicate.setAttribute("aria-hidden", "true");
-    duplicate.querySelectorAll("a").forEach((link) => {
-      // Pointer clicks still open the linked simulation; duplicates are skipped by Tab.
-      link.setAttribute("tabindex", "-1");
+    function cloneSet() {
+      const copy = original.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      copy.querySelectorAll("a").forEach((link) => {
+        link.tabIndex = -1;
+      });
+      return copy;
+    }
+
+    track.prepend(cloneSet());
+    track.append(cloneSet());
+    slideshow.classList.add("is-looping");
+
+    let setWidth = 0;
+    let lastFrame = 0;
+    let lastAutomaticScroll = 0;
+    let resumeAfter = 0;
+    let pausedByUser = false;
+    let drag = null;
+    let ignoreClicksUntil = 0;
+    let isVisible = true;
+
+    // The view always stays inside the middle copy, with no visual jump.
+    function wrap() {
+      if (!setWidth) return;
+      const position = slideshow.scrollLeft;
+      if (position < setWidth || position >= 2 * setWidth) {
+        const offset = ((position - setWidth) % setWidth + setWidth) % setWidth;
+        slideshow.scrollLeft = setWidth + offset;
+      }
+    }
+
+    function measure() {
+      const width = original.getBoundingClientRect().width;
+      if (width <= 0 || width === setWidth) return;
+      const fraction = setWidth ? (slideshow.scrollLeft - setWidth) / setWidth : 0;
+      setWidth = width;
+      slideshow.scrollLeft = setWidth * (1 + fraction);
+      wrap();
+    }
+
+    // Native horizontal wheel, trackpad and touch scrolling remain available.
+    slideshow.addEventListener("scroll", () => {
+      wrap();
+      if (performance.now() - lastAutomaticScroll > 100) {
+        resumeAfter = performance.now() + 700;
+      }
+    }, { passive: true });
+
+    // Mouse/pen dragging does not interfere with ordinary link clicks.
+    slideshow.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch" || event.button !== 0) return;
+      drag = { id: event.pointerId, start: event.clientX, last: event.clientX, moved: false };
     });
-    track.appendChild(duplicate);
 
-    slideshow.classList.add("is-playing");
-    pauseButton.hidden = false;
+    window.addEventListener("pointermove", (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const delta = event.clientX - drag.last;
+      if (!drag.moved && Math.abs(event.clientX - drag.start) > 5) {
+        drag.moved = true;
+        slideshow.classList.add("is-dragging");
+      }
+      if (drag.moved) {
+        event.preventDefault();
+        slideshow.scrollLeft -= delta;
+        wrap();
+      }
+      drag.last = event.clientX;
+    }, { passive: false });
+
+    function finishDrag(event) {
+      if (!drag || event.pointerId !== drag.id) return;
+      if (drag.moved) {
+        ignoreClicksUntil = performance.now() + 400;
+        slideshow.classList.remove("is-dragging");
+      }
+      drag = null;
+      resumeAfter = performance.now() + 800;
+    }
+    window.addEventListener("pointerup", finishDrag);
+    window.addEventListener("pointercancel", finishDrag);
+    slideshow.addEventListener("dragstart", (event) => event.preventDefault());
+    slideshow.addEventListener("click", (event) => {
+      if (performance.now() < ignoreClicksUntil) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+
+    slideshow.addEventListener("touchstart", () => {
+      resumeAfter = performance.now() + 800;
+    }, { passive: true });
+    slideshow.addEventListener("touchend", () => {
+      resumeAfter = performance.now() + 1200;
+    }, { passive: true });
+
+    function syncMotionPreference() {
+      pauseButton.hidden = reducedMotion.matches;
+    }
+    syncMotionPreference();
+    reducedMotion.addEventListener?.("change", syncMotionPreference);
+
     pauseButton.addEventListener("click", () => {
-      const paused = slideshow.classList.toggle("is-paused");
-      pauseButton.setAttribute("aria-pressed", String(paused));
-      pauseButton.textContent = paused ? "Resume slideshow" : "Pause slideshow";
+      pausedByUser = !pausedByUser;
+      pauseButton.setAttribute("aria-pressed", String(pausedByUser));
+      pauseButton.textContent = pausedByUser ? "Resume slideshow" : "Pause slideshow";
     });
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(measure).observe(original);
+    } else {
+      window.addEventListener("resize", measure, { passive: true });
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+      }).observe(slideshow);
+    }
+    measure();
+
+    // Preserve the original ~82-second speed per complete set.
+    function frame(now) {
+      if (lastFrame && setWidth && isVisible &&
+          !reducedMotion.matches && !pausedByUser && !drag &&
+          !(hoverCapable.matches && slideshow.matches(":hover")) &&
+          !slideshow.matches(":focus-within") &&
+          document.visibilityState === "visible" && now >= resumeAfter) {
+        lastAutomaticScroll = now;
+        slideshow.scrollLeft += Math.min(now - lastFrame, 50) * setWidth / 82000;
+        wrap();
+      }
+      lastFrame = now;
+      window.requestAnimationFrame(frame);
+    }
+    window.requestAnimationFrame(frame);
   }
 
   initialiseSlideshow();
