@@ -39,17 +39,20 @@
   window.requestAnimationFrame(syncHeaderAppearance);
 
 
-  // Reveal the three About topics as the section scrolls into view.
-  // The HTML class prevents hiding content if JavaScript is disabled.
+  // Replay the About topics whenever the section is entered from either direction.
+  // Hide/reset only after it is completely off-screen to avoid flicker while scrolling.
   const aboutSection = document.getElementById("about");
   if (aboutSection) {
     if ("IntersectionObserver" in window) {
-      const aboutRevealObserver = new IntersectionObserver((entries, observer) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          aboutSection.classList.add("about-revealed");
-          observer.unobserve(aboutSection);
+      const aboutRevealObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.intersectionRatio >= 0.18) {
+            aboutSection.classList.add("about-revealed");
+          } else if (!entry.isIntersecting) {
+            aboutSection.classList.remove("about-revealed");
+          }
         }
-      }, { threshold: 0.2 });
+      }, { threshold: [0, 0.18] });
       aboutRevealObserver.observe(aboutSection);
     } else {
       aboutSection.classList.add("about-revealed");
