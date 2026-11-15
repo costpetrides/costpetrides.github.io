@@ -280,7 +280,21 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 }
 
 #about { background: #fff; }
-#repositories { background: #f8f8f8; }
+/* Dark, restrained repository section; scoped tokens keep other sections unchanged. */
+#repositories {
+  --ink: #f2f4f5;
+  --body: #dbe0e5;
+  --muted: #b6c0c9;
+  --line: rgba(255, 255, 255, .16);
+  background: #1d252d;
+  color: var(--body);
+}
+#repositories .repo-arrow { color: #b6c0c9; }
+#repositories .repo-item:hover .repo-arrow { color: var(--ink); }
+#repositories .text-link { text-decoration-color: rgba(255, 255, 255, .46); }
+#repositories .text-link:hover { text-decoration-color: var(--ink); }
+#repositories .text-button { text-decoration-color: rgba(255, 255, 255, .46); }
+
 #animations { background: #fff; }
 
 /* About: understated editorial introduction with three areas of interest. */
