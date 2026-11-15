@@ -10,7 +10,8 @@
     { name: "FAIRMODE-WG5", title: "FAIRMODE WG5", summary: "Bias correction for air-quality model predictions." },
     { name: "NOx-Ozone-Relationship-Modeling-with-ML", title: "NOx–Ozone Modelling", summary: "Machine learning applied to atmospheric chemistry." },
     { name: "Temperature_Forecasting_MethodComparison", title: "Temperature Forecasting", summary: "Comparison of time-series forecasting methods." },
-    { name: "UCASS-Intercomparison", title: "UCASS Intercomparison", summary: "Atmospheric measurement and sensor comparison." }
+    { name: "UCASS-Intercomparison", title: "UCASS Intercomparison", summary: "Atmospheric measurement and sensor comparison." },
+    { name: "Box_Model", title: "Box Model", summary: "Interactive chemical box-model dashboard for comparing scenarios and species." }
   ];
 
   const curated = new Map(featured.map((item) => [item.name, item]));
@@ -182,13 +183,13 @@
   function renderRepositories() {
     if (!list || !repositories) return;
 
-    const visible = showAll ? repositories : repositories.slice(0, 6);
+    const visible = showAll ? repositories : repositories.slice(0, featured.length);
     const fragment = document.createDocumentFragment();
     visible.forEach((repo) => fragment.appendChild(createRepositoryRow(repo)));
     list.replaceChildren(fragment);
 
     if (showAllButton) {
-      showAllButton.hidden = repositories.length <= 6;
+      showAllButton.hidden = repositories.length <= featured.length;
       showAllButton.textContent = showAll
         ? "Show selected repositories ↑"
         : "Show all " + repositories.length + " repositories ↓";
@@ -237,7 +238,7 @@
       repositories = selectedFirst(owned);
       renderRepositories();
     } catch {
-      // The six verified HTML links above are always available as a fallback.
+      // The featured HTML links above are always available as a fallback.
       if (showAllButton) showAllButton.hidden = true;
       if (status) status.textContent = "Selected repositories · More on GitHub";
     }
