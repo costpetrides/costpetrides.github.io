@@ -350,7 +350,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 @media (prefers-reduced-motion: no-preference) {
   html.js #about .about-topic {
     opacity: 0;
-    transform: translate3d(-min(38vw, 490px), 0, 0);
+    transform: translate3d(calc(-1 * min(38vw, 490px)), 0, 0);
   }
 
   html.js #about.about-revealed .about-topic {
@@ -369,7 +369,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   @keyframes about-topic-enter {
     from {
       opacity: 0;
-      transform: translate3d(-min(38vw, 490px), 0, 0);
+      transform: translate3d(calc(-1 * min(38vw, 490px)), 0, 0);
     }
     to {
       opacity: 1;
