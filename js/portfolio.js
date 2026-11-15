@@ -38,6 +38,24 @@
   syncHeaderAppearance();
   window.requestAnimationFrame(syncHeaderAppearance);
 
+
+  // Reveal the three About topics as the section scrolls into view.
+  // The HTML class prevents hiding content if JavaScript is disabled.
+  const aboutSection = document.getElementById("about");
+  if (aboutSection) {
+    if ("IntersectionObserver" in window) {
+      const aboutRevealObserver = new IntersectionObserver((entries, observer) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          aboutSection.classList.add("about-revealed");
+          observer.unobserve(aboutSection);
+        }
+      }, { threshold: 0.2 });
+      aboutRevealObserver.observe(aboutSection);
+    } else {
+      aboutSection.classList.add("about-revealed");
+    }
+  }
+
   function closeMenu() {
     if (!menu || !navLinks) return;
     navLinks.classList.remove("is-open");
