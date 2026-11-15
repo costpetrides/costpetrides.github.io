@@ -343,6 +343,31 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   color: var(--ink);
 }
 
+
+/* The three About topics enter gently from the left on first view. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js #about .about-topic {
+    opacity: 0;
+    transform: translate3d(-72px, 0, 0);
+    transition:
+      opacity .65s ease,
+      transform .75s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  html.js #about.about-revealed .about-topic {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  html.js #about.about-revealed .about-topic:nth-child(2) {
+    transition-delay: .13s;
+  }
+
+  html.js #about.about-revealed .about-topic:nth-child(3) {
+    transition-delay: .26s;
+  }
+}
+
 h2 {
   margin-bottom: 0;
   font-size: clamp(30px, 3.4vw, 47px);
