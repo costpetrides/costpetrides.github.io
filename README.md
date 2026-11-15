@@ -18,7 +18,7 @@ The name in the navigation links to the top of the page; the navigation has thre
 
 - **About:** a short biography with CV, GitHub, LinkedIn and email links.
 - **Repositories:** six selected public GitHub repositories shown in compact rows, with an optional control to reveal the entire list.
-- **Simulations:** six lightweight previews (four simulation posters and two notebook visualisations) in a slow, infinitely looping horizontal carousel. It supports native horizontal scrolling, mouse dragging, touch swipes and pause/resume. Selecting any card opens its existing simulation page in the separate [Fluid Dynamics gallery](https://costpetrides.github.io/Fluid-Dynamics-Navier-Stokes/). The carousel pauses on hover or keyboard focus, includes a Pause/Resume control, and can be scrolled indefinitely in either direction. Reduced-motion preferences disable automatic movement without disabling manual browsing.
+- **Simulations:** three fixed previews: autoplaying muted looping MP4s for Semicircular Hill Flow and Kelvin–Helmholtz, and the original static PennyLane image. Each links to its own simulation page in the Fluid Dynamics gallery.
 
 Repositories are loaded using the public GitHub API. The six static repository links remain available if JavaScript is disabled or GitHub rate-limits a visitor. The full GitHub profile is always linked.
 
@@ -33,7 +33,7 @@ Repositories are loaded using the public GitHub API. The six static repository l
 | `favicon.svg` | Site favicon |
 | `Full_CV.pdf` | Existing CV |
 
-**Simulation and notebook previews are loaded directly from the Fluid Dynamics repository.** The moving slideshow only animates the cards' position; it does not auto-play GIFs/MP4s. Two extra image sets are generated client-side for seamless looping in both directions, omitted from keyboard navigation and hidden from screen readers.
+**Previews are loaded directly from the Fluid Dynamics repository.** Two muted MP4 clips loop inline without controls; PennyLane remains a static PNG. No carousel JavaScript or duplicated elements are needed.
 
 ## Legacy compatibility
 
