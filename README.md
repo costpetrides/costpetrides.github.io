@@ -17,10 +17,10 @@ The homepage CSS and JavaScript URLs include a version parameter so browsers suc
 The name in the navigation links to the top of the page; the navigation has three main destinations:
 
 - **About:** a short biography with CV, GitHub, LinkedIn and email links.
-- **Repositories:** six selected public GitHub repositories shown in compact rows, with an optional control to reveal the entire list.
+- **Repositories:** seven selected public GitHub repositories shown in compact rows, with an optional control to reveal the entire list.
 - **Simulations:** three fixed previews: autoplaying muted looping MP4s for Semicircular Hill Flow and Kelvin–Helmholtz, and the original static PennyLane image. Each links to its own simulation page in the Fluid Dynamics gallery.
 
-Repositories are loaded using the public GitHub API. The six static repository links remain available if JavaScript is disabled or GitHub rate-limits a visitor. The full GitHub profile is always linked.
+Repositories are loaded using the public GitHub API. The seven static repository links remain available if JavaScript is disabled or GitHub rate-limits a visitor. The full GitHub profile is always linked.
 
 ## Homepage files
 
