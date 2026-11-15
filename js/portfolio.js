@@ -39,24 +39,42 @@
   window.requestAnimationFrame(syncHeaderAppearance);
 
 
-  // Replay the About topics whenever the section is entered from either direction.
-  // Hide/reset only after it is completely off-screen to avoid flicker while scrolling.
+  // Start the entrance when About is almost at its final snapped position.
+  // Reset only once it has substantially left the screen, so it replays both ways.
   const aboutSection = document.getElementById("about");
   if (aboutSection) {
-    if ("IntersectionObserver" in window) {
-      const aboutRevealObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.intersectionRatio >= 0.18) {
-            aboutSection.classList.add("about-revealed");
-          } else if (!entry.isIntersecting) {
-            aboutSection.classList.remove("about-revealed");
-          }
-        }
-      }, { threshold: [0, 0.18] });
-      aboutRevealObserver.observe(aboutSection);
-    } else {
-      aboutSection.classList.add("about-revealed");
+    let aboutFramePending = false;
+
+    function updateAboutAnimation() {
+      aboutFramePending = false;
+      const rect = aboutSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      const readyToReveal =
+        rect.top <= viewportHeight * 0.12 &&
+        rect.bottom >= viewportHeight * 0.88;
+      const clearlyExited =
+        rect.top >= viewportHeight * 0.75 ||
+        rect.bottom <= viewportHeight * 0.25;
+
+      if (readyToReveal) {
+        aboutSection.classList.add("about-revealed");
+      } else if (clearlyExited) {
+        aboutSection.classList.remove("about-revealed");
+      }
     }
+
+    function queueAboutAnimationCheck() {
+      if (aboutFramePending) return;
+      aboutFramePending = true;
+      window.requestAnimationFrame(updateAboutAnimation);
+    }
+
+    window.addEventListener("scroll", queueAboutAnimationCheck, { passive: true });
+    window.addEventListener("resize", queueAboutAnimationCheck, { passive: true });
+    queueAboutAnimationCheck();
+    // Also check after smooth scrolling or a scroll-snap transition finishes.
+    window.addEventListener("scrollend", queueAboutAnimationCheck, { passive: true });
   }
 
   function closeMenu() {
