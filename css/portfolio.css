@@ -344,14 +344,16 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 }
 
 
-/* The three About topics enter gently from the left on first view. */
+/* The About topics slide noticeably in from the left whenever About is entered. */
+#about { overflow-x: clip; }
+
 @media (prefers-reduced-motion: no-preference) {
   html.js #about .about-topic {
     opacity: 0;
-    transform: translate3d(-72px, 0, 0);
+    transform: translate3d(-170px, 0, 0);
     transition:
-      opacity .65s ease,
-      transform .75s cubic-bezier(.22, 1, .36, 1);
+      opacity .85s ease,
+      transform 1.05s cubic-bezier(.22, 1, .36, 1);
   }
 
   html.js #about.about-revealed .about-topic {
@@ -360,11 +362,11 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   }
 
   html.js #about.about-revealed .about-topic:nth-child(2) {
-    transition-delay: .13s;
+    transition-delay: .18s;
   }
 
   html.js #about.about-revealed .about-topic:nth-child(3) {
-    transition-delay: .26s;
+    transition-delay: .36s;
   }
 }
 
