@@ -70,30 +70,23 @@ button:focus-visible {
 
 .skip-link:focus { top: 10px; }
 
-/* Transparent on the image; light once the page moves into the content. */
+/* Consistent charcoal navigation over both the hero and light sections. */
 .site-header {
-  --nav-text: #fff;
-  --nav-muted: rgba(255,255,255,.80);
-  --nav-edge: rgba(255,255,255,.22);
-  --nav-menu: rgba(11,17,22,.98);
+  --nav-text: #f4f6f7;
+  --nav-muted: #c6cdd3;
+  --nav-edge: rgba(255,255,255,.18);
+  --nav-menu: #1d252d;
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
-  background: rgba(9,15,20,.22);
-  border-bottom: 1px solid rgba(255,255,255,.15);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  transition: background .26s ease, border-color .26s ease, box-shadow .26s ease;
+  background: #1d252d;
+  border-bottom: 1px solid rgba(255,255,255,.12);
 }
 
+/* Retain compatibility with the existing scroll-state JavaScript. */
 .site-header.is-scrolled {
-  --nav-text: var(--ink);
-  --nav-muted: #666;
-  --nav-edge: var(--line);
-  --nav-menu: #fff;
-  background: rgba(255,255,255,.97);
-  border-bottom-color: var(--line);
-  box-shadow: 0 3px 16px rgba(0,0,0,.025);
+  background: #1d252d;
+  border-bottom-color: rgba(255,255,255,.12);
 }
 
 .nav-shell {
@@ -279,23 +272,26 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   scroll-margin-top: 0;
 }
 
-#about { background: #fff; }
-/* Dark, restrained repository section; scoped tokens keep other sections unchanged. */
+/* Alternating light and dark sections, using the same cool off-white. */
+#about,
+#animations {
+  --muted: #626c75;
+  background: #f4f6f7;
+}
+
 #repositories {
   --ink: #f2f4f5;
   --body: #dbe0e5;
-  --muted: #b6c0c9;
+  --muted: #c2cbd3;
   --line: rgba(255, 255, 255, .16);
-  background: #1d252d;
+  background: #2e3740;
   color: var(--body);
 }
-#repositories .repo-arrow { color: #b6c0c9; }
+#repositories .repo-arrow { color: #c2cbd3; }
 #repositories .repo-item:hover .repo-arrow { color: var(--ink); }
 #repositories .text-link { text-decoration-color: rgba(255, 255, 255, .46); }
 #repositories .text-link:hover { text-decoration-color: var(--ink); }
 #repositories .text-button { text-decoration-color: rgba(255, 255, 255, .46); }
-
-#animations { background: #fff; }
 
 /* About: understated editorial introduction with three areas of interest. */
 .about-layout {
@@ -307,7 +303,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
 .about-main {
   min-width: 0;
   padding-bottom: clamp(28px, 4vw, 46px);
-  border-bottom: 1px solid #c9c9c9;
+  border-bottom: 1px solid #cbd2d8;
 }
 .about-eyebrow {
   margin: 0 0 28px;
@@ -328,7 +324,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   gap: clamp(36px, 4.8vw, 72px);
   min-height: 360px;
   padding: 16px 0 16px clamp(34px, 5.6vw, 88px);
-  border-left: 1px solid #c9c9c9;
+  border-left: 1px solid #cbd2d8;
 }
 .about-topic {
   display: flex;
