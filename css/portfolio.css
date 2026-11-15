@@ -496,30 +496,20 @@ h2 {
 .simulation-item:hover .simulation-preview { border-color: #aaa; }
 .simulation-item:hover .simulation-caption strong { text-decoration: underline; text-underline-offset: 3px; }
 
-/* Activated only when JavaScript has cloned the first set successfully. */
-@media (prefers-reduced-motion: no-preference) {
-  .simulation-marquee.is-playing {
-    overflow-x: hidden;
-    scroll-snap-type: none;
-    scrollbar-width: none;
-  }
-
-  .simulation-marquee.is-playing .simulation-track {
-    animation: simulation-drift 82s linear infinite;
-    will-change: transform;
-  }
-
-  .simulation-marquee.is-playing:hover .simulation-track,
-  .simulation-marquee.is-playing:focus-within .simulation-track,
-  .simulation-marquee.is-playing.is-paused .simulation-track {
-    animation-play-state: paused;
-  }
-
-  @keyframes simulation-drift {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-50%, 0, 0); }
-  }
+/* The scroll position is shared by autoplay, drag, trackpad and touch. */
+.simulation-marquee.is-looping {
+  scroll-snap-type: none;
+  scrollbar-width: none;
+  cursor: grab;
 }
+.simulation-marquee.is-looping::-webkit-scrollbar { display: none; }
+.simulation-marquee.is-dragging,
+.simulation-marquee.is-dragging * {
+  cursor: grabbing !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.simulation-preview img { -webkit-user-drag: none; }
 
 /* The footer belongs to the final full-viewport section, not a separate half-screen. */
 #animations { padding: 0; }
