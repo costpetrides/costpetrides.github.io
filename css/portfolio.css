@@ -260,7 +260,7 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   }
 }
 
-/* Three clear content sections, with whitespace instead of cards. */
+/* Full-height content sections with restrained spacing. */
 .content-section {
   border-top: 1px solid var(--line);
   min-height: 100vh;
@@ -279,7 +279,8 @@ h1, h2 { color: var(--ink); font-family: var(--font); }
   background: #f4f6f7;
 }
 
-#repositories {
+#repositories,
+#notes {
   --ink: #f2f4f5;
   --body: #dbe0e5;
   --muted: #c2cbd3;
@@ -531,10 +532,55 @@ h2 {
 .simulation-item:hover .simulation-preview { border-color: #aaa; }
 .simulation-item:hover .simulation-caption strong { text-decoration: underline; text-underline-offset: 3px; }
 
-/* The footer belongs to the final full-viewport section, not a separate half-screen. */
-#animations { padding: 0; }
 
-#animations > .container {
+/* Notes: quiet editorial groups and direct links to existing PDFs. */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(35px, 6vw, 100px);
+}
+.notes-group {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.notes-group h3 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: clamp(19px, 1.7vw, 25px);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.4;
+}
+.notes-group > p {
+  margin: 0 0 23px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.notes-links { display: grid; }
+.notes-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--body);
+  font-size: 14px;
+  transition: color .2s ease;
+}
+.notes-links a span {
+  color: var(--muted);
+  transition: transform .2s ease, color .2s ease;
+}
+.notes-links a:hover { color: var(--ink); }
+.notes-links a:hover span { color: var(--ink); transform: translate(2px, -2px); }
+#notes .footer-inner a { color: var(--ink); }
+
+/* The footer belongs to the final full-viewport section, not a separate half-screen. */
+#notes { padding: 0; }
+
+#notes > .container {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -543,7 +589,7 @@ h2 {
   padding-bottom: 48px;
 }
 
-#animations .site-footer {
+#notes .site-footer {
   flex-shrink: 0;
   margin-top: auto;
   width: 100%;
@@ -588,6 +634,7 @@ main > section.screen-section {
   .about-topic svg { width: 32px; height: 32px; flex-basis: 32px; }
   .repo-list { column-gap: 24px; }
   .simulation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .notes-grid { gap: 36px; }
 }
 
 @media (max-width: 670px) {
@@ -629,9 +676,10 @@ main > section.screen-section {
   .section-heading { align-items: flex-start; }
   .repo-list { grid-template-columns: 1fr; }
   .simulation-grid { grid-template-columns: 1fr; gap: 28px; }
+  .notes-grid { grid-template-columns: 1fr; gap: 34px; }
   .repo-item { min-height: 0; padding: 18px 0; }
-  #animations { padding: 0; }
-  #animations > .container { padding-top: calc(var(--header-height) + 30px); padding-bottom: 48px; }
+  #notes { padding: 0; }
+  #notes > .container { padding-top: calc(var(--header-height) + 30px); padding-bottom: 48px; }
 }
 
 @media (max-width: 460px) {
@@ -648,7 +696,7 @@ main > section.screen-section {
   /* Short/landscape screens must never be forced to skip overflowed content. */
   html { scroll-snap-type: none; }
   .content-section { padding-top: calc(var(--header-height) + 32px); padding-bottom: 36px; }
-  #animations > .container { padding-top: calc(var(--header-height) + 32px); padding-bottom: 36px; }
+  #notes > .container { padding-top: calc(var(--header-height) + 32px); padding-bottom: 36px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
