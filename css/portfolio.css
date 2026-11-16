@@ -577,6 +577,54 @@ h2 {
 .notes-links a:hover span { color: var(--ink); transform: translate(2px, -2px); }
 #notes .footer-inner a { color: var(--ink); }
 
+
+/* Minimal PDF access-code prompt, consistent with the portfolio. */
+.notes-group h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.notes-password-dialog {
+  width: min(420px, calc(100% - 32px));
+  max-width: none;
+  border: 1px solid #cbd2d8;
+  border-radius: 7px;
+  padding: 30px;
+  background: #f4f6f7;
+  color: #181818;
+  box-shadow: 0 20px 65px rgba(10, 20, 30, .20);
+}
+.notes-password-dialog::backdrop { background: rgba(15, 23, 31, .66); }
+.notes-password-dialog h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+  letter-spacing: -.025em;
+}
+.notes-password-dialog p { margin: 0 0 20px; color: #505b65; font-size: 14px; }
+.notes-password-dialog label { display: block; font-size: 13px; margin-bottom: 7px; }
+.notes-password-dialog input {
+  width: 100%;
+  border: 1px solid #aeb8c0;
+  border-radius: 4px;
+  background: #fff;
+  color: #181818;
+  padding: 12px;
+  font: inherit;
+}
+.notes-password-dialog .notes-password-error {
+  color: #a32d2d;
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+.notes-password-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+.notes-password-actions button {
+  border: 1px solid #1d252d;
+  border-radius: 3px;
+  padding: 9px 15px;
+  background: transparent;
+  color: #1d252d;
+  cursor: pointer;
+  font-size: 13px;
+}
+.notes-password-actions button[type="submit"] { background: #1d252d; color: #fff; }
+.notes-password-actions button:hover { opacity: .82; }
+
 /* The footer belongs to the final full-viewport section, not a separate half-screen. */
 #notes { padding: 0; }
 

@@ -20,8 +20,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/portfolio.css?v=notes-20261116">
-  <script src="js/portfolio.js?v=featured-box-model-20261115" defer></script>
+  <link rel="stylesheet" href="css/portfolio.css?v=notes-password-20261116">
+  <script src="js/portfolio.js?v=notes-password-20261116" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -215,11 +215,10 @@
             </div>
           </section>
           <section class="notes-group" aria-labelledby="numericalMethodsNotesTitle">
-            <h3 id="numericalMethodsNotesTitle">Numerical-Methods-GFD</h3>
+            <h3 id="numericalMethodsNotesTitle"><a class="protected-pdf" href="https://raw.githubusercontent.com/costpetrides/Numerical-Methods-GFD/main/Petrides/Derivative.pdf">Numerical-Methods-GFD</a></h3>
             <p>Numerical methods for geophysical fluid dynamics.</p>
             <div class="notes-links">
-              <a href="https://github.com/costpetrides/Numerical-Methods-GFD/blob/main/Petrides/Derivative.pdf" target="_blank" rel="noopener noreferrer" aria-label="Numerical Methods GFD derivatives notes (PDF)">Derivatives (PDF) <span aria-hidden="true">↗</span></a>
-              <a href="https://github.com/costpetrides/Numerical-Methods-GFD" target="_blank" rel="noopener noreferrer" aria-label="Numerical Methods GFD GitHub repository">GitHub repository <span aria-hidden="true">↗</span></a>
+              <a class="protected-pdf" href="https://raw.githubusercontent.com/costpetrides/Numerical-Methods-GFD/main/Petrides/Derivative.pdf" aria-label="Open Numerical Methods GFD Derivatives PDF">Derivatives (PDF) <span aria-hidden="true">↗</span></a>
             </div>
           </section>
         </div>
@@ -232,5 +231,19 @@
       </footer>
     </section>
   </main>
+
+  <dialog id="notesPasswordDialog" class="notes-password-dialog" aria-labelledby="notesPasswordTitle" aria-describedby="notesPasswordDescription">
+    <form id="notesPasswordForm">
+      <h2 id="notesPasswordTitle">Protected notes</h2>
+      <p id="notesPasswordDescription">Enter the access code to open the PDF.</p>
+      <label for="notesPasswordInput">Access code</label>
+      <input id="notesPasswordInput" name="accessCode" type="password" inputmode="numeric" autocomplete="off" required>
+      <p id="notesPasswordError" class="notes-password-error" role="alert" hidden>Incorrect code. Try again.</p>
+      <div class="notes-password-actions">
+        <button type="button" id="notesPasswordCancel">Cancel</button>
+        <button type="submit">Open PDF</button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>

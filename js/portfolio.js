@@ -244,5 +244,48 @@
     }
   }
 
+
+  // Client-side access prompt for the Numerical-Methods-GFD PDF.
+  // This is a convenience gate, NOT PDF encryption or secure authorization.
+  const notesDialog = document.getElementById("notesPasswordDialog");
+  const notesForm = document.getElementById("notesPasswordForm");
+  const notesInput = document.getElementById("notesPasswordInput");
+  const notesError = document.getElementById("notesPasswordError");
+  const notesCancel = document.getElementById("notesPasswordCancel");
+  let notesPDFTarget = null;
+
+  if (notesDialog && notesForm && notesInput) {
+    document.querySelectorAll("a.protected-pdf").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        notesPDFTarget = link.href;
+        notesForm.reset();
+        notesError.hidden = true;
+        notesDialog.showModal();
+        notesInput.focus();
+      });
+    });
+
+    notesForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (notesInput.value.trim() !== "421421") {
+        notesError.hidden = false;
+        notesInput.focus();
+        notesInput.select();
+        return;
+      }
+      const destination = notesPDFTarget;
+      notesDialog.close();
+      notesPDFTarget = null;
+      if (destination) window.location.assign(destination);
+    });
+
+    notesCancel?.addEventListener("click", () => notesDialog.close());
+    notesDialog.addEventListener("close", () => {
+      notesPDFTarget = null;
+      notesError.hidden = true;
+    });
+  }
+
   fetchRepositories();
 })();
