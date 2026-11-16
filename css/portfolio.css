@@ -536,8 +536,8 @@ h2 {
 /* Notes: quiet editorial groups and direct links to existing PDFs. */
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(35px, 6vw, 100px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 56px);
 }
 .notes-group {
   min-width: 0;
@@ -634,7 +634,7 @@ main > section.screen-section {
   .about-topic svg { width: 32px; height: 32px; flex-basis: 32px; }
   .repo-list { column-gap: 24px; }
   .simulation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .notes-grid { gap: 36px; }
+  .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
 }
 
 @media (max-width: 670px) {
