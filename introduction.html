@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1d252d">
+  <title>Introduction — Numerical Methods GFD | Constantinos Petrides</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e9ecef; color: #1d252d; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 18px;
+      padding: 14px clamp(18px, 3vw, 44px); background: #1d252d; color: #fff;
+      min-height: 68px;
+    }
+    .topbar a { color: #e1e6ea; text-decoration: none; font-size: 13px; white-space: nowrap; }
+    .topbar a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .title { font-size: 14px; font-weight: 600; text-align: center; line-height: 1.45; }
+    .topbar .subtitle { display: block; font-size: 11px; font-weight: 400; color: #bac4cc; }
+    .topbar .mode { color: #bac4cc; font-size: 12px; white-space: nowrap; }
+    .access-wrap { display: grid; place-items: center; min-height: calc(100dvh - 68px); padding: 28px 18px; }
+    .access-card {
+      background: #fff; border: 1px solid #d7dde1; border-radius: 6px; width: min(420px, 100%);
+      padding: 35px; box-shadow: 0 12px 34px rgba(29,37,45,.06);
+    }
+    .access-card h1 { font-size: 24px; font-weight: 600; letter-spacing: -.03em; margin: 0 0 10px; }
+    .access-card p { font-size: 14px; line-height: 1.6; color: #5b6570; margin: 0 0 26px; }
+    label { display: block; font-size: 13px; margin-bottom: 9px; }
+    input {
+      display: block; width: 100%; border: 1px solid #acb6bf; border-radius: 4px;
+      padding: 11px 13px; background: #fff; color: #1d252d; margin-bottom: 18px;
+    }
+    input:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid #5681aa; outline-offset: 3px; }
+    .unlock { background: #1d252d; color: #fff; border: 0; border-radius: 4px; padding: 12px 18px; width: 100%; }
+    .error { color: #a33030 !important; margin: -5px 0 16px !important; }
+    .viewer-toolbar {
+      display: flex; align-items: center; justify-content: center; gap: 14px; padding: 12px 20px;
+      background: #f8f9fa; border-bottom: 1px solid #d9dee2; position: sticky; top: 0; z-index: 5;
+    }
+    .viewer-toolbar button {
+      background: #fff; border: 1px solid #c8d0d6; border-radius: 4px;
+      padding: 5px 11px; min-width: 36px; min-height: 34px;
+    }
+    .viewer-toolbar button:hover { background: #e9edf0; }
+    .viewer-toolbar button:disabled { color: #8a959d; cursor: default; }
+    .viewer-toolbar .zoom-text, .viewer-toolbar .pages-text { font-size: 13px; color: #394550; white-space: nowrap; }
+    .viewer-status { padding: 32px 20px; text-align: center; font-size: 14px; color: #47545e; }
+    .page-stack { display: flex; align-items: center; flex-direction: column; gap: 22px; padding: 28px 20px 60px; overflow-x: auto; }
+    .pdf-page {
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff;
+      box-shadow: 0 3px 17px rgba(29,37,45,.17); position: relative; max-width: none;
+    }
+    .pdf-page canvas { display: block; }
+    .placeholder { color: #929ca4; font-size: 13px; }
+    @media (max-width: 650px) {
+      .topbar { padding: 12px 16px; }
+      .topbar .mode { display: none; }
+      .topbar .title { font-size: 13px; }
+      .topbar a { max-width: 65px; white-space: normal; line-height: 1.2; }
+      .viewer-toolbar { gap: 9px; }
+      .page-stack { gap: 16px; padding: 18px 12px 36px; }
+      .access-card { padding: 26px; }
+    }
+
+    /* Course-level navigation, independent of individual PDF page numbers. */
+    .topbar { position: sticky; top: 0; z-index: 25; }
+    .viewer-toolbar { top: 68px; }
+    .course-nav { position: relative; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .course-toggle, .course-arrow {
+      border: 1px solid #65717b; border-radius: 4px; color: #e1e6ea;
+      background: transparent; padding: 8px 12px; text-decoration: none;
+      font-size: 12px; line-height: 1.3; min-height: 34px;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; white-space: nowrap;
+    }
+    .course-toggle:hover, .course-arrow:hover { background: #34414c; text-decoration: none; }
+    .course-toggle[aria-expanded="true"] { background: #34414c; }
+    .course-arrow { font-size: 19px; padding: 4px 12px; }
+    .course-menu {
+      position: absolute; right: 0; top: calc(100% + 12px);
+      width: min(290px, 85vw); background: #fff; color: #1d252d;
+      padding: 12px; border: 1px solid #d7dde1; border-radius: 5px;
+      box-shadow: 0 12px 30px rgba(16,24,32,.18); z-index: 40;
+    }
+    .course-menu-heading {
+      padding: 8px 10px 12px; font-size: 11px; color: #6d7983;
+      font-weight: 600; letter-spacing: .05em;
+    }
+    .course-menu a {
+      display: flex; justify-content: space-between; align-items: center;
+      color: #1d252d; text-decoration: none; font-size: 13px;
+      padding: 11px 12px; border-radius: 4px;
+    }
+    .course-menu a:hover { background: #f0f3f5; text-decoration: none; }
+    .course-menu a[aria-current="page"] { background: #e8edf1; font-weight: 600; }
+    .course-menu a[aria-current="page"]::after { content: "✓"; color: #536675; }
+    @media (max-width: 650px) {
+      .topbar { gap: 9px; }
+      .topbar .title { font-size: 12px; }
+      .topbar .subtitle { font-size: 10px; }
+      .course-nav { gap: 5px; }
+      .course-toggle { padding: 7px 8px; font-size: 11px; }
+      .course-arrow { padding: 4px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="/#notes">← Notes</a>
+    <div class="title">Introduction<span class="subtitle">Numerical Methods for Geophysical Fluid Dynamics</span></div>
+    
+    <nav class="course-nav" aria-label="Numerical Methods course notes">
+      <button id="courseToggle" class="course-toggle" type="button" aria-expanded="false" aria-controls="courseMenu">Contents <span aria-hidden="true">&nbsp;▾</span></button>
+      
+      <a class="course-arrow" href="computational_grids.html" aria-label="Next notes: Computational Grids" title="Next notes: Computational Grids">→</a>
+      <div id="courseMenu" class="course-menu" hidden>
+        <div class="course-menu-heading">NUMERICAL-METHODS-GFD</div>
+        <a href="introduction.html" aria-current="page">Introduction</a>
+        <a href="computational_grids.html">Computational Grids</a>
+        <a href="derivatives.html">Derivatives</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="accessScreen" class="access-wrap" aria-labelledby="accessTitle">
+      <form id="accessForm" class="access-card">
+        <h1 id="accessTitle">Protected notes</h1>
+        <p>Enter the access code to read the Introduction notes in your browser.</p>
+        <label for="accessCode">Access code</label>
+        <input id="accessCode" type="password" inputmode="numeric" autocomplete="off" required autofocus>
+        <p id="accessError" class="error" role="alert" hidden>Incorrect code. Try again.</p>
+        <button class="unlock" type="submit">Open notes</button>
+      </form>
+    </section>
+
+    <section id="viewerScreen" hidden aria-label="Introduction PDF viewer">
+      <div class="viewer-toolbar">
+        <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+        <span id="zoomText" class="zoom-text">100%</span>
+        <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+        <span id="pageCount" class="pages-text" aria-live="polite"></span>
+      </div>
+      <p id="viewerStatus" class="viewer-status" role="status">Loading notes…</p>
+      <div id="pageStack" class="page-stack" aria-label="PDF pages"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    const PDF_URLS = ["Intro_mp.pdf"];
+    const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+    const PDF_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+
+    const form = document.getElementById("accessForm");
+    const codeInput = document.getElementById("accessCode");
+    const error = document.getElementById("accessError");
+    const accessScreen = document.getElementById("accessScreen");
+    const viewerScreen = document.getElementById("viewerScreen");
+    const status = document.getElementById("viewerStatus");
+    const stack = document.getElementById("pageStack");
+    const pageCount = document.getElementById("pageCount");
+    const zoomText = document.getElementById("zoomText");
+    const zoomIn = document.getElementById("zoomIn");
+    const zoomOut = document.getElementById("zoomOut");
+
+    let pdf = null;
+    let zoom = 1;
+    let aspect = 1.414;
+    let observer = null;
+    let pages = [];
+    let generation = 0;
+    let pdfjsLib = null;
+    const pending = new Set();
+    const rendered = new Set();
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (codeInput.value.trim() !== "421421") {
+        error.hidden = false;
+        codeInput.select();
+        codeInput.focus();
+        return;
+      }
+      codeInput.value = "";
+      accessScreen.hidden = true;
+      viewerScreen.hidden = false;
+      loadDocument();
+    });
+
+    function visiblePageWidth() {
+      return Math.round(Math.min(800, Math.max(270, window.innerWidth - 40)) * zoom);
+    }
+
+    function placeholder(shell, number) {
+      const label = document.createElement("span");
+      label.className = "placeholder";
+      label.textContent = "Page " + number;
+      shell.replaceChildren(label);
+    }
+
+    function updateLayout() {
+      const width = visiblePageWidth();
+      pages.forEach((shell, index) => {
+        shell.style.width = width + "px";
+        shell.style.height = Math.round(width * aspect) + "px";
+        placeholder(shell, index + 1);
+      });
+      rendered.clear();
+      pending.clear();
+      generation += 1;
+      if (observer) observer.disconnect();
+      if (!pdf) return;
+      const currentGeneration = generation;
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const number = Number(entry.target.dataset.page);
+          if (entry.isIntersecting) {
+            renderPage(number, currentGeneration);
+          } else if (rendered.has(number)) {
+            // Release off-screen canvases to keep large documents responsive.
+            rendered.delete(number);
+            placeholder(entry.target, number);
+          }
+        }
+      }, { rootMargin: "650px 0px", threshold: 0 });
+      pages.forEach((shell) => observer.observe(shell));
+      zoomText.textContent = Math.round(zoom * 100) + "%";
+      zoomOut.disabled = zoom <= 0.75;
+      zoomIn.disabled = zoom >= 1.5;
+    }
+
+    async function renderPage(number, currentGeneration) {
+      if (!pdf || currentGeneration !== generation || pending.has(number) || rendered.has(number)) return;
+      pending.add(number);
+      try {
+        const page = await pdf.getPage(number);
+        if (currentGeneration !== generation) return;
+        const shell = pages[number - 1];
+        const unscaled = page.getViewport({ scale: 1 });
+        const displayWidth = visiblePageWidth();
+        const displayScale = displayWidth / unscaled.width;
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.75);
+        const viewport = page.getViewport({ scale: displayScale * pixelRatio });
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.ceil(viewport.width);
+        canvas.height = Math.ceil(viewport.height);
+        canvas.style.width = displayWidth + "px";
+        canvas.style.height = Math.round(viewport.height / pixelRatio) + "px";
+        const context = canvas.getContext("2d", { alpha: false });
+        await page.render({ canvasContext: context, viewport, canvas }).promise;
+        if (currentGeneration !== generation) { canvas.width = 0; canvas.height = 0; return; }
+        shell.style.height = canvas.style.height;
+        shell.replaceChildren(canvas);
+        rendered.add(number);
+      } catch (e) {
+        if (currentGeneration === generation) {
+          console.error("Could not render page", number, e);
+          placeholder(pages[number - 1], number);
+        }
+      } finally {
+        if (currentGeneration === generation) pending.delete(number);
+      }
+    }
+
+    async function loadDocument() {
+      try {
+        pdfjsLib = await import(PDFJS);
+        pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+        let lastError;
+        for (const url of PDF_URLS) {
+          try {
+            pdf = await pdfjsLib.getDocument({ url }).promise;
+            break;
+          } catch (e) { lastError = e; }
+        }
+        if (!pdf) throw lastError || new Error("PDF unavailable");
+        const first = await pdf.getPage(1);
+        const dimensions = first.getViewport({ scale: 1 });
+        aspect = dimensions.height / dimensions.width;
+        for (let number = 1; number <= pdf.numPages; number++) {
+          const shell = document.createElement("article");
+          shell.className = "pdf-page";
+          shell.dataset.page = String(number);
+          shell.setAttribute("aria-label", "Page " + number);
+          pages.push(shell);
+          stack.appendChild(shell);
+        }
+        pageCount.textContent = pdf.numPages + (pdf.numPages === 1 ? " page" : " pages");
+        status.hidden = true;
+        updateLayout();
+      } catch (e) {
+        console.error("PDF could not be loaded:", e);
+        status.textContent = "The notes could not be displayed. Refresh this tab and try again.";
+      }
+    }
+
+    zoomOut.addEventListener("click", () => {
+      if (zoom > 0.75) { zoom = Math.max(0.75, +(zoom - 0.25).toFixed(2)); updateLayout(); }
+    });
+    zoomIn.addEventListener("click", () => {
+      if (zoom < 1.5) { zoom = Math.min(1.5, +(zoom + 0.25).toFixed(2)); updateLayout(); }
+    });
+    let lastWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        if (pdf) updateLayout();
+      }
+    });
+  </script>
+
+  <script>
+    (() => {
+      const toggle = document.getElementById("courseToggle");
+      const menu = document.getElementById("courseMenu");
+      function closeMenu() {
+        menu.hidden = true;
+        toggle.setAttribute("aria-expanded","false");
+      }
+      toggle.addEventListener("click", () => {
+        const opening = menu.hidden;
+        menu.hidden = !opening;
+        toggle.setAttribute("aria-expanded", String(opening));
+      });
+      document.addEventListener("click", event => {
+        if (!event.target.closest(".course-nav")) closeMenu();
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !menu.hidden) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
