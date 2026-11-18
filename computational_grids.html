@@ -68,30 +68,62 @@
       .access-card { padding: 26px; }
     }
 
-    .topbar{position:sticky;top:0;z-index:20}
-    .contents-toggle{background:transparent;border:1px solid #69747e;border-radius:4px;color:#fff;font-size:12px;padding:8px 13px;white-space:nowrap;cursor:pointer}
-    .contents-toggle:hover{background:#34404b}
-    .viewer-toolbar{top:68px;flex-wrap:wrap}
-    .page-nav{display:flex;align-items:center;gap:10px;margin-left:16px}
-    .pdf-page{scroll-margin-top:137px}
-    .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-    .contents-panel{position:fixed;top:68px;right:0;z-index:30;width:min(350px,93vw);height:calc(100dvh - 68px);overflow:auto;background:white;border-left:1px solid #d7dde1;box-shadow:-8px 0 30px #1d252d24}
-    .contents-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e6ea;padding:16px 18px}
-    .contents-header h2{font-size:16px;margin:0}
-    .contents-header button{border:0;background:transparent;font-size:24px;padding:4px 9px}
-    .contents-list{display:flex;flex-direction:column;padding:12px;gap:4px}
-    .contents-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#66717b;padding:14px 9px 6px;font-weight:600}
-    .contents-list button{border:0;background:white;border-radius:4px;padding:10px 12px;text-align:left;color:#32414c;font-size:13px}
-    .contents-list button:hover{background:#f1f3f5}
-    .contents-list button[aria-current=page]{background:#e8edf1;font-weight:600}
-    @media(max-width:650px){.contents-toggle{font-size:11px;padding:7px 9px}.viewer-toolbar{padding:10px 8px}.page-nav{gap:5px;margin-left:0}.pdf-page{scroll-margin-top:156px}}
+    /* Course-level navigation, independent of individual PDF page numbers. */
+    .topbar { position: sticky; top: 0; z-index: 25; }
+    .viewer-toolbar { top: 68px; }
+    .course-nav { position: relative; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .course-toggle, .course-arrow {
+      border: 1px solid #65717b; border-radius: 4px; color: #e1e6ea;
+      background: transparent; padding: 8px 12px; text-decoration: none;
+      font-size: 12px; line-height: 1.3; min-height: 34px;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; white-space: nowrap;
+    }
+    .course-toggle:hover, .course-arrow:hover { background: #34414c; text-decoration: none; }
+    .course-toggle[aria-expanded="true"] { background: #34414c; }
+    .course-arrow { font-size: 19px; padding: 4px 12px; }
+    .course-menu {
+      position: absolute; right: 0; top: calc(100% + 12px);
+      width: min(290px, 85vw); background: #fff; color: #1d252d;
+      padding: 12px; border: 1px solid #d7dde1; border-radius: 5px;
+      box-shadow: 0 12px 30px rgba(16,24,32,.18); z-index: 40;
+    }
+    .course-menu-heading {
+      padding: 8px 10px 12px; font-size: 11px; color: #6d7983;
+      font-weight: 600; letter-spacing: .05em;
+    }
+    .course-menu a {
+      display: flex; justify-content: space-between; align-items: center;
+      color: #1d252d; text-decoration: none; font-size: 13px;
+      padding: 11px 12px; border-radius: 4px;
+    }
+    .course-menu a:hover { background: #f0f3f5; text-decoration: none; }
+    .course-menu a[aria-current="page"] { background: #e8edf1; font-weight: 600; }
+    .course-menu a[aria-current="page"]::after { content: "✓"; color: #536675; }
+    @media (max-width: 650px) {
+      .topbar { gap: 9px; }
+      .topbar .title { font-size: 12px; }
+      .topbar .subtitle { font-size: 10px; }
+      .course-nav { gap: 5px; }
+      .course-toggle { padding: 7px 8px; font-size: 11px; }
+      .course-arrow { padding: 4px 8px; }
+    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <a href="/#notes">← Notes</a>
     <div class="title">Computational Grids<span class="subtitle">Numerical Methods for Geophysical Fluid Dynamics</span></div>
-    <button id="contentsToggle" class="contents-toggle" type="button" aria-expanded="false" aria-controls="contentsPanel" hidden>Contents</button>
+    
+    <nav class="course-nav" aria-label="Numerical Methods course notes">
+      <button id="courseToggle" class="course-toggle" type="button" aria-expanded="false" aria-controls="courseMenu">Contents <span aria-hidden="true">&nbsp;▾</span></button>
+      <a class="course-arrow" href="derivatives.html" aria-label="Next notes: Derivatives" title="Next notes: Derivatives">→</a>
+      <div id="courseMenu" class="course-menu" hidden>
+        <div class="course-menu-heading">NUMERICAL-METHODS-GFD</div>
+        <a href="computational_grids.html" aria-current="page">Computational Grids</a>
+        <a href="derivatives.html">Derivatives</a>
+      </div>
+    </nav>
   </header>
 
   <main>
@@ -111,9 +143,9 @@
         <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
         <span id="zoomText" class="zoom-text">100%</span>
         <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
-        <div class="page-nav" aria-label="PDF pages"><button id="prevPage" type="button" aria-label="Previous page" disabled>←</button><span id="currentPageLabel" class="pages-text">Page 1</span><button id="nextPage" type="button" aria-label="Next page" disabled>→</button></div><span id="pageCount" class="visually-hidden" aria-live="polite"></span>
+        <span id="pageCount" class="pages-text" aria-live="polite"></span>
       </div>
-      <aside id="contentsPanel" class="contents-panel" hidden aria-label="Contents of this PDF"><div class="contents-header"><h2>Contents</h2><button id="contentsClose" type="button" aria-label="Close contents">×</button></div><nav id="contentsList" class="contents-list" aria-label="Pages of this document"></nav></aside><p id="viewerStatus" class="viewer-status" role="status">Loading notes…</p>
+      <p id="viewerStatus" class="viewer-status" role="status">Loading notes…</p>
       <div id="pageStack" class="page-stack" aria-label="PDF pages"></div>
     </section>
   </main>
@@ -135,7 +167,6 @@
     const zoomIn = document.getElementById("zoomIn");
     const zoomOut = document.getElementById("zoomOut");
 
-    const SECTION_LINKS = [{"label":"3.1 · 1D Spatial Grid","page":1},{"label":"3.2 · Time Grid","page":3},{"label":"3.3 · Space–Time Grid","page":5},{"label":"3.4 · Direct Evaluation","page":6},{"label":"3.5 · Time Stepping","page":9},{"label":"3.5.2 · Index Limits","page":10},{"label":"FTCS · Worked Example","page":11},{"label":"Mixed Boundary Conditions","page":15}];
     let pdf = null;
     let zoom = 1;
     let aspect = 1.414;
@@ -145,108 +176,6 @@
     let pdfjsLib = null;
     const pending = new Set();
     const rendered = new Set();
-
-
-    // Navigation is scoped to the current PDF instance.
-    const contentsToggle = document.getElementById("contentsToggle");
-    const contentsPanel = document.getElementById("contentsPanel");
-    const contentsClose = document.getElementById("contentsClose");
-    const contentsList = document.getElementById("contentsList");
-    const prevPage = document.getElementById("prevPage");
-    const nextPage = document.getElementById("nextPage");
-    const currentPageLabel = document.getElementById("currentPageLabel");
-    let currentPage = 1;
-    let scrollTick = false;
-    function updateNav() {
-      if (!pdf) return;
-      currentPageLabel.textContent = "Page " + currentPage + " / " + pdf.numPages;
-      prevPage.disabled = currentPage <= 1;
-      nextPage.disabled = currentPage >= pdf.numPages;
-      contentsList.querySelectorAll("button[data-page]").forEach(button => {
-        if (Number(button.dataset.page) === currentPage) button.setAttribute("aria-current","page");
-        else button.removeAttribute("aria-current");
-      });
-    }
-    function closeContents() {
-      contentsPanel.hidden = true;
-      contentsToggle.setAttribute("aria-expanded", "false");
-    }
-    function goToPage(number) {
-      if (!pdf || !pages.length) return;
-      currentPage = Math.max(1,Math.min(pdf.numPages,number));
-      updateNav();
-      closeContents();
-      pages[currentPage-1].scrollIntoView({behavior:"smooth",block:"start"});
-    }
-    function addContentsButton(label,number) {
-      if (!Number.isInteger(number) || number<1 || number>pdf.numPages) return;
-      const button = document.createElement("button");
-      button.type = "button";
-      button.dataset.page = String(number);
-      button.textContent = label;
-      button.addEventListener("click",()=>goToPage(number));
-      contentsList.appendChild(button);
-    }
-    function addContentsHeader(label) {
-      const node = document.createElement("div");
-      node.className = "contents-label";
-      node.textContent = label;
-      contentsList.appendChild(node);
-    }
-    async function buildContents() {
-      contentsList.replaceChildren();
-      let count = 0;
-      try {
-        const outline = await pdf.getOutline();
-        if (outline?.length) {
-          addContentsHeader("Sections");
-          async function appendOutline(items) {
-            for (const item of items) {
-              let destination = item.dest;
-              if (typeof destination==="string") destination = await pdf.getDestination(destination);
-              if (Array.isArray(destination)) {
-                const first = destination[0];
-                const idx = typeof first==="number" ? first : await pdf.getPageIndex(first);
-                if (Number.isInteger(idx) && idx>=0 && idx<pdf.numPages) {
-                  addContentsButton(item.title,idx+1);
-                  count++;
-                }
-              }
-              if (item.items?.length) await appendOutline(item.items);
-            }
-          }
-          await appendOutline(outline);
-        }
-      } catch (e) { console.info("Using manual PDF page contents.",e); }
-      if (!count && SECTION_LINKS.length) {
-        contentsList.replaceChildren();
-        addContentsHeader("Sections");
-        SECTION_LINKS.forEach(s=>addContentsButton(s.label,s.page));
-      }
-      addContentsHeader("Pages");
-      for (let number=1;number<=pdf.numPages;number++) addContentsButton("Page "+number,number);
-      updateNav();
-    }
-    contentsToggle.addEventListener("click",()=>{
-      contentsPanel.hidden = !contentsPanel.hidden;
-      contentsToggle.setAttribute("aria-expanded",String(!contentsPanel.hidden));
-    });
-    contentsClose.addEventListener("click",closeContents);
-    prevPage.addEventListener("click",()=>goToPage(currentPage-1));
-    nextPage.addEventListener("click",()=>goToPage(currentPage+1));
-    document.addEventListener("keydown",e=>{if(e.key==="Escape") closeContents()});
-    window.addEventListener("scroll",()=>{
-      if (scrollTick || !pdf) return;
-      scrollTick=true;
-      requestAnimationFrame(()=>{
-        scrollTick=false;
-        let number=pages.length;
-        for(let i=0;i<pages.length;i++){
-          if (pages[i].getBoundingClientRect().bottom>145){number=i+1;break}
-        }
-        if(currentPage!==number){currentPage=number;updateNav()}
-      });
-    },{passive:true});
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -259,7 +188,6 @@
       codeInput.value = "";
       accessScreen.hidden = true;
       viewerScreen.hidden = false;
-      contentsToggle.hidden = false;
       loadDocument();
     });
 
@@ -364,7 +292,6 @@
         pageCount.textContent = pdf.numPages + (pdf.numPages === 1 ? " page" : " pages");
         status.hidden = true;
         updateLayout();
-        await buildContents();
       } catch (e) {
         console.error("PDF could not be loaded:", e);
         status.textContent = "The notes could not be displayed. Refresh this tab and try again.";
@@ -384,6 +311,31 @@
         if (pdf) updateLayout();
       }
     });
+  </script>
+
+  <script>
+    (() => {
+      const toggle = document.getElementById("courseToggle");
+      const menu = document.getElementById("courseMenu");
+      function closeMenu() {
+        menu.hidden = true;
+        toggle.setAttribute("aria-expanded","false");
+      }
+      toggle.addEventListener("click", () => {
+        const opening = menu.hidden;
+        menu.hidden = !opening;
+        toggle.setAttribute("aria-expanded", String(opening));
+      });
+      document.addEventListener("click", event => {
+        if (!event.target.closest(".course-nav")) closeMenu();
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !menu.hidden) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
