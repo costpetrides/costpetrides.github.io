@@ -58,6 +58,28 @@
     }
     .pdf-page canvas { display: block; }
     .placeholder { color: #929ca4; font-size: 13px; }
+    /* Let the PDF occupy the screen without altering the regular page layout. */
+    #viewerScreen:fullscreen,
+    #viewerScreen.pseudo-fullscreen {
+      width: 100%; height: 100dvh; background: #e9ecef;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    #viewerScreen:fullscreen .viewer-toolbar,
+    #viewerScreen.pseudo-fullscreen .viewer-toolbar {
+      position: static; flex-shrink: 0;
+    }
+    #viewerScreen:fullscreen .page-stack,
+    #viewerScreen.pseudo-fullscreen .page-stack {
+      flex: 1; min-height: 0; overflow: auto;
+    }
+    #viewerScreen.pseudo-fullscreen {
+      position: fixed; inset: 0; z-index: 1000;
+    }
+    body.pdf-fullscreen-fallback { overflow: hidden; }
+    #fullscreenToggle { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    @media (max-width: 650px) {
+      #fullscreenToggle .fullscreen-label { display: none; }
+    }
     @media (max-width: 650px) {
       .topbar { padding: 12px 16px; }
       .topbar .mode { display: none; }
@@ -146,6 +168,10 @@
         <span id="zoomText" class="zoom-text">100%</span>
         <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
         <span id="pageCount" class="pages-text" aria-live="polite"></span>
+        <button id="fullscreenToggle" type="button" aria-label="Enter PDF full screen" aria-pressed="false" title="Full screen">
+          <span id="fullscreenIcon" aria-hidden="true">⛶</span>
+          <span id="fullscreenLabel" class="fullscreen-label">Full screen</span>
+        </button>
       </div>
       <p id="viewerStatus" class="viewer-status" role="status">Loading notes…</p>
       <div id="pageStack" class="page-stack" aria-label="PDF pages"></div>
@@ -168,6 +194,9 @@
     const zoomText = document.getElementById("zoomText");
     const zoomIn = document.getElementById("zoomIn");
     const zoomOut = document.getElementById("zoomOut");
+    const fullscreenToggle = document.getElementById("fullscreenToggle");
+    const fullscreenIcon = document.getElementById("fullscreenIcon");
+    const fullscreenLabel = document.getElementById("fullscreenLabel");
 
     let pdf = null;
     let zoom = 1;
@@ -299,6 +328,43 @@
         status.textContent = "The notes could not be displayed. Refresh this tab and try again.";
       }
     }
+
+    function syncFullscreenControl() {
+      const active = document.fullscreenElement === viewerScreen ||
+                     viewerScreen.classList.contains("pseudo-fullscreen");
+      fullscreenIcon.textContent = active ? "⤢" : "⛶";
+      fullscreenLabel.textContent = active ? "Exit full screen" : "Full screen";
+      fullscreenToggle.setAttribute("aria-label", active ? "Exit PDF full screen" : "Enter PDF full screen");
+      fullscreenToggle.setAttribute("aria-pressed", String(active));
+      fullscreenToggle.title = active ? "Exit full screen" : "Full screen";
+    }
+
+    fullscreenToggle.addEventListener("click", async () => {
+      if (document.fullscreenElement === viewerScreen) {
+        await document.exitFullscreen();
+      } else if (viewerScreen.classList.contains("pseudo-fullscreen")) {
+        viewerScreen.classList.remove("pseudo-fullscreen");
+        document.body.classList.remove("pdf-fullscreen-fallback");
+      } else {
+        try {
+          if (!viewerScreen.requestFullscreen) throw new Error("Fullscreen API unavailable");
+          await viewerScreen.requestFullscreen();
+        } catch (error) {
+          // Fixed-screen fallback for browsers that restrict the Fullscreen API.
+          viewerScreen.classList.add("pseudo-fullscreen");
+          document.body.classList.add("pdf-fullscreen-fallback");
+        }
+      }
+      syncFullscreenControl();
+    });
+    document.addEventListener("fullscreenchange", syncFullscreenControl);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && viewerScreen.classList.contains("pseudo-fullscreen")) {
+        viewerScreen.classList.remove("pseudo-fullscreen");
+        document.body.classList.remove("pdf-fullscreen-fallback");
+        syncFullscreenControl();
+      }
+    });
 
     zoomOut.addEventListener("click", () => {
       if (zoom > 0.75) { zoom = Math.max(0.75, +(zoom - 0.25).toFixed(2)); updateLayout(); }
