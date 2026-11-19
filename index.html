@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/portfolio.css?v=box-model-feature-20261119">
+  <link rel="stylesheet" href="css/portfolio.css?v=box-model-grid-20261119">
   <script src="js/portfolio.js?v=notes-viewer-20261117" defer></script>
   <script type="application/ld+json">
     {
@@ -181,23 +181,32 @@
             </span>
             <span class="simulation-caption"><strong>PennyLane</strong><span aria-hidden="true">↗</span></span>
           </a>
-        </div>
-        <div class="simulation-feature" aria-labelledby="boxModelTitle">
-          <div class="simulation-feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-              <path d="M9 9v30h30"/>
-              <path d="M12 30c6-1 8-15 14-16s8 14 12 10"/>
-              <circle cx="26" cy="14" r="2" fill="currentColor" stroke="none"/>
-            </svg>
-          </div>
-          <div class="simulation-feature-copy">
-            <h3 id="boxModelTitle">Box Model</h3>
-            <p>Interactive atmospheric chemistry dashboard for exploring chemical species and comparing scenarios.</p>
-          </div>
-          <div class="simulation-feature-links">
-            <a href="https://costpetrides.github.io/Box_Model/" target="_blank" rel="noopener noreferrer">Explore model <span aria-hidden="true">↗</span></a>
-            <a href="https://github.com/costpetrides/Box_Model" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-          </div>
+          <a class="simulation-item" href="https://costpetrides.github.io/Box_Model/" target="_blank" rel="noopener noreferrer" aria-label="Open the interactive Box Model dashboard">
+            <span class="simulation-preview simulation-plot-preview">
+              <svg viewBox="0 0 640 400" role="img" aria-label="Illustrative time-series plot for atmospheric chemical species" xmlns="http://www.w3.org/2000/svg">
+                <rect width="640" height="400" fill="#fff"/>
+                <g font-family="Arial, sans-serif" font-size="15" fill="#677687">
+                  <circle cx="92" cy="48" r="5" fill="#C62828"/><text x="106" y="53">O₃</text>
+                  <circle cx="184" cy="48" r="5" fill="#1565C0"/><text x="198" y="53">NO</text>
+                  <circle cx="282" cy="48" r="5" fill="#7B1FA2"/><text x="296" y="53">NO₂</text>
+                  <circle cx="392" cy="48" r="5" fill="#2E7D32"/><text x="406" y="53">OH</text>
+                </g>
+                <g stroke="#e9edf0" stroke-width="1.5">
+                  <path d="M70 103H587 M70 158H587 M70 213H587 M70 268H587 M70 323H587"/>
+                  <path d="M173 103V323 M276 103V323 M379 103V323 M482 103V323"/>
+                </g>
+                <path d="M70 91V323H589" stroke="#b9c4cc" stroke-width="2" fill="none"/>
+                <g fill="none" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M70 263 C120 257 161 237 212 208 S310 150 362 138 S475 131 587 115" stroke="#C62828"/>
+                  <path d="M70 294 C132 281 163 178 211 179 S292 265 357 275 S480 263 587 279" stroke="#1565C0"/>
+                  <path d="M70 300 C129 290 176 273 219 251 S316 235 363 246 S483 217 587 230" stroke="#7B1FA2"/>
+                  <path d="M70 306 C150 304 191 297 258 283 S360 205 411 202 S502 255 587 270" stroke="#2E7D32" stroke-dasharray="8 6"/>
+                </g>
+                <text x="330" y="363" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#7f8b96">Time</text>
+              </svg>
+            </span>
+            <span class="simulation-caption"><strong>Box Model</strong><span aria-hidden="true">↗</span></span>
+          </a>
         </div>
       </div>
     </section>
